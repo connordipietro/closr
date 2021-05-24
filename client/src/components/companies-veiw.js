@@ -16,35 +16,46 @@ function Companies() {
   function renderCompaniesDisplay () {
     if (!_.isEmpty(companies)) { // if companies returned from dispatch, render companies
       const companyTableRows = companies.map(item => {
-        return (
-          <tr key={item.name}>
-            <td>{item.name}</td>
-          </tr>
-          )
-      })
-
       return (
-        <div>
-          <table className="table">
-            <thead>
-              <tr key="company-names">
-                <th scope="col">Company Name</th>
-              </tr>
-            </thead>
-            <tbody>
+        <tr key={item.name}>
+          <td>{item.name}</td>
+          <td>{item.owner}</td>
+          <td>{item.phone}</td>
+          <td>{item.city}, {item.state}</td>
+          <td>{item.industry}</td>
+          <td>{item.createdAt}</td>
+        </tr>
+        );
+      }
+    );
+
+    return (
+      <div>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Main Contact</th>
+              <th scope="col">Contact Number</th>
+              <th scope="col">Location</th>
+              <th scope="col">Industry</th>
+              <th scope="col">Create Date</th>
+            </tr>
+          </thead>
+          <tbody>
               {companyTableRows}
-            </tbody>
-          </table>
-        </div>
+          </tbody>
+        </table>
+      </div>
       );
     };
   };
 
-  return (
-    <div>
-      {renderCompaniesDisplay()}
-      <AddCompany />
-    </div>
+return (
+  <div>
+    {renderCompaniesDisplay()}
+    <AddCompany />
+  </div>
   );
 };
 
