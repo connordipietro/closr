@@ -4,7 +4,7 @@ export const GET_COMPANIES = "GET_COMPANIES";
 export const GET_DEALS = "GET_DEALS";
 
 export function getCompanies() {
-  return axios.get(`urlHere`)
+  return axios.get(`http://localhost:8000/companies`)
   .then(response => {
     return {
       type: GET_COMPANIES,
