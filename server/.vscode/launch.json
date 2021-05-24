@@ -4,7 +4,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Paristy CRM Server",
+      "name": "Parsity CRM Server",
       "program": "${workspaceRoot}/server.js"
     }
   ]
