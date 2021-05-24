@@ -9,6 +9,17 @@ router.get("/companies", (req, res)=> {
   })
 })
 
+router.get("/companies/:id", (req, res) => {
+  Company.findById(req.params.id).exec((err, company) => {
+    if (err) console.log(err)
+
+    if(!company) {
+      res.status(404).send("No Company Found with that Id");
+    }
+    res.send(company)
+  })
+})
+
 router.get("/generate-company-dev-data", (req, res)=> {
   Company.deleteMany({}).exec().then(
     companies.forEach(company => {
