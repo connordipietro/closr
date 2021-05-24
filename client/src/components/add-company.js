@@ -10,11 +10,11 @@ function AddCompany() {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Add Company
+        Add a Company
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Add a new Company</Modal.Title>
         </Modal.Header>
         <Modal.Body>
