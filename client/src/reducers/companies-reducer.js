@@ -8,7 +8,7 @@ const CompaniesReducer = function(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_COMPANIES:
       return {
-        companies: action.payload.data.companies,
+        companies: action.payload.data,
         }
     default:
       return state;
