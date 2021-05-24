@@ -54,6 +54,18 @@ router.put("/companies/:id", (req, res) => {
     })
 })
 
+router.delete("/companies/:id", (req, res) => {
+  Company.findByIdAndDelete(req.params.id).exec((err, deletedCompany) => {
+    if(!deletedCompany) {
+      return res.status(404).send("No company with that Id found")
+    }
+    if(err) {
+      console.log(err)
+    }
+    res.send(`${deletedCompany.name} successfully deleted`)
+  })
+})
+
 router.get("/generate-company-dev-data", (req, res)=> {
   Company.deleteMany({}).exec().then(
     companies.forEach(company => {
