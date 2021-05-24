@@ -3,10 +3,25 @@ const router = require("express").Router();
 const Company = require("../models/company");
 const companies = require("../dev-data/companies")
 
-router.get("/companies", (req, res)=> {
+router.get("/companies", (req, res) => {
   Company.find({}).exec((err, companies) => {
     res.send(companies);
   })
+})
+
+router.post("/companies", (req, res) => {
+  if(!req.body.name) {
+    res.status(400).send("Name field is required");
+  }
+  const newCompany = new Company(req.body);
+  newCompany.deals = [];
+  newCompany.createdAt = new Date();
+  newCompany.save().then(savedCompany => {
+    res.send(savedCompany);
+  }).catch(err => {
+    console.error(err);
+    res.end();
+  }) 
 })
 
 router.get("/companies/:id", (req, res) => {
