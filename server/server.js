@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-mongoose.connect("mongodb://localhost/products", {
+mongoose.connect("mongodb://localhost/crm-data", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
