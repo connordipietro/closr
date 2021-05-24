@@ -35,6 +35,25 @@ router.get("/companies/:id", (req, res) => {
   })
 })
 
+router.put("/companies/:id", (req, res) => {
+  Company.findById(req.params.id).exec()
+    .then((company) => {
+      if(!company) {
+        res.status(404).send("No Company Found with that Id");
+      }
+      for (prop in req.body) {
+        company[prop] = req.body[prop];
+      }
+      return company.save();
+    })
+    .then(updatedCompany => {
+      res.send(updatedCompany)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+})
+
 router.get("/generate-company-dev-data", (req, res)=> {
   Company.deleteMany({}).exec().then(
     companies.forEach(company => {
