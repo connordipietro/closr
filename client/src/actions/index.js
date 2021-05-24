@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const GET_COMPANIES = "GET_COMPANIES";
 export const GET_DEALS = "GET_DEALS";
-export const NEW_COMPANY = "NEW_COMPANY";
+export const POST_COMPANY = "POST_COMPANY";
 
 export function getCompanies() {
   return axios.get(`http://localhost:8000/companies`)
@@ -34,7 +34,7 @@ export function postNewCopmany(newCompany) {
   return axios.post(`http://localhost:8000/companies`, newCompany)
   .then(response => {
     return {
-      type: NEW_COMPANY,
+      type: POST_COMPANY,
       payload: response
     }; 
   })

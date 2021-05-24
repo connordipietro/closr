@@ -1,4 +1,4 @@
-import { GET_COMPANIES, NEW_COMPANY } from "../actions";
+import { GET_COMPANIES, POST_COMPANY } from "../actions";
 
 const DEFAULT_STATE = {
   companies: []
@@ -10,7 +10,7 @@ const CompaniesReducer = function(state = DEFAULT_STATE, action) {
       return {
         companies: action.payload.data,
         }
-      case NEW_COMPANY:
+      case POST_COMPANY:
         return {
         companies: action.payload.data,
             }
