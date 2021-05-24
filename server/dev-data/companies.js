@@ -6,7 +6,7 @@ const companies = [
     city: "Mountain View",
     state: "CA",
     deals: [],
-    createdAt: new Date('December 17, 1995 03:24:00'),
+    createdAt: new Date('December 17, 2005 03:24:00'),
     industry: "Technology"
   },
   {
@@ -48,6 +48,56 @@ const companies = [
     deals: [],
     createdAt: new Date('June 21, 2006 18:00:00'),
     industry: "Apparel"
+  },
+  {
+    name: "Honda",
+    owner: "Publicly Traded",
+    phone: "800-999-1009",
+    city: "Hamamatsu",
+    state: "Japan",
+    deals: [],
+    createdAt: new Date('August 12, 2016 12:00:00'),
+    industry: "Automotive"
+  },
+  {
+    name: "Alpaca Chicken",
+    owner: "Nora Palma",
+    phone: "919-908-1597",
+    city: "Durham",
+    state: "NC",
+    deals: [],
+    createdAt: new Date('August 1, 2013 4:00:00'),
+    industry: "Restaraunts"
+  },
+  {
+    name: "British Petroleum",
+    owner: "Publicly Traded",
+    phone: "784-986-5912",
+    city: "Houston",
+    state: "TX",
+    deals: [],
+    createdAt: new Date('November 8, 2017 14:00:00'),
+    industry: "Petrochemicals"
+  },
+  {
+    name: "Gibson Guitars",
+    owner: "James Curleigh",
+    phone: "223-567-4039",
+    city: "Nashville",
+    state: "TN",
+    deals: [],
+    createdAt: new Date('December 5, 2015 19:00:00'),
+    industry: "Music Supply"
+  },
+  {
+    name: "ScubaPro",
+    owner: "Gustav Dalla Valle",
+    phone: "875-966-2103",
+    city: "Racine",
+    state: "WI",
+    deals: [],
+    createdAt: new Date('April 3, 2013 22:00:00'),
+    industry: "Recreational Products"
   }
 ];
 
