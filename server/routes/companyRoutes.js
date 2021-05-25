@@ -86,14 +86,7 @@ router.delete("/companies/:id", (req, res) => {
   })
 })
 
-router.get("/deals", (req, res) => {
-  Deal.find({}).populate({path: "company"}).exec((err, dealResults) => {
-    if (err) {
-      console.error(err)
-    }
-    res.send(dealResults);
-  });
-})
+
 
 router.get("/generate-company-dev-data", (req, res)=> {
   Company.deleteMany({}).exec().then(
@@ -107,17 +100,6 @@ router.get("/generate-company-dev-data", (req, res)=> {
   res.send('saved the fake data')
 })
 
-router.get("/generate-deals-dev-data", (req, res) => {
-  Deal.deleteMany({}).exec()
-    .then(() => {
-      deals.forEach(deal => {
-        let newDeal = new Deal(deal);
-        newDeal.save((err) => {
-          if (err) throw err;
-        })
-      })
-    })
-  res.send('saved the fake data');
-})
+
 
 module.exports = router;
