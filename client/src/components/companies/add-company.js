@@ -17,6 +17,9 @@ function AddCompany() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const createdDate = new Date();
+  const createdDateString = createdDate.toString();
+
   const dispatch = useDispatch();
 
   const handleCompanyAdd = (e) => {
@@ -35,6 +38,12 @@ function AddCompany() {
         })
       )
       setShow(false);
+      setName('');
+      setOwner('');
+      setPhone('');
+      setCity('');
+      setDeals([]);
+      setIndustry('');
     }
 
   function renderAddCompanyModal() {
@@ -118,12 +127,11 @@ function AddCompany() {
 
           <div className="form-group">
             <label>Created Date</label>
-            <input
+            <p
               className="form-control"
               placeholder="Enter Company Created Date" 
-              value={Date}
               onChange={(e) => setCreatedAt(e.target.value)} 
-            ></input>
+            >{createdDateString}</p>
           </div>
           <br />
 
@@ -143,7 +151,7 @@ function AddCompany() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleCompanyAdd}>
+          <Button type="submit" variant="primary" onClick={handleCompanyAdd}>
             Save
           </Button>
         </Modal.Footer>
