@@ -1,8 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const keys = require('./config/keys');
 
-mongoose.connect("mongodb://localhost/crm-data", {
+mongoose.connect(keys.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -30,7 +31,13 @@ const companyRoutes = require("./routes/companyRoutes");
 const dealRoutes = require("./routes/dealRoutes")
 
 app.use(companyRoutes, dealRoutes);
+const PORT = process.env.PORT || 8000;
 
-app.listen(8000, () => {
-  console.log("Node.js listening on port " + 8000);
+const server = http.createServer(app);
+server.listen(PORT, () => {
+  console.log("Node.js listening on port " + PORT)
 });
+
+// app.listen(PORT, () => {
+//   console.log("Node.js listening on port " + PORT);
+// });
