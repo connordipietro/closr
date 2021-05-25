@@ -1,0 +1,16 @@
+.deals {
+  display: flex;
+}
+
+.deals li {
+  display: flex;
+  border: solid 2px #000000c7;
+  border-radius: 0.2em;
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+.deals p {
+  max-width: none;
+  margin: 0;
+}

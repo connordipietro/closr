@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
 
-function Companies() {
+function CompaniesView() {
   const { companies } = useSelector(state => state.companyData);
   const dispatch = useDispatch();
 
@@ -60,4 +60,4 @@ return (
   );
 };
 
-export default Companies;
+export default CompaniesView;

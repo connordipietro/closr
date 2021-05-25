@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
 import Nav from './nav.js';
-import Companies from './companies-veiw.js';
-import Deals from './deals-view';
+import CompaniesView from './companies-veiw.js';
+import DealsView from './deals-view-dnd/deals-view'
 
 function App() {
   return (
     <React.Fragment>
       <Nav /> 
-      <Companies />
-      <Deals />
+      <CompaniesView />
+      <DealsView />
     </React.Fragment>
   );
 };
