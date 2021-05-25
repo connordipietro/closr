@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
-import Nav from './nav.js';
-import CompaniesView from './companies-veiw.js';
-import DealsView from './deals-view-dnd/deals-view'
+import Nav from './nav/nav.js';
+import DealsContainer from './deals/deals-container'
+import CompaniesContainer from './companies/companies-container'
 
 function App() {
   return (
     <React.Fragment>
       <Nav /> 
-      <CompaniesView />
-      <DealsView />
+      <CompaniesContainer/>
+      <DealsContainer />
     </React.Fragment>
   );
 };

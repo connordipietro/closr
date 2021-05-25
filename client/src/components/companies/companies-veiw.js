@@ -1,5 +1,4 @@
-import AddCompany from './add-company';
-import { getCompanies } from '../actions';
+import { getCompanies } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import _ from 'lodash';
@@ -55,7 +54,6 @@ function CompaniesView() {
 return (
   <div>
     {renderCompaniesDisplay()}
-    <AddCompany />
   </div>
   );
 };
