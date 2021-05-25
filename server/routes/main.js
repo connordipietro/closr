@@ -86,6 +86,15 @@ router.delete("/companies/:id", (req, res) => {
   })
 })
 
+router.get("/deals", (req, res) => {
+  Deal.find({}).populate({path: "company"}).exec((err, dealResults) => {
+    if (err) {
+      console.error(err)
+    }
+    res.send(dealResults);
+  });
+})
+
 router.get("/generate-company-dev-data", (req, res)=> {
   Company.deleteMany({}).exec().then(
     companies.forEach(company => {
