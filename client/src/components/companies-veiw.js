@@ -2,7 +2,8 @@ import AddCompany from './add-company';
 import { getCompanies } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import _ from 'lodash'
+import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 function Companies() {
   const { companies } = useSelector(state => state.companyData);
@@ -18,7 +19,7 @@ function Companies() {
       const companyTableRows = companies.map(item => {
       return (
         <tr key={item.name}>
-          <td>{item.name}</td>
+          <td><Link to={`companies/${item._id}`}>{item.name}</Link></td>
           <td>{item.owner}</td>
           <td>{item.phone}</td>
           <td>{item.city}, {item.state}</td>
