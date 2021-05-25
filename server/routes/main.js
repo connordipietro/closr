@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const router = require("express").Router();
 const Company = require("../models/company");
-const companies = require("../dev-data/companies")
+const companies = require("../dev-data/companies");
+const Deal = require("../models/deal");
+const deals = require("../dev-data/deals");
 
 router.get("/companies", (req, res) => {
   const perPage = 5;
@@ -84,6 +86,15 @@ router.delete("/companies/:id", (req, res) => {
   })
 })
 
+router.get("/deals", (req, res) => {
+  Deal.find({}).populate({path: "company"}).exec((err, dealResults) => {
+    if (err) {
+      console.error(err)
+    }
+    res.send(dealResults);
+  });
+})
+
 router.get("/generate-company-dev-data", (req, res)=> {
   Company.deleteMany({}).exec().then(
     companies.forEach(company => {
@@ -94,6 +105,19 @@ router.get("/generate-company-dev-data", (req, res)=> {
     }) 
   );
   res.send('saved the fake data')
+})
+
+router.get("/generate-deals-dev-data", (req, res) => {
+  Deal.deleteMany({}).exec()
+    .then(() => {
+      deals.forEach(deal => {
+        let newDeal = new Deal(deal);
+        newDeal.save((err) => {
+          if (err) throw err;
+        })
+      })
+    })
+  res.send('saved the fake data');
 })
 
 module.exports = router;
