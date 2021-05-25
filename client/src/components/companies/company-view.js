@@ -1,12 +1,12 @@
 // import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 // import { getCompanyById } from "../actions";
 
 const CompanyView = (props) => {
   const { companies } = useSelector((state) => state.companyData);
   const companyId = props.match.params._id;
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const company = companies.find((company) => company._id === companyId);
 
   // useEffect(() => {
