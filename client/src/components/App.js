@@ -4,6 +4,7 @@ import Nav from './nav.js';
 import Companies from './companies-veiw.js';
 import Deals from './deals-view';
 
+
 function App() {
   return (
     <React.Fragment>

@@ -4,8 +4,8 @@ export const GET_COMPANIES = "GET_COMPANIES";
 export const GET_DEALS = "GET_DEALS";
 export const POST_COMPANY = "POST_COMPANY";
 
-export function getCompanies() {
-  return axios.get(`http://localhost:8000/companies`)
+export function getCompanies(pageNumber, name) {
+  return axios.get(`http://localhost:8000/companies?page=${pageNumber}`)
   .then(response => {
     return {
       type: GET_COMPANIES,
