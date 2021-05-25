@@ -26,9 +26,10 @@ app.use((req, res, next) => {
   next();
 });
 
-const mainRoutes = require("./routes/main");
+const companyRoutes = require("./routes/companyRoutes");
+const dealRoutes = require("./routes/dealRoutes")
 
-app.use(mainRoutes);
+app.use(companyRoutes, dealRoutes);
 
 app.listen(8000, () => {
   console.log("Node.js listening on port " + 8000);

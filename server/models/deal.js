@@ -10,7 +10,7 @@ const DealSchema = new Schema({
   company: {type: Schema.Types.ObjectId, ref: "Company", required: true},
   stage: {type: String, required: true},
   createdAt: { type: Date, required: true },
-  expectedCloseDate: {type: Date, required: true},
+  expectedCloseDate: Date,
   stageLastUpdatedAt: {type: Date, required: true},
   isActive: Boolean
 });
