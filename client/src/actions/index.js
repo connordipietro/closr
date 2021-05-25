@@ -34,6 +34,7 @@ export function getDeals() {
 export function postNewCopmany(newCompany) {
   return axios.post(`http://localhost:8000/companies`, newCompany)
   .then(response => {
+    console.log(response)
     return {
       type: POST_COMPANY,
       payload: response

@@ -15,6 +15,8 @@ function CompaniesView() {
 
   function renderCompaniesDisplay () {
     if (!_.isEmpty(companies)) { // if companies returned from dispatch, render companies
+      console.log(typeof companies);
+      console.log(companies)
       const companyTableRows = companies.map(item => {
       return (
         <tr key={item.name}>
