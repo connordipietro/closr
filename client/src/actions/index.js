@@ -6,7 +6,7 @@ export const GET_DEALS = "GET_DEALS";
 export const POST_COMPANY = "POST_COMPANY";
 
 export function getCompanies() {
-  return axios.get(`http://localhost:8000/companies`)
+  return axios.get(`/companies`)
   .then(response => {
     return {
       type: GET_COMPANIES,
@@ -32,7 +32,7 @@ export function getDeals() {
 };
 
 export function postNewCopmany(newCompany) {
-  return axios.post(`http://localhost:8000/companies`, newCompany)
+  return axios.post(`/companies`, newCompany)
   .then(response => {
     return {
       type: POST_COMPANY,
