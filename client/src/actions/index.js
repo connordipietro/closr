@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const GET_COMPANIES = "GET_COMPANIES";
+export const GET_COMPANY = "GET_COMPANY";
 export const GET_DEALS = "GET_DEALS";
 export const POST_COMPANY = "POST_COMPANY";
 
@@ -42,3 +43,11 @@ export function postNewCopmany(newCompany) {
     alert('Error');
   });
 };
+
+// to be changed once we have the backend
+export function getCompanyById(companies) {
+  return {
+    type: GET_COMPANY,
+    payload: companies,
+  };
+}
