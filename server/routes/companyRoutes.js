@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const router = require('express').Router();
 const Company = require('../models/company');
 const companies = require('../dev-data/companies');
+const Deal = require('../models/deal');
+const deals = require('../dev-data/deals');
 
 router.get('/companies', (req, res) => {
   const perPage = 5;
@@ -88,6 +90,22 @@ router.delete('/companies/:id', (req, res) => {
     res.send(`${deletedCompany.name} successfully deleted`);
   });
 });
+
+router.get('/generate-company-dev-data', (req, res) => {
+  Company.deleteMany({})
+    .exec()
+    .then(
+      companies.forEach((company) => {
+        const newCompany = new Company(company);
+        newCompany.save((err) => {
+          if (err) throw err;
+        });
+      })
+    );
+  res.send('saved the fake data');
+});
+
+module.exports = router;
 
 router.get('/generate-company-dev-data', (req, res) => {
   Company.deleteMany({})

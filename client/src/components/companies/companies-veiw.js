@@ -1,13 +1,15 @@
-import AddCompany from './add-company';
-import { getCompanies } from '../actions';
+import { getCompanies } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect , useState} from 'react';
 import _ from 'lodash'
 import { FormControl } from 'react-bootstrap'
 
 import './App.css'
+import { useEffect } from 'react';
+import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
-function Companies() {
+function CompaniesView() {
   const { companies } = useSelector(state => state.companyData);
   
   const [pageNumber, setPageNumber] = useState(1)
@@ -48,7 +50,7 @@ function Companies() {
       const companyTableRows = companies.map(item => {
       return (
         <tr key={item.name}>
-          <td>{item.name}</td>
+          <td><Link to={`companies/${item._id}`}>{item.name}</Link></td>
           <td>{item.owner}</td>
           <td>{item.phone}</td>
           <td>{item.city}, {item.state}</td>
@@ -85,18 +87,8 @@ function Companies() {
 return (
   <div >
     {renderCompaniesDisplay()}
-    <div className=" mt-5 mb-5 row">
-      <div className="m-auto">
-      <a href={() => false} onClick={handlePrevPage} className="previous round">&#8249;</a>
-      <div className="border-page">
-      <p className=" number text-center">{pageNumber}</p>
-      </div>
-      <a href={() => false} onClick={handleNextPage}class="next round">&#8250;</a>
-      </div>
-      </div>
-    <AddCompany />
   </div>
   );
 };
 
-export default Companies;
+export default CompaniesView;
