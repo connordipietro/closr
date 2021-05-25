@@ -3,13 +3,20 @@ import './App.css';
 import Nav from './nav/nav.js';
 import DealsContainer from './deals/deals-container'
 import CompaniesContainer from './companies/companies-container'
+import {Tab, Tabs} from 'react-bootstrap';
 
 function App() {
   return (
     <React.Fragment>
-      <Nav /> 
-      <CompaniesContainer/>
-      <DealsContainer />
+      <Nav />
+        <Tabs defaultActiveKey="companies" id="uncontrolled-tab-example">
+          <Tab eventKey="companies" title="Companies">
+            <CompaniesContainer/>
+          </Tab>
+          <Tab eventKey="deals" title="Deals">
+            <DealsContainer />
+          </Tab>
+        </Tabs>
     </React.Fragment>
   );
 };
