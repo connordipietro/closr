@@ -7,7 +7,10 @@ const deals = require("../dev-data/deals");
 const dealStages = require("../dev-data/dealStages")
 
 router.get("/deals", (req, res) => {
-  Deal.find({}).populate({path: "company"}).exec((err, dealResults) => {
+  const searchObject = {};
+  req.query.stage ? searchObject.stage = dealStages[Number(req.query.stage)] : null;
+
+  Deal.find(searchObject).populate({path: "company"}).exec((err, dealResults) => {
     if (err) {
       console.error(err)
     }
@@ -66,7 +69,10 @@ router.put("/deals/:id", (req, res) => {
     })
 })
 
-router.put("/deals/:id/advance", (req, res) => {
+//update takes in query 'stage' corresponding to dealStages.js array in devData folder
+//if no query is provided, it advances the deal one stage
+
+router.put("/deals/:id/update", (req, res) => {
   Deal.findById(req.params.id).exec()
     .then((deal) => {
       if(!deal) {
@@ -76,7 +82,9 @@ router.put("/deals/:id/advance", (req, res) => {
       if (oldStageIndex === 3 || oldStageIndex === 4) {
         return res.send('Deal already closed, unable to advance')
       }
-      deal.stage = dealStages[oldStageIndex+1];
+      let newIndex
+      req.query.stage ? newIndex = Number(req.query.stage) : newIndex = oldStageIndex + 1;
+      deal.stage = dealStages[newIndex];
       deal.save((err, savedDeal)=>{
         res.send(savedDeal)
       })
