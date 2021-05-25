@@ -34,6 +34,7 @@ function AddCompany() {
           industry
         })
       )
+      setShow(false);
     }
 
   function renderAddCompanyModal() {
