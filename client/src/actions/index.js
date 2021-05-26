@@ -56,10 +56,15 @@ export function putDeal(id, updatedStage) {
   .catch(error => {alert('Error')});
 };
 
-// to be changed once we have the backend
-export function getCompanyById(companies) {
-  return {
-    type: GET_COMPANY,
-    payload: companies,
-  };
-}
+export function getCompanyById(_id) {
+  return axios.get(`/companies/${_id}`)
+  .then(response => {
+    return {
+      type: GET_COMPANY,
+      payload: response
+    }; 
+  })
+  .catch(error => {
+    alert('Error, that company does not exist');
+  });
+};
