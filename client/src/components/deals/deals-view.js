@@ -5,7 +5,7 @@ import axios from 'axios'
 
 //needs own file
 function updateDealStage(id, updatedStage) {
-  return axios.put(`http://localhost:8000/deals/${id}`, {stage: updatedStage})
+  return axios.put(`/deals/${id}`, {stage: updatedStage})
   .then(response => {
     //console.log(response)
   })
