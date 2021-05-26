@@ -102,7 +102,7 @@ function DealsView(props) {
   const dealStageColumns = {
     [uuid()]: {
       name: "Initiated",
-      items: initiatedDeals
+      items: initiatedDeals || []
     },
     [uuid()]: {
       name: "Qualified",

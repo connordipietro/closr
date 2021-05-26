@@ -16,11 +16,21 @@ function DealsViewHandler() {
   const renderDealView = () => {
     if (!_.isEmpty(deals)) {
       return  <DealsView deals={deals} />
-    }
+    }   
   };
 
+  const renderNoDeals = () => {
+    if (_.isEmpty(deals)) {
+      return <h5>No deals yet, click below to get started.</h5>
+    }
+  }
+
   return (
-    <>{renderDealView()}</>
+    <>
+    {renderDealView()}
+    {renderNoDeals()}
+    </>
+    
   );
 };
 

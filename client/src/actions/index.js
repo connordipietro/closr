@@ -32,20 +32,6 @@ export function getDeals() {
   });
 };
 
-/* export function putDeal(id, req) {
-  return axios.put(`http://localhost:8000/deals/${id}`, req)
-  .then(response => {
-    console.log(response)
-    return {
-      type: PUT_DEAL,
-      payload: response
-    }; 
-  })
-  .catch(error => {
-    alert('Error');
-  });
-}; */
-
 export function postNewCopmany(newCompany) {
   return axios.post(`/companies`, newCompany)
   .then(response => {
