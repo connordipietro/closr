@@ -4,6 +4,7 @@ export const GET_COMPANIES = "GET_COMPANIES";
 export const GET_COMPANY = "GET_COMPANY";
 export const GET_DEALS = "GET_DEALS";
 export const POST_COMPANY = "POST_COMPANY";
+export const PUT_DEAL = "PUT_DEAL";
 
 export function getCompanies() {
   return axios.get(`http://localhost:8000/companies`)
@@ -30,6 +31,20 @@ export function getDeals() {
     alert('Error');
   });
 };
+
+/* export function putDeal(id, req) {
+  return axios.put(`http://localhost:8000/deals/${id}`, req)
+  .then(response => {
+    console.log(response)
+    return {
+      type: PUT_DEAL,
+      payload: response
+    }; 
+  })
+  .catch(error => {
+    alert('Error');
+  });
+}; */
 
 export function postNewCopmany(newCompany) {
   return axios.post(`http://localhost:8000/companies`, newCompany)

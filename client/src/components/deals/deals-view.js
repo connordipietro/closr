@@ -1,6 +1,18 @@
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import uuid from "uuid/dist/v4";
+import axios from 'axios'
+
+//needs own file
+function updateDealStage(id, updatedStage) {
+  return axios.put(`http://localhost:8000/deals/${id}`, {stage: updatedStage})
+  .then(response => {
+    //console.log(response)
+  })
+  .catch(error => {
+    alert('Error');
+  });
+};
 
 const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return;
@@ -23,7 +35,9 @@ const onDragEnd = (result, columns, setColumns) => {
         ...destColumn,
         items: destItems
       }
-    });
+    }
+    )
+    updateDealStage(result.draggableId, destColumn.name);
   } else {
     const column = columns[source.droppableId];
     const copiedItems = [...column.items];
@@ -86,23 +100,23 @@ function DealsView(props) {
 
   const dealStageColumns = {
     [uuid()]: {
-      name: "INITIATED",
+      name: "Initiated",
       items: initiatedDeals
     },
     [uuid()]: {
-      name: "QUALIFIED",
+      name: "Qualified",
       items: qualifiedDeals
     },
     [uuid()]: {
-      name: "CONTRACT SENT",
+      name: "Contract Sent",
       items: contractSentDeals
     },
     [uuid()]: {
-      name: "CLOSED WON",
+      name: "Closed Won",
       items: closedWonDeals
     },
     [uuid()]: {
-      name: "CLOSED LOST",
+      name: "Closed Lost",
       items: closedLostDeals
     }
   }

@@ -6,7 +6,7 @@ import NewCompanyReducer from "./new-company-reducer";
 const rootReducer = combineReducers({
   companyData: CompaniesReducer,
   dealsData: DealsReducer,
-  newCompany: NewCompanyReducer
+  newCompany: NewCompanyReducer,
 });
 
 export default rootReducer;
