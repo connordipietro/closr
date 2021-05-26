@@ -53,7 +53,7 @@ router.post("/deals", (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      res.status(400).send("validation error, missing required fields")
+      res.status(400).send("error, entry not saved")
       res.end();
     }) 
 })

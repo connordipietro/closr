@@ -9,7 +9,7 @@ const CompanySchema = new Schema({
   phone: String,
   city: String,
   state: String,
-  deals: Array,
+  deals: [{type: Schema.Types.ObjectId, ref: "Deal"}],
   createdAt: { type: Date, required: true },
   industry: String
 });
