@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect , useState} from 'react';
 import _ from 'lodash'
 import { FormControl } from 'react-bootstrap'
-
+import Paginate from '../pagination/pagination-filtering'
 import '../App.css'
 
 import { Link } from 'react-router-dom';
 
 function CompaniesView() {
   const { companies } = useSelector(state => state.companyData);
+  
   
   const dispatch = useDispatch();
 
@@ -18,6 +19,7 @@ function CompaniesView() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },  [getCompanies]);
 
+  
   function renderCompaniesDisplay () {
     if (!_.isEmpty(companies)) { // if companies returned from dispatch, render companies
       const companyTableRows = companies.map(item => {
@@ -49,8 +51,10 @@ function CompaniesView() {
           </thead>
           <tbody>
               {companyTableRows}
+              
           </tbody>
         </table>
+        
       </div>
       );
     };
@@ -59,6 +63,7 @@ function CompaniesView() {
 return (
   <div >
     {renderCompaniesDisplay()}
+    <Paginate />
   </div>
   );
 };

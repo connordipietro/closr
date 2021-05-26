@@ -1,19 +1,10 @@
-/*  */
 a {
   text-decoration: none;
   display: inline-block;
   padding: 8px 16px;
 }
 
-.border-page {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  margin: 5px;
-}
-
 a:hover {
-  cursor: pointer;
   background-color: #e46407;
   color: white;
 }
@@ -32,7 +23,10 @@ a:hover {
   border-radius: 50%;
 }
 
-.number {
+.boxed {
+  display: inline-block;
   background-color: #e5f5f8;
   border: 1px solid #7fd1de;
+  margin: 10px;
+  padding: 5px;
 }
