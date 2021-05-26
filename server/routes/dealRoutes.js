@@ -4,13 +4,17 @@ const Company = require("../models/company");
 const companies = require("../dev-data/companies");
 const Deal = require("../models/deal");
 const deals = require("../dev-data/deals");
-const dealStages = require("../dev-data/dealStages")
+const dealStages = require("../dev-data/dealStages");
+const ChangeEntry = require("../models/changeEntry");
 
 router.get("/deals", (req, res) => {
   const searchObject = {};
   req.query.stage ? searchObject.stage = dealStages[Number(req.query.stage)] : null;
 
-  Deal.find(searchObject).populate({path: "company"}).exec((err, dealResults) => {
+  Deal.find(searchObject)
+    .populate("company")
+    .populate("stageHistory")
+    .exec((err, dealResults) => {
     if (err) {
       console.error(err)
     }
@@ -20,7 +24,10 @@ router.get("/deals", (req, res) => {
 
 router.get("/deals/:id", (req, res) => {
 
-  Deal.findById(req.params.id).populate({path: "company"}).exec((err, foundDeal) => {
+  Deal.findById(req.params.id)
+    .populate({path: "company"})
+    .populate("stageHistory")
+    .exec((err, foundDeal) => {
     if (err) {
       console.error(err)
     }
@@ -33,10 +40,10 @@ router.get("/deals/:id", (req, res) => {
 
 router.post("/deals", (req, res) => {
   let newDeal = new Deal(req.body);
-  newDeal.stage = 'Initiated';
+  newDeal.stage = req.body.stage || 'Initiated';
   newDeal.createdAt = new Date();
   newDeal.stageLastUpdatedAt = new Date();
-  newDeal.isActive = true;
+  newDeal.archived = false;
   newDeal.expectedCloseDate = req.body.expectedCloseDate || null;
   
 
@@ -64,6 +71,7 @@ router.put("/deals/:id", (req, res) => {
       if(!deal) {
         res.status(404).send("Deal not found");
       }
+
       for (prop in req.body) {
         deal[prop] = req.body[prop];
       }
@@ -94,7 +102,15 @@ router.put("/deals/:id/update", (req, res) => {
       let newIndex
       req.query.stage ? newIndex = Number(req.query.stage) : newIndex = oldStageIndex + 1;
       deal.stage = dealStages[newIndex];
+      const newChangeEntry = new ChangeEntry({
+        timeStamp: new Date(),
+        deal: deal._id,
+        newValue: deal.stage
+      });
+      deal.stageHistory.push(newChangeEntry._id);
+
       deal.save((err, savedDeal)=>{
+        newChangeEntry.save();
         res.send(savedDeal)
       })
     })
@@ -110,6 +126,7 @@ router.put("/deals/:id/cancel", (req, res) => {
         res.status(404).send("Deal not found");
       }
       let oldStageIndex = dealStages.findIndex(stage => stage === deal.stage);
+      //examine if this is necessary later
       if (oldStageIndex === 3 || oldStageIndex === 4) {
         return res.send('Deal already closed, unable to cancel')
       }
@@ -149,16 +166,3 @@ router.get("/generate-deals-dev-data", (req, res) => {
 })
 
   module.exports = router;
-
-  // const DealSchema = new Schema({
-  //   name: { type: String, required: true },
-  //   // Update owner when we get to users extension
-  //   owner: String,
-  //   amount: {type: Number, required: true },
-  //   company: {type: Schema.Types.ObjectId, ref: "Company", required: true},
-  //   stage: {type: String, required: true},
-  //   createdAt: { type: Date, required: true },
-  //   expectedCloseDate: Date,
-  //   stageLastUpdatedAt: {type: Date, required: true},
-  //   isActive: Boolean
-  // });
