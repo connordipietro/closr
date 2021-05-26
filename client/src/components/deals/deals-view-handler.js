@@ -3,6 +3,8 @@ import { getDeals } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import _ from 'lodash';
+import NoDealsView from './deals-view-no-deals'
+
 
 function DealsViewHandler() {
   const { deals } = useSelector(state => state.dealsData);
@@ -16,11 +18,21 @@ function DealsViewHandler() {
   const renderDealView = () => {
     if (!_.isEmpty(deals)) {
       return  <DealsView deals={deals} />
-    }
+    }   
   };
 
+  const renderNoDeals = () => {
+    if (_.isEmpty(deals)) {
+      return <NoDealsView />
+    }
+  }
+
   return (
-    <>{renderDealView()}</>
+    <>
+    {renderDealView()}
+    {renderNoDeals()}
+    </>
+    
   );
 };
 

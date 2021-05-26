@@ -32,20 +32,6 @@ export function getDeals() {
   });
 };
 
-/* export function putDeal(id, req) {
-  return axios.put(`http://localhost:8000/deals/${id}`, req)
-  .then(response => {
-    console.log(response)
-    return {
-      type: PUT_DEAL,
-      payload: response
-    }; 
-  })
-  .catch(error => {
-    alert('Error');
-  });
-}; */
-
 export function postNewCopmany(newCompany) {
   return axios.post(`/companies`, newCompany)
   .then(response => {
@@ -57,6 +43,17 @@ export function postNewCopmany(newCompany) {
   .catch(error => {
     alert('Error');
   });
+};
+
+export function putDeal(id, updatedStage) {
+  return axios.put(`/deals/${id}`, {stage: updatedStage})
+  .then(response => {
+    return {
+      type: PUT_DEAL
+      }
+    }
+  )
+  .catch(error => {alert('Error')});
 };
 
 // to be changed once we have the backend
