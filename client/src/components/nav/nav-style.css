@@ -1,0 +1,13 @@
+.navbar {
+  background-color: #565453 !important;
+}
+
+.nav-item {
+  color: #F5F5F5 !important;
+}
+
+.navbar-brand {
+  margin: 10px;
+  color: #F5F5F5 !important;
+  font-weight: 800;
+}
