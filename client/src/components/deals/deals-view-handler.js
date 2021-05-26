@@ -3,6 +3,8 @@ import { getDeals } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import _ from 'lodash';
+import NoDealsView from './deals-view-no-deals'
+
 
 function DealsViewHandler() {
   const { deals } = useSelector(state => state.dealsData);
@@ -21,7 +23,7 @@ function DealsViewHandler() {
 
   const renderNoDeals = () => {
     if (_.isEmpty(deals)) {
-      return <h5>No deals yet, click below to get started.</h5>
+      return <NoDealsView />
     }
   }
 
