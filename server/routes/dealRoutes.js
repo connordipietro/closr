@@ -38,11 +38,17 @@ router.post("/deals", (req, res) => {
   newDeal.stageLastUpdatedAt = new Date();
   newDeal.isActive = true;
   newDeal.expectedCloseDate = req.body.expectedCloseDate || null;
-
+  
 
   newDeal.save().then(dealSaved => {
-    res.send(dealSaved);
-  }).catch(err => {
+    Company.findById(dealSaved.company).exec((err, companyMatch) => {
+      companyMatch.deals.push(dealSaved._id);
+      companyMatch.save()
+      res.send('Deal added to database')
+    })
+  })
+  .then()
+  .catch(err => {
     console.error(err);
     res.status(400).send("validation error, missing required fields")
     res.end();
