@@ -15,6 +15,7 @@ router.get('/companies', (req, res) => {
   const resultPromise = Company.find({})
     .skip(perPage * page - perPage)
     .limit(perPage)
+    .populate({ path: 'deals' })
     .exec();
 
   Promise.all([countPromise, resultPromise])
@@ -49,14 +50,16 @@ router.post('/companies', (req, res) => {
 });
 
 router.get('/companies/:id', (req, res) => {
-  Company.findById(req.params.id).exec((err, company) => {
-    if (err) console.log(err);
+  Company.findById(req.params.id)
+    .populate({ path: 'deals' })
+    .exec((err, company) => {
+      if (err) console.log(err);
 
-    if (!company) {
-      res.status(404).send('No Company Found with that Id');
-    }
-    res.send(company);
-  });
+      if (!company) {
+        res.status(404).send('No Company Found with that Id');
+      }
+      res.send(company);
+    });
 });
 
 router.put('/companies/:id', (req, res) => {

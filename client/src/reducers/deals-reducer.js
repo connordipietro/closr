@@ -8,7 +8,7 @@ const DealsReducer = function(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_DEALS:
       return {
-        deals: action.payload.data.deals,
+        deals: action.payload.data,
         }
     default:
       return state;

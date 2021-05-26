@@ -1,10 +1,16 @@
 import { useState } from "react";
 import {Modal, Button, Form} from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { getDeals } from '../../actions'
 
 function AddDeal() {
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch()
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    dispatch(getDeals())
+  }
   const handleShow = () => setShow(true);
 
   return (

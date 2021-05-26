@@ -2,36 +2,17 @@ import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import uuid from "uuid/dist/v4";
 
-const dummyDeals = [
-  { id: uuid(), content: "Deal 1" },
-  { id: uuid(), content: "Deal 2" },
-  { id: uuid(), content: "Deal 3" },
-  { id: uuid(), content: "Deal 4" },
-  { id: uuid(), content: "Deal 5" }
-];
-
-const dealStages = {
-  [uuid()]: {
-    name: "INITIATED",
-    items: dummyDeals
-  },
-  [uuid()]: {
-    name: "QUALIFIED",
-    items: []
-  },
-  [uuid()]: {
-    name: "CONTRACT SENT",
-    items: []
-  },
-  [uuid()]: {
-    name: "CLOSED WON",
-    items: []
-  },
-  [uuid()]: {
-    name: "CLOSED LOST",
-    items: []
-  }
-};
+import { useDispatch } from 'react-redux';
+import { getDeals, putDeal } from '../../actions'
+/* 
+function updateDealStage(id, updatedStage) {
+  return axios.put(`/deals/${id}`, {stage: updatedStage})
+  .then(response => {
+  })
+  .catch(error => {
+    alert('Error');
+  });
+}; */
 
 const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return;
@@ -54,7 +35,10 @@ const onDragEnd = (result, columns, setColumns) => {
         ...destColumn,
         items: destItems
       }
-    });
+    }
+    )
+    /* updateDealStage(result.draggableId, destColumn.name);
+   */
   } else {
     const column = columns[source.droppableId];
     const copiedItems = [...column.items];
@@ -70,12 +54,88 @@ const onDragEnd = (result, columns, setColumns) => {
   }
 };
 
-function DealsView() {
-  const [columns, setColumns] = useState(dealStages);
+function DealsView(props) {
+  const dispatch = useDispatch();
+  const { deals } = props
+
+  const dealsArray = deals.map(item => {
+    return (
+      {id: item._id, amount: item.amount, name: item.name, stage: item.stage}
+      )
+    }
+  ) 
+  
+  const qualifiedDeals = dealsArray.filter(item => {
+    return (
+      item.stage === 'Qualified'
+      )
+    }
+  )
+
+  const initiatedDeals = dealsArray.filter(item => {
+    return (
+      item.stage === 'Initiated'
+      )
+    }
+  )
+
+  const contractSentDeals = dealsArray.filter(item => {
+    return (
+      item.stage === 'Contract Sent'
+      )
+    }
+  )
+
+  const closedWonDeals = dealsArray.filter(item => {
+    return (
+      item.stage === 'Closed Won'
+      )
+    }
+  )
+
+  const closedLostDeals = dealsArray.filter(item => {
+    return (
+      item.stage === 'Closed Lost'
+      )
+    }
+  )
+
+  const dealStageColumns = {
+    [uuid()]: {
+      name: "Initiated",
+      items: initiatedDeals
+    },
+    [uuid()]: {
+      name: "Qualified",
+      items: qualifiedDeals
+    },
+    [uuid()]: {
+      name: "Contract Sent",
+      items: contractSentDeals
+    },
+    [uuid()]: {
+      name: "Closed Won",
+      items: closedWonDeals
+    },
+    [uuid()]: {
+      name: "Closed Lost",
+      items: closedLostDeals
+    }
+  }
+
+  const [columns, setColumns] = useState(dealStageColumns);
+
   return (
     <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
       <DragDropContext
-        onDragEnd={result => onDragEnd(result, columns, setColumns)}
+        onDragEnd={result => onDragEnd(
+          result, 
+          columns, 
+          setColumns, 
+          dispatch(putDeal(result.draggableId, columns[result.destination.droppableId].name)),
+          dispatch(getDeals()),
+          )
+        }
       >
         {Object.entries(columns).map(([columnId, column], index) => {
           return (
@@ -126,10 +186,13 @@ function DealsView() {
                                         ? "#263B4A"
                                         : "#456C86",
                                       color: "white",
+                                      fontSize: 12,
                                       ...provided.draggableProps.style
                                     }}
                                   >
-                                    {item.content}
+                                    {item.name}
+                                    <br></br>
+                                    Amount: {item.amount}
                                   </div>
                                 );
                               }}

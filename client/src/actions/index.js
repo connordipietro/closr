@@ -4,9 +4,10 @@ export const GET_COMPANIES = "GET_COMPANIES";
 export const GET_COMPANY = "GET_COMPANY";
 export const GET_DEALS = "GET_DEALS";
 export const POST_COMPANY = "POST_COMPANY";
+export const PUT_DEAL = "PUT_DEAL";
 
-export function getCompanies(pageNumber, name) {
-  return axios.get(`http://localhost:8000/companies?page=${pageNumber}`)
+export function getCompanies() {
+  return axios.get(`/companies`)
   .then(response => {
     return {
       type: GET_COMPANIES,
@@ -19,7 +20,7 @@ export function getCompanies(pageNumber, name) {
 };
 
 export function getDeals() {
-  return axios.get(`urlHere`)
+  return axios.get(`/deals`)
   .then(response => {
     return {
       type: GET_DEALS,
@@ -32,7 +33,7 @@ export function getDeals() {
 };
 
 export function postNewCopmany(newCompany) {
-  return axios.post(`http://localhost:8000/companies`, newCompany)
+  return axios.post(`/companies`, newCompany)
   .then(response => {
     return {
       type: POST_COMPANY,
@@ -44,10 +45,26 @@ export function postNewCopmany(newCompany) {
   });
 };
 
-// to be changed once we have the backend
-export function getCompanyById(companies) {
-  return {
-    type: GET_COMPANY,
-    payload: companies,
-  };
-}
+export function putDeal(id, updatedStage) {
+  return axios.put(`/deals/${id}`, {stage: updatedStage})
+  .then(response => {
+    return {
+      type: PUT_DEAL
+      }
+    }
+  )
+  .catch(error => {alert('Error')});
+};
+
+export function getCompanyById(_id) {
+  return axios.get(`/companies/${_id}`)
+  .then(response => {
+    return {
+      type: GET_COMPANY,
+      payload: response
+    }; 
+  })
+  .catch(error => {
+    alert('Error, that company does not exist');
+  });
+};
