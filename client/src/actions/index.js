@@ -45,6 +45,17 @@ export function postNewCopmany(newCompany) {
   });
 };
 
+export function putDeal(id, updatedStage) {
+  return axios.put(`/deals/${id}`, {stage: updatedStage})
+  .then(response => {
+    return {
+      type: PUT_DEAL
+      }
+    }
+  )
+  .catch(error => {alert('Error')});
+};
+
 // to be changed once we have the backend
 export function getCompanyById(companies) {
   return {

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import uuid from "uuid/dist/v4";
-import axios from 'axios'
-import { useDispatch } from 'react-redux';
-import { getDeals } from '../../actions'
 
+import { useDispatch } from 'react-redux';
+import { getDeals, putDeal } from '../../actions'
+/* 
 function updateDealStage(id, updatedStage) {
   return axios.put(`/deals/${id}`, {stage: updatedStage})
   .then(response => {
@@ -12,7 +12,7 @@ function updateDealStage(id, updatedStage) {
   .catch(error => {
     alert('Error');
   });
-};
+}; */
 
 const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return;
@@ -37,7 +37,8 @@ const onDragEnd = (result, columns, setColumns) => {
       }
     }
     )
-    updateDealStage(result.draggableId, destColumn.name);
+    /* updateDealStage(result.draggableId, destColumn.name);
+   */
   } else {
     const column = columns[source.droppableId];
     const copiedItems = [...column.items];
@@ -127,7 +128,14 @@ function DealsView(props) {
   return (
     <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
       <DragDropContext
-        onDragEnd={result => onDragEnd(result, columns, setColumns, dispatch(getDeals()))}
+        onDragEnd={result => onDragEnd(
+          result, 
+          columns, 
+          setColumns, 
+          dispatch(putDeal(result.draggableId, columns[result.destination.droppableId].name)),
+          dispatch(getDeals()),
+          )
+        }
       >
         {Object.entries(columns).map(([columnId, column], index) => {
           return (
