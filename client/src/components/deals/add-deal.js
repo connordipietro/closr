@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {Modal, Button, Form} from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getDeals } from '../../actions'
 
 function AddDeal() {
