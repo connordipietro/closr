@@ -9,11 +9,11 @@ function App() {
   return (
     <React.Fragment>
       <Nav />
-        <Tabs defaultActiveKey="companies" id="uncontrolled-tab-example">
-          <Tab eventKey="companies" title="Companies">
+        <Tabs defaultActiveKey="companies" id="uncontrolled-tab-example" >
+          <Tab eventKey="companies" title="Companies" mountOnEnter={true} unmountOnExit={true}>
             <CompaniesContainer/>
           </Tab>
-          <Tab eventKey="deals" title="Deals">
+          <Tab eventKey="deals" title="Deals" mountOnEnter={true} unmountOnExit={true}>
             <DealsContainer />
           </Tab>
         </Tabs>

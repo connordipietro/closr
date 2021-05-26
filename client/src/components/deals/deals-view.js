@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import uuid from "uuid/dist/v4";
 import axios from 'axios'
+import { useDispatch } from 'react-redux';
+import { getDeals } from '../../actions'
 
-//needs own file
 function updateDealStage(id, updatedStage) {
   return axios.put(`/deals/${id}`, {stage: updatedStage})
   .then(response => {
-    //console.log(response)
   })
   .catch(error => {
     alert('Error');
@@ -54,6 +54,7 @@ const onDragEnd = (result, columns, setColumns) => {
 };
 
 function DealsView(props) {
+  const dispatch = useDispatch();
   const { deals } = props
 
   const dealsArray = deals.map(item => {
@@ -126,7 +127,7 @@ function DealsView(props) {
   return (
     <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
       <DragDropContext
-        onDragEnd={result => onDragEnd(result, columns, setColumns)}
+        onDragEnd={result => onDragEnd(result, columns, setColumns, dispatch(getDeals()))}
       >
         {Object.entries(columns).map(([columnId, column], index) => {
           return (
