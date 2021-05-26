@@ -1,6 +1,7 @@
 import uuid from 'uuid/dist/v4'
+import { putDeal } from '../../actions'
 
-export const onDragEnd = (result, columns, setColumns) => {
+export const onDragEnd = (result, columns, setColumns, dispatch) => {
   if (!result.destination) return;
   const { source, destination } = result;
 
@@ -23,6 +24,9 @@ export const onDragEnd = (result, columns, setColumns) => {
       }
     }
     )
+
+    dispatch(putDeal(result.draggableId, columns[result.destination.droppableId].name))
+    
   } else {
     const column = columns[source.droppableId];
     const copiedItems = [...column.items];

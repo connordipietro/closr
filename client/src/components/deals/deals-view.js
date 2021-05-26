@@ -1,26 +1,19 @@
 import { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
-import { putDeal } from "../../actions";
 import { onDragEnd, generateDealsStageColumns } from "./deals-view-dnd-helpers";
 
 function DealsView(props) {
   const dispatch = useDispatch();
   const { deals } = props;
-  
+
   const dealStageColumns = generateDealsStageColumns(deals);
   const [columns, setColumns] = useState(dealStageColumns);
 
   return (
     <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
       <DragDropContext
-        onDragEnd={result => onDragEnd(
-          result, 
-          columns, 
-          setColumns, 
-          dispatch(putDeal(result.draggableId, columns[result.destination.droppableId].name)
-          ))
-        }
+        onDragEnd={result => onDragEnd(result, columns, setColumns, dispatch)}
       >
         {Object.entries(columns).map(([columnId, column], index) => {
           return (
