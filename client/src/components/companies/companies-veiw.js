@@ -5,8 +5,7 @@ import _ from 'lodash'
 import { FormControl } from 'react-bootstrap'
 
 import './App.css'
-import { useEffect } from 'react';
-import _ from 'lodash';
+
 import { Link } from 'react-router-dom';
 
 function CompaniesView() {
