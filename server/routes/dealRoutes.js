@@ -40,19 +40,22 @@ router.post("/deals", (req, res) => {
   newDeal.expectedCloseDate = req.body.expectedCloseDate || null;
   
 
-  newDeal.save().then(dealSaved => {
-    Company.findById(dealSaved.company).exec((err, companyMatch) => {
-      companyMatch.deals.push(dealSaved._id);
-      companyMatch.save()
-      res.send('Deal added to database')
+  newDeal.save()
+    .then(dealSaved => {
+      return Company.findById(dealSaved.company).exec()
     })
-  })
-  .then()
-  .catch(err => {
-    console.error(err);
-    res.status(400).send("validation error, missing required fields")
-    res.end();
-  }) 
+    .then(companyMatch => {
+      companyMatch.deals.push(newDeal._id);
+      return companyMatch.save()
+    })
+    .then(company => {
+      res.send('successfully saved to database')
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(400).send("validation error, missing required fields")
+      res.end();
+    }) 
 })
 
 router.put("/deals/:id", (req, res) => {
