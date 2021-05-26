@@ -3,7 +3,6 @@ import AddDeal from './add-deal'
 import DealsViewHandler from './deals-view-handler'
 
 function DealsContainer() {
-  console.log('deals-container')
   return (
     <React.Fragment>
       <DealsViewHandler />

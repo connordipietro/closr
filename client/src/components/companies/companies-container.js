@@ -4,7 +4,6 @@ import AddCompany from './add-company';
 
 
 function CompaniesContainer() {
-  console.log('hey')
   return (
     <React.Fragment>
       <CompaniesView />

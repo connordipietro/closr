@@ -10,10 +10,10 @@ function App() {
     <React.Fragment>
       <Nav />
         <Tabs defaultActiveKey="companies" id="uncontrolled-tab-example" >
-          <Tab eventKey="companies" title="Companies" mountOnEnter={true} unmountOnExit={true}>
+          <Tab eventKey="companies" title="Companies">
             <CompaniesContainer/>
           </Tab>
-          <Tab eventKey="deals" title="Deals" mountOnEnter={true} unmountOnExit={true}>
+          <Tab eventKey="deals" title="Deals">
             <DealsContainer />
           </Tab>
         </Tabs>
