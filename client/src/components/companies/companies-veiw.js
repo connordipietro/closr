@@ -4,45 +4,19 @@ import { useEffect , useState} from 'react';
 import _ from 'lodash'
 import { FormControl } from 'react-bootstrap'
 
-import './App.css'
+import '../App.css'
 
 import { Link } from 'react-router-dom';
 
 function CompaniesView() {
   const { companies } = useSelector(state => state.companyData);
   
-  const [pageNumber, setPageNumber] = useState(1)
-
-  const [name, setName] = useState('')
-
   const dispatch = useDispatch();
 
   useEffect(() => { // loads all compaines on initial render
-    dispatch(getCompanies(pageNumber));
+    dispatch(getCompanies());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },  [getCompanies]);
-
-  const handleOnChange = (e) => {
-    setName(e.target.value)
-    e.preventDefault()
-    dispatch(getCompanies(pageNumber, name))
-  };
-
-  const handleNextPage =  (e) => {
-
-    e.preventDefault()
-    setPageNumber(page => page + 1 )
-    dispatch(getCompanies(pageNumber))
-    console.log(pageNumber)
-  };
-
-  const handlePrevPage =  (e) => {
-    e.preventDefault()
-    
-    setPageNumber(page => page - 1 )
-     dispatch(getCompanies(pageNumber))
-     console.log(pageNumber)
-  }
 
   function renderCompaniesDisplay () {
     if (!_.isEmpty(companies)) { // if companies returned from dispatch, render companies
@@ -62,7 +36,6 @@ function CompaniesView() {
 
     return (
       <div>
-        <FormControl onChange={handleOnChange} type="text" placeholder="Search By Name" className="col w-25 ml-5 mb-5" />
         <table className="table table-striped">
           <thead>
             <tr>
