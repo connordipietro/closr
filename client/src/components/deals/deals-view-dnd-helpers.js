@@ -22,9 +22,8 @@ export const onDragEnd = (result, columns, setColumns, dispatch) => {
         ...destColumn,
         items: destItems
       }
-    }
-    )
-
+    })
+  
     dispatch(putDeal(result.draggableId, columns[result.destination.droppableId].name))
     
   } else {
