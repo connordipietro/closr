@@ -19,7 +19,7 @@ export function getCompanies() {
 };
 
 export function getDeals() {
-  return axios.get(`urlHere`)
+  return axios.get(`http://localhost:8000/deals`)
   .then(response => {
     return {
       type: GET_DEALS,

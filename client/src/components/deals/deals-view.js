@@ -2,37 +2,6 @@ import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import uuid from "uuid/dist/v4";
 
-const dummyDeals = [
-  { id: uuid(), content: "Deal 1" },
-  { id: uuid(), content: "Deal 2" },
-  { id: uuid(), content: "Deal 3" },
-  { id: uuid(), content: "Deal 4" },
-  { id: uuid(), content: "Deal 5" }
-];
-
-const dealStages = {
-  [uuid()]: {
-    name: "INITIATED",
-    items: dummyDeals
-  },
-  [uuid()]: {
-    name: "QUALIFIED",
-    items: []
-  },
-  [uuid()]: {
-    name: "CONTRACT SENT",
-    items: []
-  },
-  [uuid()]: {
-    name: "CLOSED WON",
-    items: []
-  },
-  [uuid()]: {
-    name: "CLOSED LOST",
-    items: []
-  }
-};
-
 const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return;
   const { source, destination } = result;
@@ -70,8 +39,76 @@ const onDragEnd = (result, columns, setColumns) => {
   }
 };
 
-function DealsView() {
-  const [columns, setColumns] = useState(dealStages);
+function DealsView(props) {
+  const { deals } = props
+
+  const dealsArray = deals.map(item => {
+    return (
+      {id: item._id, amount: item.amount, name: item.name, stage: item.stage}
+      )
+    }
+  ) 
+  
+  const qualifiedDeals = dealsArray.filter(item => {
+    return (
+      item.stage === 'Qualified'
+      )
+    }
+  )
+
+  const initiatedDeals = dealsArray.filter(item => {
+    return (
+      item.stage === 'Initiated'
+      )
+    }
+  )
+
+  const contractSentDeals = dealsArray.filter(item => {
+    return (
+      item.stage === 'Contract Sent'
+      )
+    }
+  )
+
+  const closedWonDeals = dealsArray.filter(item => {
+    return (
+      item.stage === 'Closed Won'
+      )
+    }
+  )
+
+  const closedLostDeals = dealsArray.filter(item => {
+    return (
+      item.stage === 'Closed Lost'
+      )
+    }
+  )
+
+  const dealStageColumns = {
+    [uuid()]: {
+      name: "INITIATED",
+      items: initiatedDeals
+    },
+    [uuid()]: {
+      name: "QUALIFIED",
+      items: qualifiedDeals
+    },
+    [uuid()]: {
+      name: "CONTRACT SENT",
+      items: contractSentDeals
+    },
+    [uuid()]: {
+      name: "CLOSED WON",
+      items: closedWonDeals
+    },
+    [uuid()]: {
+      name: "CLOSED LOST",
+      items: closedLostDeals
+    }
+  }
+
+  const [columns, setColumns] = useState(dealStageColumns);
+
   return (
     <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
       <DragDropContext
@@ -126,10 +163,13 @@ function DealsView() {
                                         ? "#263B4A"
                                         : "#456C86",
                                       color: "white",
+                                      fontSize: 12,
                                       ...provided.draggableProps.style
                                     }}
                                   >
-                                    {item.content}
+                                    {item.name}
+                                    <br></br>
+                                    Amount: {item.amount}
                                   </div>
                                 );
                               }}
