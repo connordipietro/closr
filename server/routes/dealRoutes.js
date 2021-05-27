@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
-const router = require('express').Router();
-const Company = require('../models/company');
-const companies = require('../dev-data/companies');
-const Deal = require('../models/deal');
-const deals = require('../dev-data/deals');
-const dealStages = require('../dev-data/dealStages');
-const ChangeEntry = require('../models/changeEntry');
+const mongoose = require("mongoose");
+const router = require("express").Router();
+const Company = require("../models/company");
+const companies = require("../dev-data/companies");
+const Deal = require("../models/deal");
+const deals = require("../dev-data/deals");
+const dealStages = require("../dev-data/dealStages");
+const ChangeEntry = require("../models/changeEntry");
 
 router.param("id", (req, res, next, id) => {
   Deal.findById(id).populate({path: "company"}).populate("stageHistory").exec((err, deal) => {
@@ -19,13 +19,11 @@ router.param("id", (req, res, next, id) => {
 
 router.get("/", (req, res) => {
   const searchObject = {};
-  req.query.stage
-    ? (searchObject.stage = dealStages[Number(req.query.stage)])
-    : null;
+  req.query.stage ? searchObject.stage = dealStages[Number(req.query.stage)] : null;
 
   Deal.find(searchObject)
-    .populate('company')
-    .populate('stageHistory')
+    .populate("company")
+    .populate("stageHistory")
     .exec((err, dealResults) => {
     if (err) {
       console.error(err)
@@ -64,12 +62,12 @@ router.post("/", (req, res) => {
     })
     .then(companyMatch => {
       companyMatch.deals.push(newDeal._id);
-      return companyMatch.save();
+      return companyMatch.save()
     })
     .then(company => {
       res.send('successfully saved to database');
     })
-    .catch((err) => {
+    .catch(err => {
       console.error(err);
       res.status(400).send("error, entry not saved");
     }) 
@@ -157,25 +155,23 @@ router.put("/:id/update", (req, res) => {
 router.put("/:id/cancel", (req, res) => {
   Deal.findById(req.params.id).exec()
     .then((deal) => {
-      if (!deal) {
-        res.status(404).send('Deal not found');
+      if(!deal) {
+        res.status(404).send("Deal not found");
       }
-      const oldStageIndex = dealStages.findIndex(
-        (stage) => stage === deal.stage
-      );
-      // examine if this is necessary later
+      let oldStageIndex = dealStages.findIndex(stage => stage === deal.stage);
+      //examine if this is necessary later
       if (oldStageIndex === 3 || oldStageIndex === 4) {
-        return res.send('Deal already closed, unable to cancel');
+        return res.send('Deal already closed, unable to cancel')
       }
       deal.stage = dealStages[4];
-      deal.save((err, savedDeal) => {
-        res.send(savedDeal);
-      });
+      deal.save((err, savedDeal)=>{
+        res.send(savedDeal)
+      })
     })
     .catch((err) => {
-      console.error(err);
-    });
-});
+      console.error(err)
+    })
+})
 
 // TO-DO: Make sure it removes the deal from the deals array in the corresponding company document as well.
 router.delete("/:id", (req, res) => {
