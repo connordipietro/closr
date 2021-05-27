@@ -25,7 +25,7 @@ a:hover {
   background-color: #e5f5f8;
   border: 1px solid #7fd1de;
   margin: 10px;
-  padding: 5px;
+  padding: 5px 14px;
 }
 
 .container-for-a-tags {
@@ -34,4 +34,18 @@ a:hover {
 
 .a-tag-children {
   margin: auto;
+}
+
+.arrow {
+  text-decoration: none;
+  display: inline-block;
+  padding: 6px 14px;
+  border: none;
+}
+
+.arrow:hover{
+  background-color: #e46407;
+  color: white;
+  cursor: pointer;
+  padding: 6px 15px
 }

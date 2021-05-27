@@ -47,11 +47,11 @@ const  Paginate = () => {
     <div className="row container-for-a-tags">
       <div className="col-md-8 a-tag-children">  
       {/* // a callback to href to stop es lint error */}
-          <a onClick={handlePrevPage} href={() => false} className="previous round arrow">&#8249;</a>
-              <div class="boxed">
+          <button onClick={handlePrevPage}  className="previous arrow">&#8249;</button>
+              <div className="boxed">
                 {pageNumber}
               </div>
-          <a onClick={handleNextPage} href={() => false} className="previous round  arrow">&#8250;</a> 
+          <button onClick={handleNextPage}  className="previous arrow">&#8250;</button> 
           
       </div>
     </div>
