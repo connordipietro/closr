@@ -1,3 +1,5 @@
+import "./nav-style.css";
+
 function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">

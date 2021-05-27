@@ -2,34 +2,39 @@ import { useState } from "react";
 import {Modal, Button} from 'react-bootstrap';
 import { useDispatch } from "react-redux";
 import { postNewCopmany } from '../../actions'
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+
+const companySchema = Yup.object().shape({
+  name: Yup.string().required(),
+  owner: Yup.string(),
+  phone: Yup.string(),
+  city: Yup.string(),
+  state: Yup.string(),
+  industry: Yup.string()
+})
 
 function AddCompany() {
-  const dispatch = useDispatch();
+  const { reset, register, handleSubmit, formState: { errors }} = useForm({
+    resolver: yupResolver(companySchema),
+  });
 
-  const defaultFormInfo = {
-    name: '',
-    owner: '',
-    phone: '',
-    city: '',
-    state: '',
-    industry: '',
-    createdAt: Date()
-  }
-
-  const [formInfo, setFormInfo] = useState(defaultFormInfo);
+  const dispatch = useDispatch(); 
   const [show, setShow] = useState(false);
 
-  const handleCompanyAdd = () => {
-    dispatch(postNewCopmany(formInfo))
-    setFormInfo(defaultFormInfo);
+  const handleCompanyAdd = (data) => {
+    dispatch(postNewCopmany(data))
+    reset()
     setShow(false);
-    //dispatch getCompanies but maintain page num?
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormInfo(prevState => ({...prevState, [name]: value}));
-  };
+  const onClose = () => {
+    setShow(false)
+    reset()
+  }
+
+  const formFields = ['Name', 'Owner', 'Phone', 'City', 'State', 'Industry']
 
   const renderAddCompanyModal = () => {
     return (
@@ -42,85 +47,31 @@ function AddCompany() {
           <Modal.Header>
             <Modal.Title>Add a new Company</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <form>
-              <div className="form-group">
-                <label>Name</label>
-                <input
-                  required
-                  className="form-control"
-                  placeholder="Enter Company Name"
-                  value={formInfo.name}
-                  name="name"
-                  onChange={handleChange}
-                ></input>
-              </div>
-              <br />
-              <div className="form-group">
-                <label>Owner</label>
-                <input
-                  className="form-control"
-                  placeholder="Enter Company Owner" 
-                  value={formInfo.owner}
-                  name="owner"
-                  onChange={handleChange}
-                ></input>
-              </div>
-              <br />
-              <div className="form-group">
-                <label>Phone</label>
-                <input
-                  className="form-control"
-                  placeholder="Enter Company Phone Number" 
-                  value={formInfo.phone}
-                  name="phone"
-                  onChange={handleChange} 
-                ></input>
-              </div>
-              <br />
-              <div className="form-group">
-                <label>City</label>
-                  <input
-                    className="form-control"
-                    placeholder="Enter Company City" 
-                    value={formInfo.city}
-                    name="city"
-                    onChange={handleChange} 
-                  ></input>
-              </div>
-              <br />
-              <div className="form-group">
-                <label>State</label>
-                <input
-                  className="form-control"
-                  placeholder="Enter Company State" 
-                  value={formInfo.state}
-                  name="state"
-                  onChange={handleChange} 
-                ></input>
-              </div>
-              <br />
-              <div className="form-group">
-                <label>Industry</label>
-                <input
-                  className="form-control"
-                  placeholder="Enter Company Industy" 
-                  value={formInfo.industry}
-                  name="industry"
-                  onChange={handleChange} 
-                ></input>
-              </div>
-              <br />
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShow(false)}>
-              Close
-            </Button>
-            <Button type="submit" variant="primary" onClick={handleCompanyAdd}>
-              Save
-            </Button>
-          </Modal.Footer>
+          <form onSubmit={handleSubmit(handleCompanyAdd)}>
+            <Modal.Body>
+              {formFields.map(field => {
+                return (
+                  <div key ={field}>
+                    <div className="form-group" >
+                      <label>{field}</label>
+                      <input
+                        className="form-control"
+                        placeholder={`Enter Company ${field}`}
+                        name={field.toLowerCase()}
+                        {...register(field.toLowerCase())}
+                      ></input>
+                      {errors[field.toLowerCase()]?.message}
+                    </div>
+                    <br />
+                  </div>
+                )
+              })} 
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={onClose}>Close</Button>
+              <Button type="submit" variant="primary">Submit</Button>
+            </Modal.Footer>
+          </form>
         </Modal>
       </>
     );

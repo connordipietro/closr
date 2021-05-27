@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import _ from 'lodash';
 import NoDealsView from './deals-view-no-deals'
 
-
 function DealsViewHandler() {
   const { deals } = useSelector(state => state.dealsData);
   const dispatch = useDispatch();
@@ -29,8 +28,8 @@ function DealsViewHandler() {
 
   return (
     <>
-    {renderDealView()}
-    {renderNoDeals()}
+      {renderDealView()}
+      {renderNoDeals()}
     </>
     
   );
