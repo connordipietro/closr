@@ -39,7 +39,7 @@ function AddCompany() {
   const renderAddCompanyModal = () => {
     return (
       <>
-        <Button variant="primary" onClick={() => setShow(true)}>
+        <Button variant="primary" className="add-button" onClick={() => setShow(true)}>
           Add a Company
         </Button>
 

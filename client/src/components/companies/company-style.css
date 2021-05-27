@@ -55,3 +55,34 @@ p {
   margin-top: 20px;
   font-style: italic;
 }
+
+.table {
+  display: flexbox;
+  margin: 10px auto;
+}
+
+.table-head {
+  background-color: #CBD6E2;
+}
+
+.table-row {
+  background-color: #F5F5F5 !important;
+}
+
+a {
+  color: #0091AE !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.add-button {
+  background-color: #E46407;
+  color: #F5F5F5;
+  font-weight: 700;
+  border: #cbd6e2;
+  margin: 15px;
+}
+
+.modal-open {
+  padding-right: 0px !important;
+}
