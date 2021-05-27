@@ -5,6 +5,7 @@ export const GET_COMPANY = "GET_COMPANY";
 export const GET_DEALS = "GET_DEALS";
 export const POST_COMPANY = "POST_COMPANY";
 export const PUT_DEAL = "PUT_DEAL";
+export const EDIT_COPMANY = "EDIT_COPMANY";
 
 export function getCompanies() {
   return axios.get(`/companies`)
@@ -69,5 +70,14 @@ export function getCompanyById(_id) {
   })
   .catch(error => {
     alert('Error, that company does not exist');
+  });
+};
+
+export function editCopmany(updatedInfo, id) {
+  debugger;
+  return axios.put(`/companies/${id}`, updatedInfo)
+  .then(()=>getCompanyById(id))
+  .catch(error => {
+    alert('Error');
   });
 };

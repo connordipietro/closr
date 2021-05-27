@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCompanyById } from "../../actions";
 import Nav from '../nav/nav';
+import EditCompany from './edit-company'
 import './company-style.css'
 
 const CompanyView = (props) => {
@@ -30,7 +31,7 @@ const CompanyView = (props) => {
         </div>
         <div className = "float-child deals col-md-4">
           <h2 className="deals-title">Associated Deals</h2>
-          <h6>{company.deals}</h6>
+          {/* <h6>{company.deals}</h6> */}
         </div>
       </div>
     );
@@ -41,6 +42,7 @@ const CompanyView = (props) => {
       <Nav />
       <Link to="/"><button className="btn-return">Return to full list</button></Link>
       {renderCompany()}
+      <EditCompany company={company} id={companyId}/>
     </div>
   );
 };
