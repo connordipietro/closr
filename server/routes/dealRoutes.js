@@ -34,6 +34,21 @@ router.get("/", (req, res) => {
   });
 })
 
+router.get("/by-stage", (req, res) => {
+  const resultsObj = dealStages.reduce((acc,stageName) => ({...acc,[stageName]:{name: stageName, items: []}}),{});
+  const searchObject = {};
+  const propertiesToReturn = 'amount name stage company';
+  Deal.find(searchObject, propertiesToReturn).populate("company").exec()
+    .then(dealResults => {
+      const dealsSortedByStage = dealResults.reduce((acc, deal) => {
+        deal.id = deal._id;
+        acc[deal.stage].items.push(deal)
+        return acc;
+      }, resultsObj)
+      res.send(dealsSortedByStage)
+    })
+})
+
 // TO-DO: Build in some way to make sure the company for new deal is valid. Also, add in an error message if the company is invalid.
 router.post("/", (req, res) => {
   let newDeal = new Deal(req.body);
