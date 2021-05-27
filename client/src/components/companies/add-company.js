@@ -6,8 +6,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
+// const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
 const companySchema = Yup.object().shape({
-  name: Yup.string().required(),
+  name: Yup.string().required("Please enter a Company Name"),
   owner: Yup.string(),
   phone: Yup.string(),
   city: Yup.string(),
