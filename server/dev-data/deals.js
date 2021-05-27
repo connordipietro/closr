@@ -17,7 +17,7 @@ const generateDeals = () => {
         deal.createdAt = faker.date.recent();
         deal.stageLastUpdatedAt = faker.date.between(deal.createdAt, new Date());
         deal.expectedCloseDate = faker.date.future();
-        deal.isActive = true;
+        deal.archived = false;
         deal.stage = stageOptions[Math.floor(Math.random()*5)];
         deal.company = companyOptions[Math.floor(Math.random()*10)];
         deals.push(deal);
