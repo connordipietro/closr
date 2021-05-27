@@ -40,9 +40,11 @@ router.get("/by-stage", (req, res) => {
     .then(dealResults => {
       const dealsSortedByStage = dealResults.reduce((acc, deal) => {
         deal.id = deal._id;
+        console.log(deal.id)
         acc[deal.stage].items.push(deal)
         return acc;
       }, resultsObj)
+      console.log(dealsSortedByStage['Initiated'].items)
       res.send(dealsSortedByStage)
     })
 })
