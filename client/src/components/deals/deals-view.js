@@ -1,141 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import uuid from "uuid/dist/v4";
-
-import { useDispatch } from 'react-redux';
-import { getDeals, putDeal } from '../../actions'
-/* 
-function updateDealStage(id, updatedStage) {
-  return axios.put(`/deals/${id}`, {stage: updatedStage})
-  .then(response => {
-  })
-  .catch(error => {
-    alert('Error');
-  });
-}; */
-
-const onDragEnd = (result, columns, setColumns) => {
-  if (!result.destination) return;
-  const { source, destination } = result;
-
-  if (source.droppableId !== destination.droppableId) {
-    const sourceColumn = columns[source.droppableId];
-    const destColumn = columns[destination.droppableId];
-    const sourceItems = [...sourceColumn.items];
-    const destItems = [...destColumn.items];
-    const [removed] = sourceItems.splice(source.index, 1);
-    destItems.splice(destination.index, 0, removed);
-    setColumns({
-      ...columns,
-      [source.droppableId]: {
-        ...sourceColumn,
-        items: sourceItems
-      },
-      [destination.droppableId]: {
-        ...destColumn,
-        items: destItems
-      }
-    }
-    )
-    /* updateDealStage(result.draggableId, destColumn.name);
-   */
-  } else {
-    const column = columns[source.droppableId];
-    const copiedItems = [...column.items];
-    const [removed] = copiedItems.splice(source.index, 1);
-    copiedItems.splice(destination.index, 0, removed);
-    setColumns({
-      ...columns,
-      [source.droppableId]: {
-        ...column,
-        items: copiedItems
-      }
-    });
-  }
-};
+import { useDispatch } from "react-redux";
+import { onDragEnd, generateDealsStageColumns } from "./deals-view-dnd-helpers";
 
 function DealsView(props) {
   const dispatch = useDispatch();
-  const { deals } = props
+  const { deals } = props;
 
-  const dealsArray = deals.map(item => {
-    return (
-      {id: item._id, amount: item.amount, name: item.name, stage: item.stage}
-      )
-    }
-  ) 
-  
-  const qualifiedDeals = dealsArray.filter(item => {
-    return (
-      item.stage === 'Qualified'
-      )
-    }
-  )
-
-  const initiatedDeals = dealsArray.filter(item => {
-    return (
-      item.stage === 'Initiated'
-      )
-    }
-  )
-
-  const contractSentDeals = dealsArray.filter(item => {
-    return (
-      item.stage === 'Contract Sent'
-      )
-    }
-  )
-
-  const closedWonDeals = dealsArray.filter(item => {
-    return (
-      item.stage === 'Closed Won'
-      )
-    }
-  )
-
-  const closedLostDeals = dealsArray.filter(item => {
-    return (
-      item.stage === 'Closed Lost'
-      )
-    }
-  )
-
-  const dealStageColumns = {
-    [uuid()]: {
-      name: "Initiated",
-      items: initiatedDeals
-    },
-    [uuid()]: {
-      name: "Qualified",
-      items: qualifiedDeals
-    },
-    [uuid()]: {
-      name: "Contract Sent",
-      items: contractSentDeals
-    },
-    [uuid()]: {
-      name: "Closed Won",
-      items: closedWonDeals
-    },
-    [uuid()]: {
-      name: "Closed Lost",
-      items: closedLostDeals
-    }
-  }
-
+  const dealStageColumns = generateDealsStageColumns(deals);
   const [columns, setColumns] = useState(dealStageColumns);
 
   return (
     <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
       <DragDropContext
-        onDragEnd={result => onDragEnd(
-          result, 
-          columns, 
-          setColumns, 
-          dispatch(putDeal(result.draggableId, columns[result.destination.droppableId].name)),
-          dispatch(getDeals()),
-          )
-        }
+        onDragEnd={result => onDragEnd(result, columns, setColumns, dispatch)}
       >
         {Object.entries(columns).map(([columnId, column], index) => {
           return (
