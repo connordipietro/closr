@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
 const router = require("express").Router();
 const Company = require("../models/company");
-const companies = require("../dev-data/companies");
-const Deal = require("../models/deal");
-const deals = require("../dev-data/deals");
 
 router.param("id", (req, res, next, id) => {
   Company.findById(id).populate({path: "deals"}).exec((err, company) => {
@@ -39,25 +36,29 @@ router.get("/", (req, res) => {
     })
 })
 
+// TO-DO: Do we need to send saved company or simply a message stating company was successfully saved?
 router.post("/", (req, res) => {
   if(!req.body.name) {
-    res.status(400).send("Name field is required");
+    return res.status(400).send("Name field is required");
   }
   const newCompany = new Company(req.body);
   newCompany.deals = [];
   newCompany.createdAt = new Date();
-  newCompany.save().then(savedCompany => {
-    res.send(savedCompany);
-  }).catch(err => {
-    console.error(err);
-    res.end();
-  }) 
+  newCompany.save()
+    .then(savedCompany => {
+      res.send(savedCompany);
+    })
+    .catch(err => {
+      console.error(err);
+      res.end();
+    }) 
 })
 
 router.get("/:id", (req, res) => {
   res.send(req.company);
 })
 
+// TO-DO: Fix so changes are not allowed to be made to the createdAt property
 router.put("/:id", (req, res) => {
   const company = req.company;
   for (prop in req.body) {
