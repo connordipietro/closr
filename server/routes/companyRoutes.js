@@ -58,7 +58,6 @@ router.get("/:id", (req, res) => {
   res.send(req.company);
 })
 
-// TO-DO: Fix so changes are not allowed to be made to the createdAt property
 router.put("/:id", (req, res) => {
   const company = req.company;
   for (prop in req.body) {
@@ -73,6 +72,7 @@ router.put("/:id", (req, res) => {
     })
 })
 
+// TO-DO: We may not want a delete company route, more like archive company
 router.delete("/:id", (req, res) => {
   Company.deleteOne(req.company)
     .then(() => {
