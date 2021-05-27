@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect , useState} from 'react';
 import _ from 'lodash'
 import { FormControl } from 'react-bootstrap'
-import Paginate from '../pagination/pagination-filtering'
+import Paginate from '../pagination/pagination'
 import '../App.css'
 
 import { Link } from 'react-router-dom';

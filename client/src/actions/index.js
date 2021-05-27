@@ -6,8 +6,8 @@ export const GET_DEALS = "GET_DEALS";
 export const POST_COMPANY = "POST_COMPANY";
 export const PUT_DEAL = "PUT_DEAL";
 
-export function getCompanies() {
-  return axios.get(`/companies`)
+export function getCompanies(pageNumber) {
+  return axios.get(`/companies?page=${pageNumber}`)
   .then(response => {
     return {
       type: GET_COMPANIES,
