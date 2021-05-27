@@ -24,7 +24,7 @@ function CompaniesView() {
     if (!_.isEmpty(companies)) { // if companies returned from dispatch, render companies
       const companyTableRows = companies.map(item => {
       return (
-        <tr key={item.name}>
+        <tr key={item.name} className ="table-row">
           <td><Link to={`companies/${item._id}`}>{item.name}</Link></td>
           <td>{item.owner}</td>
           <td>{item.phone}</td>
@@ -38,8 +38,8 @@ function CompaniesView() {
 
     return (
       <div>
-        <table className="table table-striped">
-          <thead>
+        <table className="table">
+          <thead className ="table-head">
             <tr>
               <th scope="col">Name</th>
               <th scope="col">Main Contact</th>
