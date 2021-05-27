@@ -1,11 +1,11 @@
 import React from 'react';
-import DealsView from './deals-view'
 import AddDeal from './add-deal'
+import DealsViewHandler from './deals-view-handler'
 
 function DealsContainer() {
   return (
     <React.Fragment>
-      <DealsView />
+      <DealsViewHandler />
       <AddDeal />
     </React.Fragment>
   );

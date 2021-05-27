@@ -1,4 +1,4 @@
-import { GET_COMPANIES, GET_COMPANY } from "../actions";
+import { GET_COMPANIES } from "../actions";
 
 const DEFAULT_STATE = {
   companies: [],
@@ -12,10 +12,6 @@ const CompaniesReducer = function(state = DEFAULT_STATE, action) {
         companies: action.payload.data.companies,
         count: action.payload.data.totalResultsCount
         }
-      case GET_COMPANY: //needs fixing
-        return {
-        company: action.payload.data,
-            };
     default:
       return state;
   };

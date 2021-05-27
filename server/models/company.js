@@ -9,8 +9,8 @@ const CompanySchema = new Schema({
   phone: String,
   city: String,
   state: String,
-  deals: Array,
-  createdAt: { type: Date, required: true },
+  deals: [{ type: Schema.Types.ObjectId, ref: "Deal" }],
+  createdAt: { type: Date, required: true, immutable: true },
   industry: String
 });
 
