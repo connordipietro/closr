@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCompanyById } from "../../actions";
 import Nav from '../nav/nav';
+import EditCompany from './edit-company'
 import './company-style.css';
 import _ from "lodash";
 
@@ -65,6 +66,7 @@ const CompanyView = (props) => {
       <Nav />
       <Link to="/"><button className="btn-return">Return to full list</button></Link>
       {renderCompany()}
+      <EditCompany company={company} id={companyId}/>
     </div>
   );
 };
