@@ -63,6 +63,7 @@ function CompaniesView() {
 return (
   <div >
     {renderCompaniesDisplay()}
+    {/* renders our pagination component */}
     <Paginate />
   </div>
   );
