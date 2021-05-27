@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
 import { postNewDeal } from '../../actions'
@@ -20,12 +21,23 @@ function AddDeal() {
 
   const [formInfo, setFormInfo] = useState(defaultFormInfo);
   const [show, setShow] = useState(false);
+  const [companiesList, setCompaniesList] = useState([]);
 
   const handleDealSubmit = () => {
     dispatch(postNewDeal(formInfo))
     setFormInfo(defaultFormInfo);
     setShow(false);
   }
+
+  const getCompaniesList = async () => {
+    let list = await axios.get("/companies/list");
+    debugger;
+    setCompaniesList(list.data);
+  }
+
+  useEffect(() => {
+    getCompaniesList();
+  }, [])
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
