@@ -10,7 +10,7 @@ const CompanySchema = new Schema({
   city: String,
   state: String,
   deals: [{ type: Schema.Types.ObjectId, ref: "Deal" }],
-  createdAt: { type: Date, required: true },
+  createdAt: { type: Date, required: true, immutable: true },
   industry: String
 });
 
