@@ -5,6 +5,8 @@ export const GET_COMPANY = "GET_COMPANY";
 export const GET_DEALS = "GET_DEALS";
 export const POST_COMPANY = "POST_COMPANY";
 export const PUT_DEAL = "PUT_DEAL";
+export const EDIT_COPMANY = "EDIT_COPMANY";
+export const POST_DEAL = "POST_DEAL";
 
 export function getCompanies(pageNumber) {
   return axios.get(`/companies?page=${pageNumber}`)
@@ -47,6 +49,20 @@ export function postNewCopmany(newCompany) {
   });
 };
 
+export function postNewDeal(newDeal) {
+  return axios.post(`/deals`, newDeal)
+  .then(response => {
+    return {
+      type: POST_DEAL,
+      payload: response
+    }; 
+  })
+  .then(() => getDeals())
+  .catch(error => {
+    alert('Error');
+  });
+};
+
 export function putDeal(id, updatedStage) {
   return axios.put(`/deals/${id}`, {stage: updatedStage})
   .then(response => {
@@ -69,5 +85,14 @@ export function getCompanyById(_id) {
   })
   .catch(error => {
     alert('Error, that company does not exist');
+  });
+};
+
+export function editCopmany(updatedInfo, id) {
+  debugger;
+  return axios.put(`/companies/${id}`, updatedInfo)
+  .then(()=>getCompanyById(id))
+  .catch(error => {
+    alert('Error');
   });
 };
