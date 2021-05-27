@@ -56,6 +56,7 @@ export function postNewDeal(newDeal) {
       payload: response
     }; 
   })
+  .then(() => getDeals())
   .catch(error => {
     alert('Error');
   });
