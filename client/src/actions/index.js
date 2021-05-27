@@ -5,6 +5,7 @@ export const GET_COMPANY = "GET_COMPANY";
 export const GET_DEALS = "GET_DEALS";
 export const POST_COMPANY = "POST_COMPANY";
 export const PUT_DEAL = "PUT_DEAL";
+export const POST_DEAL = "POST_DEAL";
 
 export function getCompanies() {
   return axios.get(`/companies`)
@@ -42,6 +43,19 @@ export function postNewCopmany(newCompany) {
     }; 
   })
   .then(() => getCompanies())
+  .catch(error => {
+    alert('Error');
+  });
+};
+
+export function postNewDeal(newDeal) {
+  return axios.post(`/deals`, newDeal)
+  .then(response => {
+    return {
+      type: POST_DEAL,
+      payload: response
+    }; 
+  })
   .catch(error => {
     alert('Error');
   });
