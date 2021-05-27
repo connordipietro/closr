@@ -9,9 +9,9 @@ function Nav() {
         </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <a className="nav-item nav-link active" href="/">Home <span className="sr-only"></span></a>
-          <a className="nav-item nav-link" href="/">Dashboard</a>
-          <a className="nav-item nav-link" href="/">Log In</a>
+          <a className="navbar-item nav-link active" href="/">Home <span className="sr-only"></span></a>
+          <a className="navbar-item nav-link" href="/">Dashboard</a>
+          <a className="navbar-item nav-link" href="/">Log In</a>
         </div>
       </div>
     </nav>
