@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
 import { onDragEnd, generateDealsStageColumns } from "./deals-view-dnd-helpers";
@@ -8,7 +8,13 @@ function DealsView(props) {
   const { deals } = props;
 
   const dealStageColumns = generateDealsStageColumns(deals);
-  const [columns, setColumns] = useState(dealStageColumns);
+  
+  const [columns, setColumns] = useState({});
+
+  useEffect(() => {
+      setColumns(dealStageColumns);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [deals])
 
   return (
     <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
