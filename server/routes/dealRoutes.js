@@ -157,6 +157,10 @@ router.get("/generate-deals-dev-data", (req, res) => {
     .then(() => {
       deals.forEach(deal => {
         let newDeal = new Deal(deal);
+        Company.findById(newDeal.company._id).exec((err, companyForDeal) => {
+          companyForDeal.deals.push(newDeal);
+          companyForDeal.save();
+        })
         newDeal.save((err) => {
           if (err) throw err;
         })
