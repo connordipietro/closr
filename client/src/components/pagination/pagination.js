@@ -39,11 +39,11 @@ const  Paginate = () => {
    
     <div className="row container-for-a-tags">
       <div className="col-md-8 a-tag-children">  
-          <a onClick={handlePrevPage} href={() => false} className="previous round ">&#8249;</a>
+          <a onClick={handlePrevPage} href={() => false} className="previous round arrow">&#8249;</a>
               <div class="boxed">
                 {pageNumber}
               </div>
-          <a onClick={handleNextPage} href={() => false} className="previous round  ">&#8250;</a> 
+          <a onClick={handleNextPage} href={() => false} className="previous round  arrow">&#8250;</a> 
           
       </div>
     </div>
