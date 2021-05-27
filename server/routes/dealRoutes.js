@@ -7,7 +7,7 @@ const deals = require("../dev-data/deals");
 const dealStages = require("../dev-data/dealStages");
 const ChangeEntry = require("../models/changeEntry");
 
-router.get("/deals", (req, res) => {
+router.get("/", (req, res) => {
   const searchObject = {};
   req.query.stage ? searchObject.stage = dealStages[Number(req.query.stage)] : null;
 
@@ -22,7 +22,7 @@ router.get("/deals", (req, res) => {
   });
 })
 
-router.get("/deals/:id", (req, res) => {
+router.get("/:id", (req, res) => {
 
   Deal.findById(req.params.id)
     .populate({path: "company"})
@@ -38,7 +38,7 @@ router.get("/deals/:id", (req, res) => {
   });
 })
 
-router.post("/deals", (req, res) => {
+router.post("/", (req, res) => {
   let newDeal = new Deal(req.body);
   newDeal.stage = req.body.stage || 'Initiated';
   newDeal.createdAt = new Date();
@@ -65,7 +65,7 @@ router.post("/deals", (req, res) => {
     }) 
 })
 
-router.put("/deals/:id", (req, res) => {
+router.put("/:id", (req, res) => {
   Deal.findById(req.params.id).exec()
     .then((deal) => {
       if(!deal) {
@@ -89,7 +89,7 @@ router.put("/deals/:id", (req, res) => {
 //update takes in query 'stage' corresponding to dealStages.js array in devData folder
 //if no query is provided, it advances the deal one stage
 
-router.put("/deals/:id/update", (req, res) => {
+router.put("/:id/update", (req, res) => {
   Deal.findById(req.params.id).exec()
     .then((deal) => {
       if(!deal) {
@@ -119,7 +119,7 @@ router.put("/deals/:id/update", (req, res) => {
     })
 })
 
-router.put("/deals/:id/cancel", (req, res) => {
+router.put("/:id/cancel", (req, res) => {
   Deal.findById(req.params.id).exec()
     .then((deal) => {
       if(!deal) {
@@ -140,7 +140,7 @@ router.put("/deals/:id/cancel", (req, res) => {
     })
 })
 
-router.delete("/deals/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   Deal.findByIdAndDelete(req.params.id).exec((err, deletedDeal) => {
     if(!deletedDeal) {
       return res.status(404).send("No deal with that Id found")
@@ -150,23 +150,6 @@ router.delete("/deals/:id", (req, res) => {
     }
     res.send(`${deletedDeal.name} deal for ${deletedDeal.amount} successfully deleted`)
   })
-})
-
-router.get("/generate-deals-dev-data", (req, res) => {
-  Deal.deleteMany({}).exec()
-    .then(() => {
-      deals.forEach(deal => {
-        let newDeal = new Deal(deal);
-        Company.findById(newDeal.company._id).exec((err, companyForDeal) => {
-          companyForDeal.deals.push(newDeal);
-          companyForDeal.save();
-        })
-        newDeal.save((err) => {
-          if (err) throw err;
-        })
-      })
-    })
-  res.send('saved the fake data');
 })
 
 module.exports = router;
