@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {Modal, Button} from 'react-bootstrap';
 import { useDispatch } from "react-redux";
-import { postNewCopmany } from '../../actions'
+import { postNewCompany } from '../../actions'
 
 function AddCompany() {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function AddCompany() {
   const [show, setShow] = useState(false);
 
   const handleCompanyAdd = () => {
-    dispatch(postNewCopmany(formInfo))
+    dispatch(postNewCompany(formInfo))
     setFormInfo(defaultFormInfo);
     setShow(false);
     //dispatch getCompanies but maintain page num?
