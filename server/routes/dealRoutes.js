@@ -7,6 +7,16 @@ const deals = require("../dev-data/deals");
 const dealStages = require("../dev-data/dealStages");
 const ChangeEntry = require("../models/changeEntry");
 
+router.param("id", (req, res, next, id) => {
+  Deal.findById(id).populate({path: "company"}).populate("stageHistory").exec((err, deal) => {
+    if(err) {
+      return res.status(404).send("No Deal with that ID found");
+    }
+    req.deal = deal;
+    next();
+  })
+})
+
 router.get("/", (req, res) => {
   const searchObject = {};
   req.query.stage ? searchObject.stage = dealStages[Number(req.query.stage)] : null;
@@ -23,19 +33,7 @@ router.get("/", (req, res) => {
 })
 
 router.get("/:id", (req, res) => {
-
-  Deal.findById(req.params.id)
-    .populate({path: "company"})
-    .populate("stageHistory")
-    .exec((err, foundDeal) => {
-    if (err) {
-      console.error(err)
-    }
-    if (!foundDeal){
-      res.status(404).send("Deal not found")
-    }
-    res.send(foundDeal);
-  });
+  res.send(req.deal);
 })
 
 router.post("/", (req, res) => {
