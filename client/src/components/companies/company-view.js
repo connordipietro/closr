@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCompanyById } from "../../actions";
 import Nav from '../nav/nav';
+import EditCompany from './edit-company'
 import './company-style.css';
 import _ from "lodash";
 
@@ -21,8 +22,7 @@ const CompanyView = (props) => {
   // will refactor this whole function to clean it up, ok for now to fix the error
   function renderCompany() {
     if (!_.isEmpty(company.deals)) {
-      let deals = company.deals.map(deal => deal);
-      
+      let deals = company.deals.map(deal => deal)
       return (
         <div className="float-container col-md-8">
           <div className = "float-child info col-md-4">
@@ -46,8 +46,8 @@ const CompanyView = (props) => {
             }
           </div>
         </div>
-      )
-      } else {
+      );
+    } else {
       return (
         <div className="float-container col-md-8">
           <div className = "float-child info col-md-4">
@@ -73,6 +73,7 @@ const CompanyView = (props) => {
       <Nav />
       <Link to="/"><button className="btn-return">Return to full list</button></Link>
       {renderCompany()}
+      <EditCompany company={company} id={companyId}/>
     </div>
   );
 };
