@@ -32,10 +32,6 @@ router.get("/", (req, res) => {
   });
 })
 
-router.get("/:id", (req, res) => {
-  res.send(req.deal);
-})
-
 router.post("/", (req, res) => {
   let newDeal = new Deal(req.body);
   newDeal.stage = req.body.stage || 'Initiated';
@@ -63,24 +59,24 @@ router.post("/", (req, res) => {
     }) 
 })
 
-router.put("/:id", (req, res) => {
-  Deal.findById(req.params.id).exec()
-    .then((deal) => {
-      if(!deal) {
-        res.status(404).send("Deal not found");
-      }
+router.get("/:id", (req, res) => {
+  res.send(req.deal);
+})
 
-      for (prop in req.body) {
-        deal[prop] = req.body[prop];
-      }
-      return deal.save();
-    })
+// TO-DO: Make sure request cannot change routes it shouldn't be allowed to like stageHistory and createdAt
+// TO-DO: Add in the stageHistory tracker model here.
+router.put("/:id", (req, res) => {
+  const deal = req.deal;
+  for (prop in req.body) {
+    deal[prop] = req.body[prop];
+  }
+  deal.save()
     .then(dealWithUpdates => {
       res.send(dealWithUpdates)
     })
     .catch((err) => {
       console.error(err)
-      res.status(500).send("Server error")
+      res.end();
     })
 })
 
