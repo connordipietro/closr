@@ -5,6 +5,7 @@ const keys = require("./config/keys");
 const http = require("http");
 const companyRoutes = require("./routes/companyRoutes");
 const dealRoutes = require("./routes/dealRoutes");
+const allRoutes = require("./routes/index");
 
 mongoose.connect(keys.MONGODB_URI, {
   useNewUrlParser: true,
@@ -29,7 +30,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(companyRoutes, dealRoutes);
+app.use(allRoutes);
 
 if (process.env.NODE_ENV === "production") {
   // Express will serve up production assets

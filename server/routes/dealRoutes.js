@@ -165,4 +165,4 @@ router.get("/generate-deals-dev-data", (req, res) => {
   res.send('saved the fake data');
 })
 
-  module.exports = router;
+module.exports = router;

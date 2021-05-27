@@ -12,21 +12,22 @@ router.get("/companies", (req, res) => {
 
   const countPromise = Company.find(query).countDocuments().exec();
 
-  const resultPromise = Company.find({})
+  const resultPromise = Company.find(query)
     .skip(perPage * page - perPage)
     .limit(perPage)
     .populate({path: "deals"})
     .exec()
 
-  Promise.all([countPromise, resultPromise]).then(resultsWithCount => {
-    const [totalResultsCount, companies] = resultsWithCount;
-    const results = { companies, totalResultsCount };
-    res.send(results)
-  })
-  .catch(err =>{
-    console.error(err);
-    res.end();
-  })
+  Promise.all([countPromise, resultPromise])
+    .then(resultsWithCount => {
+      const [totalResultsCount, companies] = resultsWithCount;
+      //const results = { companies, totalResultsCount };
+      res.send({ companies, totalResultsCount });
+    })
+    .catch(err =>{
+      console.error(err);
+      res.end();
+    })
 })
 
 router.post("/companies", (req, res) => {
@@ -102,7 +103,5 @@ router.get("/generate-company-dev-data", (req, res)=> {
   );
   res.send('saved the fake data')
 })
-
-
 
 module.exports = router;
