@@ -10,8 +10,6 @@ import { Link } from 'react-router-dom';
 
 function CompaniesView() {
   const { companies } = useSelector(state => state.companyData);
-  
-  
   const dispatch = useDispatch();
 
   useEffect(() => { // loads all compaines on initial render
@@ -50,11 +48,9 @@ function CompaniesView() {
             </tr>
           </thead>
           <tbody>
-              {companyTableRows}
-              
+              {companyTableRows}    
           </tbody>
-        </table>
-        
+        </table>       
       </div>
       );
     };
