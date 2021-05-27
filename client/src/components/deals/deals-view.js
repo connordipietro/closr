@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
 import { onDragEnd, generateDealsStageColumns } from "./deals-view-dnd-helpers";
+import './styles.css'
 
 function DealsView(props) {
   const dispatch = useDispatch();
   const { deals } = props;
-
-  const dealStageColumns = generateDealsStageColumns(deals);
   
+  const dealStageColumns = generateDealsStageColumns(deals);
   const [columns, setColumns] = useState({});
 
   useEffect(() => {
@@ -23,60 +23,49 @@ function DealsView(props) {
       >
         {Object.entries(columns).map(([columnId, column], index) => {
           return (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center"
-              }}
-              key={columnId}
-            >
-              <h6>{column.name}</h6>
-              <div style={{ margin: 3 }}>
+            <div className="deal-area" key={columnId}>
+              <div className="deal-view">
+                <div className="deals-column-header">
+                  <div className="deals-column-name">{column.name}</div>
+                  <div className="deals-column-quantity" >{column.quantity}</div>
+                </div>
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
-                      <div
+                      <div className="deal-column-body"
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         style={{
                           background: snapshot.isDraggingOver
                             ? "lightblue"
                             : "lightgrey",
-                          padding: 4,
-                          width: '19vw',
-                          minHeight: 400
                         }}
                       >
                         {column.items.map((item, index) => {
+                        
                           return (
                             <Draggable
-                              key={item.id}
-                              draggableId={item.id}
+                              key={item._id}
+                              draggableId={item._id}
                               index={index}
                             >
                               {(provided, snapshot) => {
                                 return (
                                   <div
+                                    className="deal-item"
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     style={{
-                                      userSelect: "none",
-                                      padding: 16,
-                                      margin: "0 0 8px 0",
-                                      minHeight: "50px",
                                       backgroundColor: snapshot.isDragging
                                         ? "#263B4A"
                                         : "#456C86",
-                                      color: "white",
-                                      fontSize: 12,
                                       ...provided.draggableProps.style
                                     }}
-                                  >
+                                    >
                                     {item.name}
                                     <br></br>
-                                    Amount: {item.amount}
+                                    Amount: ${item.amount}
                                   </div>
                                 );
                               }}
@@ -88,6 +77,9 @@ function DealsView(props) {
                     );
                   }}
                 </Droppable>
+                <div className="deals-column-footer">
+                  <div className="deals-column-total"> Total ${column.amount}</div>
+                </div>
               </div>
             </div>
           );
