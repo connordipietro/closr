@@ -22,7 +22,7 @@ export function getCompanies() {
 };
 
 export function getDeals() {
-  return axios.get(`/deals`)
+  return axios.get(`/deals/by-stage`)
   .then(response => {
     return {
       type: GET_DEALS,

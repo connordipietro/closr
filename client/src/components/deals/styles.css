@@ -1,16 +1,53 @@
-.deals {
-  display: flex;
+.deal-column-body {
+  padding: 4;
+  width: "19vw";
+  height: "60vh";
 }
 
-.deals li {
+.deal-area {
   display: flex;
-  border: solid 2px #000000c7;
-  border-radius: 0.2em;
-  padding: 0.5em;
-  margin: 0.5em;
+  flex-direction: column;
+  align-items: center;
 }
 
-.deals p {
-  max-width: none;
-  margin: 0;
+.deal-view {
+  outline: 1px solid;
+}
+
+.deals-column-header {
+  border-bottom-width: 1px;
+  border-bottom-color: black;
+  border-bottom-style: solid;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: #cbd6e2;
+}
+
+.deal-column-body {
+  padding: 4px;
+  width: 19vw;
+  height: 58vh;
+}
+
+.deal-item {
+  color: white;
+  user-select: none;
+  padding: 16px;
+  margin: 0px 0px 8px 0px;
+  min-height: 50px;
+  font-size: 12px;
+}
+
+.deals-column-footer {
+  border-top-width: 1px;
+  border-top-color: black;
+  border-top-style: solid;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  background-color: white;
+}
+
+.deal-column-total {
 }
