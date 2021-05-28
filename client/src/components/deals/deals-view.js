@@ -45,7 +45,6 @@ function DealsView(props) {
                       >
                           <Scrollbars>
                         {column.items.map((item, index) => {
-                        
                           return (
                             <Draggable
                               key={item._id}
@@ -66,9 +65,11 @@ function DealsView(props) {
                                       ...provided.draggableProps.style
                                     }}
                                     >
-                                    {item.name}
+                                    <b>{item.company['name']}</b>
                                     <br></br>
-                                    Amount: ${item.amount}
+                                    <em>{item.name}</em>
+                                    <br></br>
+                                    ${item.amount}
                                   </div>
                                 );
                               }}
@@ -76,15 +77,17 @@ function DealsView(props) {
                           );
                         })}
                          </Scrollbars>
-                        {/* {provided.placeholder} */}
+                        {provided.placeholder} 
                       </div>
                      
                     );
                   }}
                 </Droppable>
+     
                 <div className="deals-column-footer">
                   <div className="deals-column-total"> Total ${column.amount}</div>
                 </div>
+         
               </div>
             </div>
           );
