@@ -43,7 +43,7 @@ export const onDragEnd = (result, columns, setColumns, dispatch) => {
 
 export const generateDealsStageColumns = (deals) => {
  
-  const calculateAmountTotal = (dealStage) => dealStage.map(deal => deal.amount).reduce((acc, dealAmount) => acc + dealAmount, 0);
+  const calculateAmountTotal = (dealStage) => dealStage.map(deal => deal.amount).reduce((acc, dealAmount) => acc + dealAmount, 0).toFixed(2);
  
   const dealStageColumns = {
     [uuid()]: {
