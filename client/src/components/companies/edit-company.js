@@ -39,7 +39,7 @@ function EditCompany({ company, id }) {
   const renderEditCompanyModal = () => {
     return (
       <>
-        <PencilSquare width={32} height={32} onClick={() => setShow(true)}/>
+        <PencilSquare width={24} height={24} onClick={() => setShow(true)}/>
         {/* <Button className="glyphicon glyphicon-pencil" variant="primary" onClick={() => setShow(true)}>
           Edit
         </Button> */}
