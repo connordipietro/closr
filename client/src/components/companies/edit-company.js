@@ -1,29 +1,31 @@
 import { useState } from "react";
-import {Modal, Button} from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
-import { postNewDeal } from '../../actions'
+import { editCopmany } from '../../actions'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { PencilSquare } from 'react-bootstrap-icons';
 
-const dealSchema = Yup.object().shape({
-  name: Yup.string().required("Please enter a name for the deal"),
+const companySchema = Yup.object().shape({
+  name: Yup.string().required(),
   owner: Yup.string(),
-  amount: Yup.number().required().typeError("Please enter a deal amount"),
-  company: Yup.string().required("Please select a Company"),
+  phone: Yup.string(),
+  city: Yup.string(),
+  state: Yup.string(),
+  industry: Yup.string()
 })
 
-function AddDeal() {
+function EditCompany({ company, id }) {
   const { reset, register, handleSubmit, formState: { errors }} = useForm({
-    resolver: yupResolver(dealSchema),
+    resolver: yupResolver(companySchema),
   });
 
   const dispatch = useDispatch(); 
   const [show, setShow] = useState(false);
 
-  const handleCompanyAdd = (data) => {
-    dispatch(postNewDeal(data))
-    reset()
+  const handleCopmanyEdit = (data) => {
+    dispatch(editCopmany(data, id))
     setShow(false);
   };
 
@@ -32,20 +34,21 @@ function AddDeal() {
     reset()
   }
 
-  const formFields = ['Name', 'Owner', 'Amount', 'Company']
+  const formFields = ['Name', 'Owner', 'Phone', 'City', 'State', 'Industry']
 
-  const renderAddDealModal = () => {
+  const renderEditCompanyModal = () => {
     return (
       <>
-        <Button variant="primary" className="add-button" onClick={() => setShow(true)}>
-          Add a Deal
-        </Button>
+        <PencilSquare width={32} height={32} onClick={() => setShow(true)}/>
+        {/* <Button className="glyphicon glyphicon-pencil" variant="primary" onClick={() => setShow(true)}>
+          Edit
+        </Button> */}
 
         <Modal show={show} onHide={() => setShow(false)}>
           <Modal.Header>
-            <Modal.Title>Add a new Deal</Modal.Title>
+            <Modal.Title>Edit Company</Modal.Title>
           </Modal.Header>
-          <form onSubmit={handleSubmit(handleCompanyAdd)}>
+          <form onSubmit={handleSubmit(handleCopmanyEdit)}>
             <Modal.Body>
               {formFields.map(field => {
                 return (
@@ -54,7 +57,7 @@ function AddDeal() {
                       <label>{field}</label>
                       <input
                         className="form-control"
-                        placeholder={`Enter Company ${field}`}
+                        defaultValue={company[field.toLowerCase()]}
                         name={field.toLowerCase()}
                         {...register(field.toLowerCase())}
                       ></input>
@@ -77,9 +80,9 @@ function AddDeal() {
 
   return (
     <div>
-      {renderAddDealModal()}
+      {renderEditCompanyModal()}
     </div>
   );
 };
 
-export default AddDeal;
+export default EditCompany;
