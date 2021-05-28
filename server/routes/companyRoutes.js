@@ -22,8 +22,8 @@ router.get("/", (req, res) => {
   const resultPromise = Company.find(query)
     .skip(perPage * page - perPage)
     .limit(perPage)
-    .populate({ path: 'deals' })
-    .exec();
+    .populate({path: "deals"})
+    .exec()
 
   Promise.all([countPromise, resultPromise])
     .then(resultsWithCount => {

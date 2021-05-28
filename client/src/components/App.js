@@ -5,7 +5,6 @@ import DealsContainer from './deals/deals-container'
 import CompaniesContainer from './companies/companies-container'
 import {Tab, Tabs} from 'react-bootstrap';
 
-
 function App() {
   return (
     <React.Fragment>
