@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
 import { onDragEnd, generateDealsStageColumns } from "./deals-view-dnd-helpers";
+import { Scrollbars } from 'react-custom-scrollbars-2';
 import './styles.css'
 
 function DealsView(props) {
@@ -32,6 +33,7 @@ function DealsView(props) {
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
+                    
                       <div className="deal-column-body"
                         {...provided.droppableProps}
                         ref={provided.innerRef}
@@ -41,6 +43,7 @@ function DealsView(props) {
                             : "lightgrey",
                         }}
                       >
+                          <Scrollbars>
                         {column.items.map((item, index) => {
                         
                           return (
@@ -72,8 +75,10 @@ function DealsView(props) {
                             </Draggable>
                           );
                         })}
-                        {provided.placeholder}
+                         </Scrollbars>
+                        {/* {provided.placeholder} */}
                       </div>
+                     
                     );
                   }}
                 </Droppable>

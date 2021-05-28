@@ -19,7 +19,6 @@
 
 .deals-button-container {
   display: flex;
-  /* justify-content: space-between; */
 }
 
 .deal-view {
@@ -40,7 +39,6 @@
   padding: 4px;
   width: 19vw;
   height: 58vh;
-  overflow: scroll;
 }
 
 .deal-item {
@@ -61,16 +59,3 @@
   padding: 5px;
   background-color: white;
 }
-
-/* ::-webkit-scrollbar {
-  width: 15px;
-  height: 15px;
-}
-::-webkit-scrollbar-track-piece {
-  background-color: #c2d2e4;
-}
-::-webkit-scrollbar-thumb:vertical {
-  height: 30px;
-  background-color: #0a4c95;
-}
- */
