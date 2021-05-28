@@ -7,9 +7,10 @@ export const POST_COMPANY = "POST_COMPANY";
 export const PUT_DEAL = "PUT_DEAL";
 export const EDIT_COPMANY = "EDIT_COPMANY";
 export const POST_DEAL = "POST_DEAL";
+export const RESET_NEW_COMPANY = "RESET_NEW_COMPANY";
 
-export function getCompanies() {
-  return axios.get(`/companies`)
+export function getCompanies(pageNumber) {
+  return axios.get(`/companies?page=${pageNumber}`)
   .then(response => {
     return {
       type: GET_COMPANIES,
@@ -43,13 +44,19 @@ export function postNewCopmany(newCompany) {
       payload: response
     }; 
   })
-  .then(() => getCompanies())
   .catch(error => {
     alert('Error');
   });
 };
 
+export function resetNewCompany() {
+  return {
+    type: RESET_NEW_COMPANY
+  }
+}
+
 export function postNewDeal(newDeal) {
+  debugger;
   return axios.post(`/deals`, newDeal)
   .then(response => {
     return {

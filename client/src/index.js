@@ -7,7 +7,7 @@ import App from './components/App';
 
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter/* , Route, Switch */ } from "react-router-dom";
 import promise from "redux-promise";
 
 import reducers from "./reducers";

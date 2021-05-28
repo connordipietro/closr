@@ -100,7 +100,7 @@ router.put("/:id", (req, res) => {
 // update takes in query 'stage' corresponding to dealStages.js array in devData folder
 // if no query is provided, it advances the deal one stage
 router.put("/:id/update", (req, res) => {
-  const deal = req.deal;
+  const { deal } = req;
   let oldStageIndex = dealStages.findIndex(stage => stage === deal.stage);
   if (oldStageIndex === 3 || oldStageIndex === 4) {
     return res.send('Deal already closed, unable to advance')
@@ -113,6 +113,9 @@ router.put("/:id/update", (req, res) => {
     deal: deal._id,
     newValue: deal.stage
   });
+  //save data as soon as possible, persist on database immediatelty
+  //save changeEntry first, THEN push and save deals
+
   deal.stageHistory.push(newChangeEntry._id);
 
   deal.save()
