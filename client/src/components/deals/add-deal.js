@@ -10,7 +10,7 @@ import * as Yup from 'yup';
 const dealSchema = Yup.object().shape({
   name: Yup.string().required("Please enter a name for the deal"),
   owner: Yup.string(),
-  amount: Yup.number().required("Please enter a deal amount"),
+  amount: Yup.number().typeError("Please enter a deal amount"),
   company: Yup.string()
 })
 
@@ -46,7 +46,7 @@ function AddDeal() {
 
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header>
-          <Modal.Title>Add a new Company</Modal.Title>
+          <Modal.Title>Add a new Deal</Modal.Title>
         </Modal.Header>
         <form onSubmit={handleSubmit(handleDealAdd)}>
           <Modal.Body>
@@ -54,10 +54,10 @@ function AddDeal() {
               return (
                 <div key ={field}>
                   <div className="form-group" >
-                    <label>{field}</label>
+                    <label>Deal {field}</label>
                     <input
                       className="form-control"
-                      placeholder={`Enter Company ${field}`}
+                      placeholder={`Enter Deal ${field}`}
                       name={field.toLowerCase()}
                       {...register(field.toLowerCase())}
                     ></input>
@@ -71,7 +71,7 @@ function AddDeal() {
               <div className="form-group" >
                 <label>Company</label>
                 <select 
-                  className="form-control"
+                  className="form-select"
                   name="company"
                   {...register("company")}
                   >

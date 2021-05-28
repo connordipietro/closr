@@ -78,7 +78,7 @@ function DealsView(props) {
                   }}
                 </Droppable>
                 <div className="deals-column-footer">
-                  <div className="deals-column-total"> Total ${column.amount}</div>
+                  <div className="deals-column-total"> Total ${column.amount.toFixed(2)}</div>
                 </div>
               </div>
             </div>
