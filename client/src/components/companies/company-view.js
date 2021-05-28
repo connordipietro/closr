@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCompanyById } from "../../actions";
-import Nav from '../nav/nav';
+/* import Nav from '../nav/nav'; */
 import EditCompany from './edit-company'
 import './company-style.css';
 import _ from "lodash";
