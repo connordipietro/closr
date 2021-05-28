@@ -1,9 +1,9 @@
 import React from 'react';
 import CompaniesView from './companies-veiw'
 import AddCompany from './add-company';
-import {Nav, Tab, Tabs} from 'react-bootstrap';
-import DealsContainer from '../deals/deals-container';
-import { Link, Redirect, Switch } from 'react-router-dom';
+import {Nav, /* Tab, Tabs */} from 'react-bootstrap';
+/* import DealsContainer from '../deals/deals-container'; */
+/* import { Link, Redirect, Switch } from 'react-router-dom'; */
 import { LinkContainer } from 'react-router-bootstrap';
 
 function CompaniesContainer() {

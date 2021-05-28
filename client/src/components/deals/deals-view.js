@@ -17,7 +17,7 @@ function DealsView(props) {
   }, [deals])
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+    <div className="deals-view-outer">
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns, dispatch)}
       >

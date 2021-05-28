@@ -1,8 +1,10 @@
 import React from 'react';
 import AddDeal from './add-deal'
+import EditDeal from './edit-deals'
 import DealsViewHandler from './deals-view-handler'
-import {Tab, Tabs, Nav} from 'react-bootstrap';
+import {/* Tab, Tabs, */ Nav} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import './styles.css'
 
 function DealsContainer() {
   return (
@@ -20,7 +22,10 @@ function DealsContainer() {
         </LinkContainer>
       </Nav>
       <DealsViewHandler />
-      <AddDeal />
+      <div className="deals-button-container">
+        <AddDeal />
+        <EditDeal />
+      </div>
     </React.Fragment>
   );
 };
