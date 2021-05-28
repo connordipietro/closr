@@ -12,8 +12,8 @@ function App() {
     <React.Fragment>
       <Nav />
       <Switch>
-        <Route path="/companies" component={CompaniesContainer}/>
         <Route path="/companies/:_id" component={CompanyView}/>
+        <Route path="/companies" component={CompaniesContainer}/>
         <Route path="/deals" component={DealsContainer}/>
         <Redirect to="/companies" />
       </Switch>
