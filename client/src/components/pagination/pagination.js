@@ -10,36 +10,25 @@ const  Paginate = () => {
   const itemsCount = useSelector(state => state.companyData.count)
   let numOfPages = Math.ceil(itemsCount/5)
 
-  console.log(numOfPages);
-  const [pageNumber, setPageNumber] = useState(1)
-  const [name, setName] = useState('')
+  const [pageNumber, setPageNumber] = useState(1);
+  const [name, setName] = useState('');
 
   // dipatch and fetch based on change of the depandencies
   useEffect(() => {
-      dispatch(getCompanies(pageNumber))   
+    dispatch(getCompanies(pageNumber))
   },[ pageNumber])
   
 
   // sets the state for next page.
   // conditional to to prevent from going over total page limit
-  const handleNextPage = () => {    
-     if(pageNumber == numOfPages) {
-       setPageNumber(numOfPages)
-     }
-     else {
-       setPageNumber(page => page + 1)
-     }
+  const handleNextPage = () => { 
+    pageNumber == numOfPages ? setPageNumber(numOfPages) : setPageNumber(page => page + 1)
   };
 
   // sets the state for next page.
   // conditional to to prevent from going over total page limit
-  const handlePrevPage =  (e) => { 
-   if(pageNumber == 1){
-     setPageNumber(1)
-   }
-   else {
-     setPageNumber(page => page - 1)
-   }
+  const handlePrevPage =  () => { 
+    pageNumber == 1 ? setPageNumber(1) : setPageNumber(page => page - 1)
  }
 
  

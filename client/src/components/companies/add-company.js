@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {Modal, Button} from 'react-bootstrap';
-import { useDispatch } from "react-redux";
-import { postNewCopmany } from '../../actions'
+import { useDispatch, useSelector } from "react-redux";
+import { postNewCopmany, resetNewCompany } from '../../actions'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { useHistory } from "react-router";
 
 // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
@@ -21,15 +22,24 @@ function AddCompany() {
   const { reset, register, handleSubmit, formState: { errors }} = useForm({
     resolver: yupResolver(companySchema),
   });
-
+  const newCompany = useSelector(({newCompany}) => newCompany);
+  const history = useHistory();
   const dispatch = useDispatch(); 
   const [show, setShow] = useState(false);
 
   const handleCompanyAdd = (data) => {
     dispatch(postNewCopmany(data))
-    reset()
-    setShow(false);
+    // reset()
+    // setShow(false);
   };
+
+  useEffect(() => {
+    if(newCompany.isSuccessful) {
+      debugger;
+      history.push(`/companies/${newCompany.newCompanyId}`)
+      dispatch(resetNewCompany())
+    }
+  }, [newCompany])
 
   const onClose = () => {
     setShow(false)
