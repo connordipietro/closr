@@ -22,7 +22,7 @@ const CompanyView = (props) => {
   // will refactor this whole function to clean it up, ok for now to fix the error
   function renderCompany() {
     if (!_.isEmpty(company.deals)) {
-      let deal = company.deals.map(deal => deal.name)
+      let deals = company.deals.map(deal => deal)
       return (
         <div className="float-container col-md-8">
           <div className = "float-child info col-md-4">
@@ -36,7 +36,14 @@ const CompanyView = (props) => {
           </div>
           <div className = "float-child deals col-md-4">
             <h2 className="deals-title">Associated Deals</h2>
-            <h6>{deal}</h6>
+            {deals.map((deal, id) => (
+              <div key={id} >
+                <p>{deal.name}</p>
+                <h6>Amount: ${deal.amount}</h6>
+                <h6>Stage: {deal.stage}</h6>
+              </div>
+            ))
+            }
           </div>
         </div>
       );
@@ -63,7 +70,6 @@ const CompanyView = (props) => {
 
   return (
     <div className="text">
-      <Nav />
       <Link to="/"><button className="btn-return">Return to full list</button></Link>
       {renderCompany()}
       <EditCompany company={company} id={companyId}/>

@@ -25,11 +25,12 @@ router.get("/", (req, res) => {
     .populate("company")
     .populate("stageHistory")
     .exec((err, dealResults) => {
-    if (err) {
-      console.error(err)
-    }
-    res.send(dealResults);
-  });
+      if (err) {
+        console.error(err)
+        res.end();
+      }
+      res.send(dealResults);
+    });
 })
 
 router.get("/by-stage", (req, res) => {
