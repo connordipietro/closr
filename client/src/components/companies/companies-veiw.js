@@ -10,6 +10,7 @@ const queryString = require('query-string');
 
 function CompaniesView() {
   const { companies } = useSelector(state => state.companyData);
+  const { error } = useSelector(state => state.companiesServerError);
   const dispatch = useDispatch();
   const location = useLocation();
  /*  const [urlQuery, setUrlQuery] = useState(1); */
@@ -22,7 +23,7 @@ function CompaniesView() {
 
   
   function renderCompaniesDisplay () {
-    if (!_.isEmpty(companies)) { // if companies returned from dispatch, render companies
+    if ((_.isEmpty(error) && (!_.isEmpty(companies)))) { // if companies returned from dispatch, render companies
       const companyTableRows = companies.map(item => {
       return (
         <tr key={item._id} className ="table-row">
@@ -56,7 +57,12 @@ function CompaniesView() {
         </table>       
       </div>
       );
-    };
+    } else if (!_.isEmpty(error)) {
+      return (
+        <div className="float-container col-md-8">
+            <p>Sorry, something went wrong, please try again at a later time.</p>
+        </div>
+    )}
   };
 
 return (

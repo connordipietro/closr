@@ -1,14 +1,15 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { Button} from 'react-bootstrap';
 import { getCompanyById } from "../../actions";
-/* import Nav from '../nav/nav'; */
 import EditCompany from './edit-company'
 import './company-style.css';
 import _ from "lodash";
 
 const CompanyView = (props) => {
   const { company }  = useSelector(state => state.companyView);
+  const { error } = useSelector(state => state.companyServerError);
   const companyId = props.match.params._id;
 
   const dispatch = useDispatch();
@@ -19,9 +20,9 @@ const CompanyView = (props) => {
   }, [getCompanyById]);
 
 
-  // will refactor this whole function to clean it up, ok for now to fix the error
   function renderCompany() {
-    if (!_.isEmpty(company.deals)) {
+    // if there is no error and the company has associated deals, return the company details and the associated list of deals
+    if ((_.isEmpty(error) && (!_.isEmpty(company.deals)))) {
       let deals = company.deals.map(deal => deal)
       return (
         <div className="float-container col-md-8">
@@ -34,8 +35,10 @@ const CompanyView = (props) => {
             <p>Location: </p><h6>{company.city}, {company.state}</h6>
             <p>Industry: </p><h6>{company.industry}</h6>
           </div>
+          <EditCompany company={company} id={companyId}/>
           <div className = "float-child deals col-md-4">
             <h2 className="deals-title">Associated Deals</h2>
+             {/* loop through the array of deals and render each detail in its respective tag */}
             {deals.map((deal, id) => (
               <div key={id} >
                 <p>{deal.name}</p>
@@ -47,7 +50,8 @@ const CompanyView = (props) => {
           </div>
         </div>
       );
-    } else {
+     // if there is no error and the company does not have associated deals, return the company details
+    } else if ((_.isEmpty(error) && (_.isEmpty(company.deals)))) {
       return (
         <div className="float-container col-md-8">
           <div className = "float-child info col-md-4">
@@ -59,20 +63,27 @@ const CompanyView = (props) => {
             <p>Location: </p><h6>{company.city}, {company.state}</h6>
             <p>Industry: </p><h6>{company.industry}</h6>
           </div>
+          <EditCompany company={company} id={companyId}/>
           <div className = "float-child deals col-md-4">
             <h2 className="deals-title">Associated Deals</h2>
             <h6>There are no deals associated with this company</h6>
           </div>
         </div>
       );
-    }
+    // if there is an error, return the respective error message
+  } else if (!_.isEmpty(error)) {
+    return (
+      <div className="float-container col-md-8">
+        <p>Sorry, something went wrong, please try again at a later time.</p>
+      </div>
+    )
   }
+};
 
   return (
     <div className="text">
-      <Link to="/"><button className="btn-return">Return to full list</button></Link>
+      <Link to="/" variant="primary"><Button className="btn-return">Return to full list</Button></Link>
       {renderCompany()}
-      <EditCompany company={company} id={companyId}/>
     </div>
   );
 };

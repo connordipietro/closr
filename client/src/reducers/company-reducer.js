@@ -1,7 +1,8 @@
-import { GET_COMPANY } from "../actions";
+import { GET_COMPANY, GET_COMPANY_ERROR } from "../actions";
 
 const DEFAULT_STATE = {
   company: [],
+  error: '',
 };
 
 const CompanyReducer = function(state = DEFAULT_STATE, action) {
@@ -9,6 +10,10 @@ const CompanyReducer = function(state = DEFAULT_STATE, action) {
     case GET_COMPANY:
       return {
         company: action.payload.data
+        };
+    case GET_COMPANY_ERROR:
+      return {
+        error: action.payload.message
         };
     default:
       return state;

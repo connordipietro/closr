@@ -7,6 +7,7 @@ import NoDealsView from './deals-view-no-deals'
 
 function DealsViewHandler() {
   const { deals } = useSelector(state => state.dealsData);
+  const { error } = useSelector(state => state.dealsServerError);
   const dispatch = useDispatch();
 
   useEffect(() => { // loads all deals on initial render
@@ -15,23 +16,21 @@ function DealsViewHandler() {
   },  [getDeals]);
 
   const renderDealView = () => {
-    if (!_.isEmpty(deals)) {
+    if ((_.isEmpty(error)) && (!_.isEmpty(deals))) {
       return  <DealsView deals={deals} />
-    }   
-  };
-
-  const renderNoDeals = () => {
-    if (_.isEmpty(deals)) {
-      return <NoDealsView />
+    } else if (!_.isEmpty(error)) {
+      return (
+        <div className="float-container col-md-8">
+            <p>Sorry, something went wrong, please try again at a later time.</p>
+        </div>
+      )
     }
-  }
+  };
 
   return (
     <>
       {renderDealView()}
-      {renderNoDeals()}
     </>
-    
   );
 };
 
