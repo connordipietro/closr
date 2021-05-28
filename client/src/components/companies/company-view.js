@@ -70,7 +70,6 @@ const CompanyView = (props) => {
 
   return (
     <div className="text">
-      <Nav />
       <Link to="/"><button className="btn-return">Return to full list</button></Link>
       {renderCompany()}
       <EditCompany company={company} id={companyId}/>

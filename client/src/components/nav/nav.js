@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./nav-style.css";
 
 function Nav() {
