@@ -62,7 +62,7 @@ export const generateDealsStageColumns = (deals) => {
       name: "Contract Sent",
       items: deals['Contract Sent'].items,
       quantity: deals['Contract Sent'].items.length,
-      amount: calculateAmountTotal(deals['Qualified'].items)
+      amount: calculateAmountTotal(deals['Contract Sent'].items)
     },
     [uuid()]: {
       name: "Closed Won",
