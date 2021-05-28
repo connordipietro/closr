@@ -50,6 +50,7 @@ export function postNewCopmany(newCompany) {
 };
 
 export function postNewDeal(newDeal) {
+  debugger;
   return axios.post(`/deals`, newDeal)
   .then(response => {
     return {
