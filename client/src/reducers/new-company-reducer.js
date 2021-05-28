@@ -8,7 +8,6 @@ const DEFAULT_STATE = {
 const NewCompanyReducer = function(state = DEFAULT_STATE, action) {
   switch (action.type) {
       case POST_COMPANY:
-        debugger;
         return {
           isSuccessful: true,
           newCompanyId: action.payload.data._id,
