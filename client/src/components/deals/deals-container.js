@@ -1,6 +1,5 @@
 import React from 'react';
 import AddDeal from './add-deal'
-import EditDeal from './edit-deals'
 import DealsViewHandler from './deals-view-handler'
 import {/* Tab, Tabs, */ Nav} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -21,11 +20,10 @@ function DealsContainer() {
           </Nav.Item>
         </LinkContainer>
       </Nav>
-      <DealsViewHandler />
       <div className="deals-button-container">
         <AddDeal />
-        <EditDeal />
       </div>
+      <DealsViewHandler />
     </React.Fragment>
   );
 };
