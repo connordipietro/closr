@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import {Modal, Button} from 'react-bootstrap';
 import { useDispatch } from "react-redux";
 import { postNewDeal } from '../../actions'
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import DatePicker from "react-datepicker";
 import axios from "axios";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -15,9 +16,11 @@ const dealSchema = Yup.object().shape({
 })
 
 function AddDeal() {
-  const { reset, register, handleSubmit, formState: { errors }} = useForm({
+  const { reset, register, handleSubmit, watch, control, formState: { errors }} = useForm({
     resolver: yupResolver(dealSchema),
   });
+
+  const { startDate, endDate } = watch(["startDate", "endDate"]);
 
   const dispatch = useDispatch(); 
   const [show, setShow] = useState(false);
@@ -84,6 +87,20 @@ function AddDeal() {
               </div>
               <br />
             </div>
+            <div className="form-section">
+              <label htmlFor="expectedCloseDate" className="form-label">Expected Close Date</label>
+              <Controller
+                control={control}
+                name="expectedCloseDate"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <DatePicker
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    selected={value}
+                  />
+                )}
+              />
+          </div>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={onClose}>Close</Button>
