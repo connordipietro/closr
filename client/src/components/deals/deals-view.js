@@ -3,6 +3,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
 import { onDragEnd, generateDealsStageColumns } from "./deals-view-dnd-helpers";
 import { Scrollbars } from 'react-custom-scrollbars-2';
+import EditDeal from './edit-deal'
 import './styles.css'
 
 function DealsView(props) {
@@ -65,11 +66,9 @@ function DealsView(props) {
                                       ...provided.draggableProps.style
                                     }}
                                     >
-                                    <b>{item.company['name']}</b>
-                                    <br></br>
-                                    <em>{item.name}</em>
-                                    <br></br>
-                                    ${item.amount}
+                                    <EditDeal deal={item}></EditDeal>
+                                    <div>{item.company['name']}</div>
+                                    <div className="deal-amount">${item.amount}</div>
                                   </div>
                                 );
                               }}

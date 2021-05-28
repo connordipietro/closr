@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   height: 100%;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .deal-area {
@@ -32,7 +32,7 @@
 .deal-column-body {
   padding: 4px;
   width: 19vw;
-  height: 58vh;
+  height: 56vh;
   min-width: 150px;
 }
 
@@ -42,7 +42,7 @@
   padding: 16px;
   margin: 0px 0px 8px 0px;
   min-height: 50px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .deals-column-footer {
@@ -53,4 +53,12 @@
   justify-content: center;
   padding: 5px;
   background-color: white;
+}
+
+.edit-deal {
+  text-decoration: underline;
+}
+
+.deal-amount {
+  text-align: end;
 }

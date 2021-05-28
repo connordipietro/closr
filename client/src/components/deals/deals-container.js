@@ -20,10 +20,10 @@ function DealsContainer() {
           </Nav.Item>
         </LinkContainer>
       </Nav>
+      <DealsViewHandler />
       <div className="deals-button-container">
         <AddDeal />
       </div>
-      <DealsViewHandler />
     </React.Fragment>
   );
 };
