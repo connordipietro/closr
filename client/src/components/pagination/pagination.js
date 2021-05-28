@@ -8,9 +8,9 @@ const  Paginate = () => {
 
   // gets the total items so we can calculate how many pages we need
   const itemsCount = useSelector(state => state.companyData.count)
-  let numOfPages = itemsCount/5
+  let numOfPages = Math.ceil(itemsCount/5)
 
-  
+  console.log(numOfPages);
   const [pageNumber, setPageNumber] = useState(1)
   const [name, setName] = useState('')
 
@@ -22,13 +22,13 @@ const  Paginate = () => {
 
   // sets the state for next page.
   // conditional to to prevent from going over total page limit
-  const handleNextPage = async() => {     
-    if(pageNumber == numOfPages){
-      setPageNumber(numOfPages)
-    }
-    else{
-      setPageNumber(page => page + 1)
-    }
+  const handleNextPage = () => {    
+     if(pageNumber == numOfPages) {
+       setPageNumber(numOfPages)
+     }
+     else {
+       setPageNumber(page => page + 1)
+     }
   };
 
   // sets the state for next page.
@@ -46,13 +46,11 @@ const  Paginate = () => {
   return (
     <div className="row container-for-a-tags">
       <div className="col-md-8 a-tag-children">  
-      {/* // a callback to href to stop es lint error */}
           <button onClick={handlePrevPage}  className="previous arrow">&#8249;</button>
               <div className="boxed">
                 {pageNumber}
               </div>
-          <button onClick={handleNextPage}  className="previous arrow">&#8250;</button> 
-          
+          <button onClick={handleNextPage}  className="previous arrow">&#8250;</button>        
       </div>
     </div>
   )   

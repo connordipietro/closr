@@ -22,7 +22,7 @@ function CompaniesView() {
     if (!_.isEmpty(companies)) { // if companies returned from dispatch, render companies
       const companyTableRows = companies.map(item => {
       return (
-        <tr key={item.name} className ="table-row">
+        <tr key={item._id} className ="table-row">
           <td><Link to={`companies/${item._id}`}>{item.name}</Link></td>
           <td>{item.owner}</td>
           <td>{item.phone}</td>
