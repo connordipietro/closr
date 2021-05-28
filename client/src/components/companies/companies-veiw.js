@@ -1,7 +1,11 @@
 import { getCompanies } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import _ from 'lodash';
+import { useEffect , useState} from 'react';
+import _ from 'lodash'
+import { FormControl } from 'react-bootstrap'
+import Paginate from '../pagination/pagination'
+import '../App.css'
+
 import { Link } from 'react-router-dom';
 
 function CompaniesView() {
@@ -13,11 +17,12 @@ function CompaniesView() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },  [getCompanies]);
 
+  
   function renderCompaniesDisplay () {
     if (!_.isEmpty(companies)) { // if companies returned from dispatch, render companies
       const companyTableRows = companies.map(item => {
       return (
-        <tr key={item.name} className ="table-row">
+        <tr key={item._id} className ="table-row">
           <td><Link to={`companies/${item._id}`}>{item.name}</Link></td>
           <td>{item.owner}</td>
           <td>{item.phone}</td>
@@ -43,17 +48,19 @@ function CompaniesView() {
             </tr>
           </thead>
           <tbody>
-              {companyTableRows}
+              {companyTableRows}    
           </tbody>
-        </table>
+        </table>       
       </div>
       );
     };
   };
 
 return (
-  <div>
+  <div >
     {renderCompaniesDisplay()}
+    {/* renders our pagination component */}
+    <Paginate />
   </div>
   );
 };
