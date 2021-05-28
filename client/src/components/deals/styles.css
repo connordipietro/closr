@@ -17,6 +17,11 @@
   align-items: center;
 }
 
+.deals-button-container {
+  display: flex;
+  /* justify-content: space-between; */
+}
+
 .deal-view {
   outline: 1px solid;
 }
