@@ -39,8 +39,8 @@ function AddDeal() {
   const formFields = ['Name', 'Owner', 'Amount']
 
   return (
-    <>
-      <Button variant="primary" className="add-button" onClick={() => setShow(true)}>
+    <div>
+      <Button variant="primary" className="add-deals-button" onClick={() => setShow(true)}>
         Add Deal
       </Button>
 
@@ -91,7 +91,7 @@ function AddDeal() {
           </Modal.Footer>
         </form>
       </Modal>
-    </>
+    </div>
   );
 };
 

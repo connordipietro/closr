@@ -8,7 +8,7 @@ function AddDeal() {
 
   return (
     <div>
-      <Button variant="primary" className="add-button" onClick={() => handleEditDeals()}>Edit Deals</Button>
+      <Button variant="primary" className="edit-deals-button " onClick={() => handleEditDeals()}>Edit Deals</Button>
     </div>
   );
 };

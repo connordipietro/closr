@@ -9,6 +9,12 @@ import './styles.css'
 function DealsContainer() {
   return (
     <React.Fragment>
+      <div className="container-fluid ">
+        <div className="row col-12 d-flex justify-content-end">
+          <div className="col "> <AddDeal /> </div>
+          <div className="col "> <EditDeal /> </div>
+         </div>
+      </div>
       <Nav variant="tabs" defaultActiveKey="/deals">
         <LinkContainer to="/companies">
           <Nav.Item>
@@ -22,10 +28,6 @@ function DealsContainer() {
         </LinkContainer>
       </Nav>
       <DealsViewHandler />
-      <div className="deals-button-container">
-        <AddDeal />
-        <EditDeal />
-      </div>
     </React.Fragment>
   );
 };
