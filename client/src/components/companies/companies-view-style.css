@@ -1,0 +1,32 @@
+.container{
+  width: 100%;
+
+}
+.col{
+  max-width: 250px
+}
+.btn.btn-primary.add-company-button {
+  background-color: #E46407; 
+  border: solid 1px #E46407;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px ;
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+
+.btn.btn-primary.add-company-button:hover{
+  background-color: white; 
+  border: solid 1px #E46407;
+  color: #E46407;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+}
+
+

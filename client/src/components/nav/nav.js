@@ -3,19 +3,28 @@ import "./nav-style.css";
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="/">Parsity-CRM</a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div className="navbar-nav">
-          <a className="navbar-item nav-link active" href="/">Home <span className="sr-only"></span></a>
-          <a className="navbar-item nav-link" href="/">Dashboard</a>
-          <a className="navbar-item nav-link" href="/">Log In</a>
-        </div>
-      </div>
-    </nav>
+    <nav class="navbar navbar-expand-sm ">
+    <h3 className="nav-title">Parsity-CRM </h3>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+              <button className="dashboard-button">Dashboard</button>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+              Contacts
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+              Settings
+            </a>
+        </li>
+    </ul>
+</nav>
+
+
   );
 };
 

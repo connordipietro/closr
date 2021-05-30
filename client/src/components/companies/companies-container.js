@@ -5,10 +5,12 @@ import {Nav, /* Tab, Tabs */} from 'react-bootstrap';
 /* import DealsContainer from '../deals/deals-container'; */
 /* import { Link, Redirect, Switch } from 'react-router-dom'; */
 import { LinkContainer } from 'react-router-bootstrap';
+import './companies-view-style.css'
 
 function CompaniesContainer() {
   return (
     <React.Fragment>
+      <AddCompany/>
       <Nav variant="tabs" defaultActiveKey="/companies">
         <LinkContainer to="/companies">
           <Nav.Item>
@@ -22,7 +24,6 @@ function CompaniesContainer() {
         </LinkContainer>
       </Nav>
       <CompaniesView />
-      <AddCompany />
     </React.Fragment>
   );
 };

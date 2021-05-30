@@ -12,3 +12,50 @@
   color: #F5F5F5 !important;
   font-weight: 800;
 }
+
+.navbar-nav {
+  float: right
+}
+
+.nav {
+  margin-top: 0;
+ 
+}
+
+.navbar-nav {
+  margin-left: auto;
+}
+
+.navbar  {
+  background-color: #565453 !important;
+  width: 100%
+}
+
+.nav-title{
+  color: white;
+  margin-left: 40px
+}
+
+.dashboard-button {
+    background-color: white; 
+    border: solid 1px #E46407;
+    color: #E46407;
+    padding: 6px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin-right: 300px
+}
+
+.dashboard-button:hover {
+  background-color: #E46407; 
+  border: solid 1px #E46407;
+  color: white;
+  padding: 6px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  
+}

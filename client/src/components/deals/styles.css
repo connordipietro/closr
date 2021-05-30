@@ -5,29 +5,20 @@
 .col{
   max-width: 250px
 }
-.add-deals-button {
+.btn.btn-primary.add-deals-button {
   background-color: #E46407; 
-  border: none;
+  border: solid 1px #E46407;
   color: white;
   padding: 10px 24px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 24px ;
+  margin-top: 30px;
+  margin-bottom: 0;
 }
 
-.edit-deals-button{
-  background-color: white; 
-  border: solid 1px #E46407;
-  color: #E46407;
-  padding: 10px 24px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 24px;
-}
-
-.edit-deals-button.edit-deals-button:hover{
+.btn.btn-primary.add-deals-button:hover{
   background-color: white; 
   border: solid 1px #E46407;
   color: #E46407;
@@ -92,12 +83,7 @@
   background-color: white;
 }
 
-.btn:hover,
-.btn-primary:hover {
-  background-color: #E46407; 
-  border: none;
-  color: white;
-}
+
 
 /* ::-webkit-scrollbar {
   width: 15px;
@@ -109,3 +95,4 @@
 .deal-amount {
   text-align: end;
 }
+*/
