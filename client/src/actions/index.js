@@ -82,6 +82,19 @@ export function putDeal(id, updatedStage) {
   .catch(error => {alert('Error')});
 };
 
+export function editDeal(updatedDeal) {
+  console.log(updatedDeal)
+ /*  return axios.put(`/deals/${id}`, {stage: updatedStage})
+  .then(response => {
+    return {
+      type: PUT_DEAL
+      }
+    }
+  )
+  .then(() => getDeals())
+  .catch(error => {alert('Error')}); */
+};
+
 export function getCompanyById(_id) {
   return axios.get(`/companies/${_id}`)
   .then(response => {

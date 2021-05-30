@@ -39,6 +39,7 @@ function AddCompany() {
       history.push(`/companies/${newCompany.newCompanyId}`)
       dispatch(resetNewCompany())
     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newCompany])
 
   const onClose = () => {

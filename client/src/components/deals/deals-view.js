@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
 import { onDragEnd, generateDealsStageColumns } from "./deals-view-dnd-helpers";
+import { Scrollbars } from 'react-custom-scrollbars-2';
+import EditDeal from './edit-deal'
 import './styles.css'
 
 function DealsView(props) {
@@ -32,6 +34,7 @@ function DealsView(props) {
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
+                    
                       <div className="deal-column-body"
                         {...provided.droppableProps}
                         ref={provided.innerRef}
@@ -41,8 +44,8 @@ function DealsView(props) {
                             : "lightgrey",
                         }}
                       >
+                          <Scrollbars>
                         {column.items.map((item, index) => {
-                        
                           return (
                             <Draggable
                               key={item._id}
@@ -63,23 +66,27 @@ function DealsView(props) {
                                       ...provided.draggableProps.style
                                     }}
                                     >
-                                    {item.name}
-                                    <br></br>
-                                    Amount: ${item.amount}
+                                    <EditDeal deal={item}></EditDeal>
+                                    <div>{item.company['name']}</div>
+                                    <div className="deal-amount">${item.amount}</div>
                                   </div>
                                 );
                               }}
                             </Draggable>
                           );
                         })}
-                        {provided.placeholder}
+                         </Scrollbars>
+                        {provided.placeholder} 
                       </div>
+                     
                     );
                   }}
                 </Droppable>
+     
                 <div className="deals-column-footer">
                   <div className="deals-column-total"> Total ${column.amount}</div>
                 </div>
+         
               </div>
             </div>
           );
