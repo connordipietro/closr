@@ -9,11 +9,11 @@
   background-color: #E46407; 
   border: solid 1px #E46407;
   color: white;
-  padding: 8px 16px;
+  padding: 6px 16px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 24px ;
+  font-size: 20px ;
   margin-top: 30px;
   margin-bottom: 0;
 }
@@ -22,11 +22,12 @@
   background-color: white; 
   border: solid 1px #E46407;
   color: #E46407;
-  padding: 8px 16px;
+  padding: 6px 16px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 24px;
+  font-size: 20px;
 }
+
 
 
