@@ -6,10 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { editDeal } from '../../actions'
 
-
 const dealSchema = Yup.object().shape({
   name: Yup.string().required("Please enter a name for the deal"),
-  owner: Yup.string(),
   amount: Yup.number().typeError("Please enter a deal amount"),
   company: Yup.string()
 })
@@ -34,7 +32,7 @@ function EditDeal(props) {
     reset()
   }
 
-  const formFields = ['Name', 'Owner', 'Amount']
+  const formFields = ['Name', 'Amount']
 
   return (
     <>
