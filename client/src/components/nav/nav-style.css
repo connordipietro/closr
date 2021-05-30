@@ -1,5 +1,6 @@
 .navbar {
   background-color: #565453 !important;
+  padding: 0;
 }
 
 .navbar-item {
@@ -33,7 +34,7 @@
 
 .nav-title{
   color: white;
-  margin-left: 40px
+  
 }
 
 .dashboard-button {
@@ -57,5 +58,9 @@
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
-  
 }
+
+.icon-logo {
+  min-height: 100%
+}
+
