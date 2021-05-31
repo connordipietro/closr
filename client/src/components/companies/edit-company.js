@@ -13,7 +13,8 @@ const companySchema = Yup.object().shape({
   phone: Yup.string(),
   city: Yup.string(),
   state: Yup.string(),
-  industry: Yup.string()
+  industry: Yup.string(),
+  logo: Yup.string().url()
 })
 
 function EditCompany({ company, id }) {
@@ -34,12 +35,12 @@ function EditCompany({ company, id }) {
     reset()
   }
 
-  const formFields = ['Name', 'Owner', 'Phone', 'City', 'State', 'Industry']
+  const formFields = ['Name', 'Owner', 'Phone', 'City', 'State', 'Industry', 'Logo']
 
   const renderEditCompanyModal = () => {
     return (
       <>
-        <PencilSquare width={32} height={32} onClick={() => setShow(true)}/>
+        <PencilSquare width={24} height={24} onClick={() => setShow(true)}/>
         {/* <Button className="glyphicon glyphicon-pencil" variant="primary" onClick={() => setShow(true)}>
           Edit
         </Button> */}

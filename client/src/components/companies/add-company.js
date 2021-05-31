@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import {Modal, Button} from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
-import { postNewCopmany, resetNewCompany } from '../../actions'
+import { postNewCompany, resetNewCompany } from '../../actions'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useHistory } from "react-router";
+import './companies-view-style.css'
 
 // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
@@ -15,7 +16,8 @@ const companySchema = Yup.object().shape({
   phone: Yup.string(),
   city: Yup.string(),
   state: Yup.string(),
-  industry: Yup.string()
+  industry: Yup.string(),
+  logo: Yup.string().url()
 })
 
 function AddCompany() {
@@ -28,14 +30,13 @@ function AddCompany() {
   const [show, setShow] = useState(false);
 
   const handleCompanyAdd = (data) => {
-    dispatch(postNewCopmany(data))
+    dispatch(postNewCompany(data))
     // reset()
     // setShow(false);
   };
 
   useEffect(() => {
     if(newCompany.isSuccessful) {
-      debugger;
       history.push(`/companies/${newCompany.newCompanyId}`)
       dispatch(resetNewCompany())
     }
@@ -47,14 +48,19 @@ function AddCompany() {
     reset()
   }
 
-  const formFields = ['Name', 'Owner', 'Phone', 'City', 'State', 'Industry']
+  const formFields = ['Name', 'Owner', 'Phone', 'City', 'State', 'Industry', 'Logo']
 
   const renderAddCompanyModal = () => {
     return (
       <>
-        <Button variant="primary" className="add-button" onClick={() => setShow(true)}>
+       <div className="container-fluid ">
+        <div className="row col-12 d-flex justify-content-end">
+          <div className="col "> <Button  className="add-company-button" onClick={() => setShow(true)}>
           Add a Company
-        </Button>
+        </Button></div>
+         </div>
+      </div>
+        
 
         <Modal show={show} onHide={() => setShow(false)}>
           <Modal.Header>

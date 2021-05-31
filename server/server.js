@@ -3,8 +3,6 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const keys = require("./config/keys");
 const http = require("http");
-const companyRoutes = require("./routes/companyRoutes");
-const dealRoutes = require("./routes/dealRoutes");
 const allRoutes = require("./routes/index");
 
 mongoose.connect(keys.MONGODB_URI, {

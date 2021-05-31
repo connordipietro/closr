@@ -8,6 +8,7 @@ import './styles.css'
 function DealsContainer() {
   return (
     <React.Fragment>
+      <AddDeal />
       <Nav variant="tabs" defaultActiveKey="/deals">
         <LinkContainer to="/companies">
           <Nav.Item>
@@ -21,9 +22,6 @@ function DealsContainer() {
         </LinkContainer>
       </Nav>
       <DealsViewHandler />
-      <div className="deals-button-container">
-        <AddDeal />
-      </div>
     </React.Fragment>
   );
 };

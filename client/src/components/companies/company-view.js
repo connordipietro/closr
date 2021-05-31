@@ -27,7 +27,7 @@ const CompanyView = (props) => {
       return (
         <div className="float-container col-md-8">
           <div className = "float-child info col-md-4">
-            <h2>Company Info</h2>
+            <h2>Company Info <EditCompany company={company} id={companyId}/></h2>
             <h4>{company.name}</h4>
             <p>Created on:</p><h6>{company.createdAt}</h6>
             <p>Owner/CEO: </p><h6>{company.owner}</h6>
@@ -55,7 +55,7 @@ const CompanyView = (props) => {
       return (
         <div className="float-container col-md-8">
           <div className = "float-child info col-md-4">
-            <h2>Company Info</h2>
+            <h2>Company Info <EditCompany company={company} id={companyId}/></h2>
             <h4>{company.name}</h4>
             <p>Created on:</p><h6>{company.createdAt}</h6>
             <p>Owner/CEO: </p><h6>{company.owner}</h6>
@@ -84,6 +84,7 @@ const CompanyView = (props) => {
     <div className="text">
       <Link to="/" variant="primary"><Button className="btn-return">Return to full list</Button></Link>
       {renderCompany()}
+      {/* <EditCompany company={company} id={companyId}/> */}
     </div>
   );
 };
