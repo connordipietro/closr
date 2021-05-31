@@ -41,10 +41,17 @@ function AddDeal() {
   }
   const formFields = ['Name', 'Amount']
   return (
-    <>
-      <Button variant="primary" className="add-button" onClick={() => setShow(true)}>
-        Add Deal
-      </Button>
+    <div>
+      <div className="container-fluid ">
+        <div className="row col-12 d-flex justify-content-end">
+          <div className="col "> 
+              <Button variant="primary" className="add-deals-button" onClick={() => setShow(true)}>
+                Add Deal
+              </Button>
+          </div>
+        </div>
+      </div>
+      
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header>
           <Modal.Title>Add a new Deal</Modal.Title>
@@ -106,7 +113,7 @@ function AddDeal() {
           </Modal.Footer>
         </form>
       </Modal>
-    </>
+    </div>
   );
 };
 export default AddDeal;

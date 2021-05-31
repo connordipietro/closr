@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useHistory } from "react-router";
+import './companies-view-style.css'
 
 // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
@@ -52,9 +53,14 @@ function AddCompany() {
   const renderAddCompanyModal = () => {
     return (
       <>
-        <Button variant="primary" className="add-button" onClick={() => setShow(true)}>
+       <div className="container-fluid ">
+        <div className="row col-12 d-flex justify-content-end">
+          <div className="col "> <Button  className="add-company-button" onClick={() => setShow(true)}>
           Add a Company
-        </Button>
+        </Button></div>
+         </div>
+      </div>
+        
 
         <Modal show={show} onHide={() => setShow(false)}>
           <Modal.Header>
