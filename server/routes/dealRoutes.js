@@ -130,7 +130,7 @@ router.put("/:id", (req, res) => {
       return deal.save();
     })
     .then(savedDeal=>{
-      res.send(savedDeal);
+      res.redirect(303, "/deals/by-stage");
     })
     .catch(err => {
       console.error(err);

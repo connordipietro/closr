@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const CompanySchema = new Schema({
   name: { type: String, required: true },
+  normalizedName: { type: String, required: true },
   owner: String,
   // FRONT END PEOPLE: if you need 'phone' as a number from any endpoints, please tell us! It will be a string otherwise
   phone: String,

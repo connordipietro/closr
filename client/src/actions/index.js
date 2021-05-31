@@ -8,7 +8,7 @@ export const GET_DEALS = "GET_DEALS";
 export const GET_DEALS_ERROR = "GET_DEALS_ERROR";
 export const POST_COMPANY = "POST_COMPANY";
 export const PUT_DEAL = "PUT_DEAL";
-export const EDIT_COPMANY = "EDIT_COPMANY";
+export const EDIT_COMPANY = "EDIT_COMPANY";
 export const POST_DEAL = "POST_DEAL";
 export const RESET_NEW_COMPANY = "RESET_NEW_COMPANY";
 export const GET_COMPANIES_LIST = "GET_COMPANIES_LIST";
@@ -89,16 +89,12 @@ export function postNewDeal(newDeal) {
 };
 
 export function putDeal(id, updatedStage) {
-  return axios.put(`/deals/${id}`, {stage: updatedStage})
-  .then(response => {
+  const response = axios.put(`/deals/${id}`, {stage: updatedStage})
     return {
-      type: PUT_DEAL
-      }
+      type: GET_DEALS,
+      payload: response
     }
-  )
-  .then(() => getDeals())
-  .catch(error => {alert('Error')});
-};
+}
 
 export function editDeal(id, updatedDeal) {
   return axios.put(`/deals/${id}/update`, updatedDeal)
@@ -122,7 +118,7 @@ export function getCompanyById(_id) {
   });
 };
 
-export function editCopmany(updatedInfo, id) {
+export function editCompany(updatedInfo, id) {
   debugger;
   return axios.put(`/companies/${id}`, updatedInfo)
   .then(()=>getCompanyById(id))

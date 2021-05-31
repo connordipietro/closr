@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button} from 'react-bootstrap';
 import { getCompanyById } from "../../actions";
-import EditCompany from './edit-company'
+import EditCompany from './company-modals/edit-company'
 import './company-style.css';
 import _ from "lodash";
 
