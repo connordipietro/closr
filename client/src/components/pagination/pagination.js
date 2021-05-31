@@ -11,24 +11,25 @@ const  Paginate = () => {
   let numOfPages = Math.ceil(itemsCount/5)
 
   const [pageNumber, setPageNumber] = useState(1);
-  const [name, setName] = useState('');
+/*   const [name, setName] = useState(''); */
 
   // dipatch and fetch based on change of the depandencies
   useEffect(() => {
     dispatch(getCompanies(pageNumber))
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[ pageNumber])
   
 
   // sets the state for next page.
   // conditional to to prevent from going over total page limit
   const handleNextPage = () => { 
-    pageNumber == numOfPages ? setPageNumber(numOfPages) : setPageNumber(page => page + 1)
+    pageNumber === numOfPages ? setPageNumber(numOfPages) : setPageNumber(page => page + 1)
   };
 
   // sets the state for next page.
   // conditional to to prevent from going over total page limit
   const handlePrevPage =  () => { 
-    pageNumber == 1 ? setPageNumber(1) : setPageNumber(page => page - 1)
+    pageNumber === 1 ? setPageNumber(1) : setPageNumber(page => page - 1)
  }
 
  

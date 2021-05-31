@@ -1,8 +1,8 @@
 import { getCompanies } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect , useState} from 'react';
+import { useEffect /* , useState */} from 'react';
 import _ from 'lodash'
-import { FormControl } from 'react-bootstrap'
+/* import { FormControl } from 'react-bootstrap' */
 import Paginate from '../pagination/pagination'
 import '../App.css'
 import { Link, useLocation } from 'react-router-dom';
@@ -12,7 +12,7 @@ function CompaniesView() {
   const { companies } = useSelector(state => state.companyData);
   const dispatch = useDispatch();
   const location = useLocation();
-  const [urlQuery, setUrlQuery] = useState(1);
+ /*  const [urlQuery, setUrlQuery] = useState(1); */
   const currentQuery = queryString.parse(location.search);
 
   useEffect(() => { // loads all compaines on initial render
