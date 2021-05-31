@@ -15,8 +15,8 @@ function Nav() {
               <button className="dashboard-button">Dashboard</button>
             </a>
         </li>
-          <li className="login-signup nav-item"><h4 >Login</h4></li>
-          <li className="login-signup nav-item"><h4 >Sign Up</h4></li>
+          <li className="login-signup nav-item">Login</li>
+          <li className="login-signup nav-item">Sign Up</li>
     </ul>
 </nav>
 
