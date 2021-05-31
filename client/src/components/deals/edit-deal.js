@@ -24,15 +24,15 @@ function EditDeal(props) {
 
   const handleDealEdit = (data) => {
     setShow(false);
-    dispatch(editDeal(data))
+    dispatch(editDeal(deal._id, data));
   };
 
   const onClose = () => {
-    setShow(false)
-    reset()
+    setShow(false);
+    reset();
   }
 
-  const formFields = ['Name', 'Amount']
+  const formFields = ['Name', 'Amount'];
 
   return (
     <>

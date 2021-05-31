@@ -148,7 +148,7 @@ router.put("/:id/update", (req, res) => {
   }
   deal.save()
     .then(dealWithUpdates => {
-      res.send(dealWithUpdates);
+      res.send("Successfully updated");
     })
     .catch((err) => {
       console.error(err);
