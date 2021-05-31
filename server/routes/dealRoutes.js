@@ -127,10 +127,10 @@ router.put("/:id", (req, res) => {
   newChangeEntry.save()
     .then(savedEntry=>{
       deal.stageHistory.push(savedEntry._id);
-      return deal.save()
+      return deal.save();
     })
     .then(savedDeal=>{
-      res.send(savedDeal)
+      res.send(savedDeal);
     })
     .catch(err => {
       console.error(err);
