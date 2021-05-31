@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const router = require("express").Router();
 const Company = require("../models/company");
 
+// For all routes that specify a company Id, finds the company and provides it to the route
 router.param("id", (req, res, next, id) => {
   Company.findById(id).populate({path: "deals"}).exec((err, company) => {
     if(err) {
@@ -12,6 +13,7 @@ router.param("id", (req, res, next, id) => {
   })
 })
 
+// Provides a paginated list of companies
 router.get("/", (req, res) => {
   const perPage = 5;
   const page = req.query.page || 1;
@@ -36,11 +38,14 @@ router.get("/", (req, res) => {
     })
 })
 
+// Provides list of all the company names in the user's list
 router.get("/list", (req, res) => {
   Company.find( {}, "name" ).exec((err, companiesList)=> {
     res.send(companiesList)
   })
 })
+
+// Adds a new company to the database
 // TO-DO: Do we need to send saved company or simply a message stating company was successfully saved?
 router.post("/", (req, res) => {
   if(!req.body.name) {
@@ -59,10 +64,12 @@ router.post("/", (req, res) => {
     }) 
 })
 
+// Returns the specific company matching the id provided
 router.get("/:id", (req, res) => {
   res.send(req.company);
 })
 
+// Edits the company information matching the id provided
 router.put("/:id", (req, res) => {
   const company = req.company;
   for (prop in req.body) {
@@ -77,6 +84,7 @@ router.put("/:id", (req, res) => {
     })
 })
 
+// Deletes the company matching the id provided
 // TO-DO: We may not want a delete company route, more like archive company
 router.delete("/:id", (req, res) => {
   Company.deleteOne(req.company)
