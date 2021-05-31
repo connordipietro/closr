@@ -3,7 +3,7 @@ import AddDeal from './add-deal'
 import DealsViewHandler from './deals-view-handler'
 import {/* Tab, Tabs, */ Nav} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import './styles.css'
+import './deals-view-style.css'
 
 function DealsContainer() {
   return (

@@ -7,7 +7,7 @@ function Nav() {
     
     <nav class="navbar navbar-expand-sm ">
       <img className="icon-logo" src={iconLogo}></img>
-    <Link className="nav-title navbar-brand" to="/companies"><h3 className="nav-title">Parsity-CRM </h3></Link> 
+    <Link className="nav-title navbar-brand" to="/companies"><h2 className="nav-title">Parsity-CRM </h2></Link> 
    
     <ul class="navbar-nav">
         <li class="nav-item">

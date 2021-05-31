@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { onDragEnd, generateDealsStageColumns } from "./deals-view-dnd-helpers";
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import EditDeal from './edit-deal'
-import './styles.css'
+import './deals-view-style.css'
 
 function DealsView(props) {
   const dispatch = useDispatch();
@@ -19,6 +19,7 @@ function DealsView(props) {
   }, [deals])
 
   return (
+    <div className="deals-container">
     <div className="deals-view-outer">
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns, dispatch)}
@@ -31,6 +32,7 @@ function DealsView(props) {
                   <div className="deals-column-name">{column.name}</div>
                   <div className="deals-column-quantity" >{column.quantity}</div>
                 </div>
+                <div className="deals">
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
@@ -40,8 +42,8 @@ function DealsView(props) {
                         ref={provided.innerRef}
                         style={{
                           background: snapshot.isDraggingOver
-                            ? "lightblue"
-                            : "lightgrey",
+                            ? "rgba(173,216,230,1)"
+                            : "rgba(203, 214, 226,0.5)", 
                         }}
                       >
                           <Scrollbars>
@@ -60,15 +62,15 @@ function DealsView(props) {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     style={{
-                                      backgroundColor: snapshot.isDragging
-                                        ? "#263B4A"
-                                        : "#456C86",
+                                      backgroundColor: "white",
                                       ...provided.draggableProps.style
                                     }}
                                     >
                                     <EditDeal deal={item}></EditDeal>
-                                    <div>{item.company['name']}</div>
-                                    <div className="deal-amount">${item.amount}</div>
+                                    <div className="deal-contents">
+                                      <div>{item.company['name']}</div>
+                                      <div className="deal-amount">${item.amount}</div>
+                                    </div>
                                   </div>
                                 );
                               }}
@@ -82,7 +84,7 @@ function DealsView(props) {
                     );
                   }}
                 </Droppable>
-     
+                </div>
                 <div className="deals-column-footer">
                   <div className="deals-column-total"> Total ${column.amount}</div>
                 </div>
@@ -92,6 +94,7 @@ function DealsView(props) {
           );
         })}
       </DragDropContext>
+    </div>
     </div>
   );
 }
