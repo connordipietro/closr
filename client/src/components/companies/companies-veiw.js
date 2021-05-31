@@ -10,7 +10,7 @@ const queryString = require('query-string');
 
 function CompaniesView() {
   const { companies } = useSelector(state => state.companyData);
-  const { error } = useSelector(state => state.companiesServerError);
+  const { error } = useSelector(state => state.companyData);
   const dispatch = useDispatch();
   const location = useLocation();
  /*  const [urlQuery, setUrlQuery] = useState(1); */
@@ -27,7 +27,7 @@ function CompaniesView() {
       const companyTableRows = companies.map(item => {
       return (
         <tr key={item._id} className ="table-row">
-          <td><Link to={`companies/${item._id}`}>{item.name}</Link></td>
+          <td><Link to={`companies/${item._id}`}><img src={item.logo} onerror="this.onerror=null; this.remove();" alt="" width="40 auto"/>   {item.name}</Link></td>
           <td>{item.owner}</td>
           <td>{item.phone}</td>
           <td>{item.city}, {item.state}</td>

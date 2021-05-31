@@ -7,12 +7,9 @@ import NewDealReducer from "./new-deal-reducer"
 
 const rootReducer = combineReducers({
   companyData: CompaniesReducer,
-  companiesServerError: CompaniesReducer,
   dealsData: DealsReducer,
-  dealsServerError: DealsReducer,
   newCompany: NewCompanyReducer,
   companyView: CompanyReducer,
-  companyServerError: CompanyReducer,
   newDeal: NewDealReducer
 });
 

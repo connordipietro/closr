@@ -9,7 +9,7 @@ import _ from "lodash";
 
 const CompanyView = (props) => {
   const { company }  = useSelector(state => state.companyView);
-  const { error } = useSelector(state => state.companyServerError);
+  const { error } = useSelector(state => state.companyView);
   const companyId = props.match.params._id;
 
   const dispatch = useDispatch();
@@ -28,7 +28,10 @@ const CompanyView = (props) => {
         <div className="float-container col-md-8">
           <div className = "float-child info col-md-4">
             <h2>Company Info <EditCompany company={company} id={companyId}/></h2>
-            <h4>{company.name}</h4>
+            <div className="box-flex">
+              <img src={company.logo} onerror="this.onerror=null; this.remove();" alt='img' width="100"/>
+              <h4>{company.name}</h4>
+            </div>
             <p>Created on:</p><h6>{company.createdAt}</h6>
             <p>Owner/CEO: </p><h6>{company.owner}</h6>
             <p>Phone: </p><h6>{company.phone}</h6>

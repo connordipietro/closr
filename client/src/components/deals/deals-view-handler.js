@@ -7,7 +7,7 @@ import NoDealsView from './deals-view-no-deals'
 
 function DealsViewHandler() {
   const { deals } = useSelector(state => state.dealsData);
-  const { error } = useSelector(state => state.dealsServerError);
+  const { error } = useSelector(state => state.dealsData);
   const dispatch = useDispatch();
 
   useEffect(() => { // loads all deals on initial render

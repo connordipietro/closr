@@ -11,10 +11,13 @@ const CompaniesReducer = function(state = DEFAULT_STATE, action) {
     case GET_COMPANIES:
       return {
         companies: action.payload.data.companies,
-        count: action.payload.data.totalResultsCount
+        count: action.payload.data.totalResultsCount,
+        error: ''
         }
     case GET_COMPANIES_ERROR:
       return {
+        companies: [],
+        count: null,
         error: action.payload.message
         }
     default:

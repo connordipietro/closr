@@ -10,9 +10,11 @@ const DealsReducer = function(state = DEFAULT_STATE, action) {
     case GET_DEALS:
       return {
         deals: action.payload.data,
+        error: ''
         }
     case GET_DEALS_ERROR:
       return {
+        deals: [],
         error: action.payload.message
         };
     default:

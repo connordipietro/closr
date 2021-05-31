@@ -81,3 +81,8 @@ a {
 .modal-open {
   padding-right: 0px !important;
 }
+
+.box-flex {
+  display: flex;
+  justify-content: center;
+}
