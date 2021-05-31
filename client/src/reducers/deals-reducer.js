@@ -1,7 +1,8 @@
-import { GET_DEALS } from "../actions";
+import { GET_DEALS, GET_DEALS_ERROR } from "../actions";
 
 const DEFAULT_STATE = {
-  deals: []
+  deals: [],
+  error: '',
 };
 
 const DealsReducer = function(state = DEFAULT_STATE, action) {
@@ -9,7 +10,13 @@ const DealsReducer = function(state = DEFAULT_STATE, action) {
     case GET_DEALS:
       return {
         deals: action.payload.data,
+        error: ''
         }
+    case GET_DEALS_ERROR:
+      return {
+        deals: [],
+        error: action.payload.message
+        };
     default:
       return state;
   };
