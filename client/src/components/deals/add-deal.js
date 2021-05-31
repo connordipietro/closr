@@ -94,6 +94,7 @@ function AddDeal() {
             </div>
             <div className="form-section">
               <label htmlFor="expectedCloseDate" className="form-label">Expected Close Date</label>
+              <br />
               <Controller
                 control={control}
                 name="expectedCloseDate"
@@ -102,6 +103,7 @@ function AddDeal() {
                     onChange={onChange}
                     onBlur={onBlur}
                     selected={value}
+                    minDate={new Date()}
                   />
                 )}
               />
