@@ -13,7 +13,8 @@ const companySchema = Yup.object().shape({
   phone: Yup.string(),
   city: Yup.string(),
   state: Yup.string(),
-  industry: Yup.string()
+  industry: Yup.string(),
+  logo: Yup.string().url()
 })
 
 function EditCompany({ company, id }) {
@@ -34,7 +35,7 @@ function EditCompany({ company, id }) {
     reset()
   }
 
-  const formFields = ['Name', 'Owner', 'Phone', 'City', 'State', 'Industry']
+  const formFields = ['Name', 'Owner', 'Phone', 'City', 'State', 'Industry', 'Logo']
 
   const renderEditCompanyModal = () => {
     return (
