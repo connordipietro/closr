@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {Modal, Button} from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
-import { postNewCopmany, resetNewCompany } from '../../actions'
+import { postNewCompany, resetNewCompany } from '../../actions'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -16,7 +16,8 @@ const companySchema = Yup.object().shape({
   phone: Yup.string(),
   city: Yup.string(),
   state: Yup.string(),
-  industry: Yup.string()
+  industry: Yup.string(),
+  logo: Yup.string().url()
 })
 
 function AddCompany() {
@@ -29,14 +30,13 @@ function AddCompany() {
   const [show, setShow] = useState(false);
 
   const handleCompanyAdd = (data) => {
-    dispatch(postNewCopmany(data))
+    dispatch(postNewCompany(data))
     // reset()
     // setShow(false);
   };
 
   useEffect(() => {
     if(newCompany.isSuccessful) {
-      debugger;
       history.push(`/companies/${newCompany.newCompanyId}`)
       dispatch(resetNewCompany())
     }
@@ -48,7 +48,7 @@ function AddCompany() {
     reset()
   }
 
-  const formFields = ['Name', 'Owner', 'Phone', 'City', 'State', 'Industry']
+  const formFields = ['Name', 'Owner', 'Phone', 'City', 'State', 'Industry', 'Logo']
 
   const renderAddCompanyModal = () => {
     return (

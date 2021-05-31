@@ -11,7 +11,8 @@ const CompanySchema = new Schema({
   state: String,
   deals: [{ type: Schema.Types.ObjectId, ref: "Deal" }],
   createdAt: { type: Date, required: true, immutable: true },
-  industry: String
+  industry: String,
+  logo: String
 });
 
 module.exports = mongoose.model("Company", CompanySchema);
