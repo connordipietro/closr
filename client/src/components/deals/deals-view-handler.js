@@ -1,5 +1,5 @@
 import DealsView from './deals-view'
-import { getDeals } from '../../actions';
+import { getCompaniesList, getDeals } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import _ from 'lodash';
@@ -12,6 +12,7 @@ function DealsViewHandler() {
 
   useEffect(() => { // loads all deals on initial render
     dispatch(getDeals());
+    dispatch(getCompaniesList());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },  [getDeals]);
 

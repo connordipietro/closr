@@ -1,9 +1,10 @@
 import {Modal, Button} from 'react-bootstrap';
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import DatePicker from "react-datepicker";
 import { editDeal } from '../../actions'
 
 const dealSchema = Yup.object().shape({
@@ -15,24 +16,26 @@ const dealSchema = Yup.object().shape({
 function EditDeal(props) {
   const { deal } = props;
   const dispatch = useDispatch();
-
-  const { reset, register, handleSubmit, formState: { errors }} = useForm({
+  const defaultValues = {...deal};
+  const { reset, register, handleSubmit, control, formState: { errors }} = useForm({
     resolver: yupResolver(dealSchema),
+    defaultValues: {expectedCloseDate: new Date(deal.expectedCloseDate)}
   });
+  const companiesList = useSelector(({companiesList}) => companiesList);
 
   const [show, setShow] = useState(false);
 
   const handleDealEdit = (data) => {
     setShow(false);
-    dispatch(editDeal(data))
+    dispatch(editDeal(deal._id, data));
   };
 
   const onClose = () => {
-    setShow(false)
-    reset()
+    setShow(false);
+    reset();
   }
 
-  const formFields = ['Name', 'Amount']
+  const formFields = ['Name', 'Amount'];
 
   return (
     <>
@@ -60,7 +63,40 @@ function EditDeal(props) {
                   <br />
                 </div>
               )
-            })} 
+            })}
+            <div key ="company">
+              <div className="form-group" >
+                <label>Company</label>
+                <select 
+                  className="form-select"
+                  name="company"
+                  {...register("company")}
+                  >
+                  {companiesList.map(company => {
+                    return (
+                      <option key={company._id} value={company._id} selected={company._id === deal.company._id ? true: false}>{company.name}</option>
+                    );
+                  })}
+                </select>
+              </div>
+              <br />
+            </div>
+            <div className="form-section">
+              <label htmlFor="expectedCloseDate" className="form-label">Expected Close Date</label>
+              <br />
+              <Controller
+                control={control}
+                name="expectedCloseDate"
+                defaultValue={deal.expectedCloseDate}
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <DatePicker
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    selected={value}
+                  />
+                )}
+              />
+            </div> 
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={onClose}>Close</Button>

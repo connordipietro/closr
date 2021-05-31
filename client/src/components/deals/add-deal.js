@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import {Modal, Button} from 'react-bootstrap';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postNewDeal } from '../../actions'
 import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
@@ -24,10 +24,9 @@ function AddDeal() {
   const dispatch = useDispatch(); 
 
   const [show, setShow] = useState(false);
+  const companiesList = useSelector(({companiesList}) => companiesList)
 
-  const [companiesList, setCompaniesList] = useState([]);
-
-  useEffect(() => axios.get("/companies/list").then(({ data }) => setCompaniesList(data)), [setCompaniesList])
+  //const [companiesList, setCompaniesList] = useState([]);
 
   const handleDealAdd = (data) => {
     debugger;
@@ -94,6 +93,7 @@ function AddDeal() {
             </div>
             <div className="form-section">
               <label htmlFor="expectedCloseDate" className="form-label">Expected Close Date</label>
+              <br />
               <Controller
                 control={control}
                 name="expectedCloseDate"
@@ -102,10 +102,11 @@ function AddDeal() {
                     onChange={onChange}
                     onBlur={onBlur}
                     selected={value}
+                    minDate={new Date()}
                   />
                 )}
               />
-          </div>
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={onClose}>Close</Button>
