@@ -41,7 +41,7 @@ router.get("/", (req, res) => {
 // Provides list of all the company names in the user's list
 router.get("/list", (req, res) => {
   Company.find( {}, "name" ).exec((err, companiesList)=> {
-    res.send(companiesList)
+    res.send(companiesList);
   })
 })
 
