@@ -40,7 +40,7 @@ router.get("/by-stage", (req, res) => {
   // Creates an object where each property is an object for a particular deal stage (e.g. {name: "Initiated", items: [Deals currently in initiated stage]})
   const resultsObj = dealStages.reduce((acc,stageName) => ({...acc,[stageName]:{name: stageName, items: []}}),{});
   const searchObject = {};
-  const propertiesToReturn = 'amount name stage company';
+  const propertiesToReturn = 'amount name stage company expectedCloseDate';
   Deal.find(searchObject, propertiesToReturn).populate("company").exec()
     .then(dealResults => {
       const dealsSortedByStage = dealResults.reduce((acc, deal) => {

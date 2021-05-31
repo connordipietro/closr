@@ -105,7 +105,7 @@ function AddDeal() {
                   />
                 )}
               />
-          </div>
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={onClose}>Close</Button>
