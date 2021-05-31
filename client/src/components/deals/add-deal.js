@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import {Modal, Button} from 'react-bootstrap';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postNewDeal } from '../../actions'
 import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
@@ -24,10 +24,9 @@ function AddDeal() {
   const dispatch = useDispatch(); 
 
   const [show, setShow] = useState(false);
+  const companiesList = useSelector(({companiesList}) => companiesList)
 
-  const [companiesList, setCompaniesList] = useState([]);
-
-  useEffect(() => axios.get("/companies/list").then(({ data }) => setCompaniesList(data)), [setCompaniesList])
+  //const [companiesList, setCompaniesList] = useState([]);
 
   const handleDealAdd = (data) => {
     debugger;

@@ -1,6 +1,6 @@
 import {Modal, Button} from 'react-bootstrap';
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -21,7 +21,7 @@ function EditDeal(props) {
     resolver: yupResolver(dealSchema),
     defaultValues: {expectedCloseDate: new Date(deal.expectedCloseDate)}
   });
-  console.log(deal.expectedCloseDate);
+  const companiesList = useSelector(({companiesList}) => companiesList);
 
   const [show, setShow] = useState(false);
 
@@ -64,6 +64,23 @@ function EditDeal(props) {
                 </div>
               )
             })}
+            <div key ="company">
+              <div className="form-group" >
+                <label>Company</label>
+                <select 
+                  className="form-select"
+                  name="company"
+                  {...register("company")}
+                  >
+                  {companiesList.map(company => {
+                    return (
+                      <option key={company._id} value={company._id} selected={company._id === deal.company._id ? true: false}>{company.name}</option>
+                    );
+                  })}
+                </select>
+              </div>
+              <br />
+            </div>
             <div className="form-section">
               <label htmlFor="expectedCloseDate" className="form-label">Expected Close Date</label>
               <br />

@@ -8,6 +8,7 @@ export const PUT_DEAL = "PUT_DEAL";
 export const EDIT_COPMANY = "EDIT_COPMANY";
 export const POST_DEAL = "POST_DEAL";
 export const RESET_NEW_COMPANY = "RESET_NEW_COMPANY";
+export const GET_COMPANIES_LIST = "GET_COMPANIES_LIST";
 
 export function getCompanies(pageNumber) {
   return axios.get(`/companies?page=${pageNumber}`)
@@ -21,6 +22,14 @@ export function getCompanies(pageNumber) {
     alert('Error');
   });
 };
+
+export function getCompaniesList() {
+  const companyList = axios.get("/companies/list")
+  return {
+    type: GET_COMPANIES_LIST,
+    payload: companyList
+  }
+}
 
 export function getDeals() {
   return axios.get(`/deals/by-stage`)
