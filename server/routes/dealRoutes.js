@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 const router = require("express").Router();
 const Company = require("../models/company");
-const companies = require("../dev-data/companies");
 const Deal = require("../models/deal");
-const deals = require("../dev-data/deals");
 const dealStages = require("../dev-data/dealStages");
 const ChangeEntry = require("../models/changeEntry");
 
+// For all routes that specify a deal Id, finds the deal and provides it to the route
 router.param("id", (req, res, next, id) => {
   Deal.findById(id).populate({path: "company"}).populate("stageHistory").exec((err, deal) => {
     if(err) {
@@ -17,9 +16,11 @@ router.param("id", (req, res, next, id) => {
   })
 })
 
+// Returns list of deals 
+// TO-DO: Update so request can specify archived deals for the search object.
 router.get("/", (req, res) => {
   const searchObject = {};
-  req.query.stage ? searchObject.stage = dealStages[Number(req.query.stage)] : null;
+  searchObject.stage = req.query.stage ? req.query.stage : null;
 
   Deal.find(searchObject)
     .populate("company")
@@ -33,7 +34,10 @@ router.get("/", (req, res) => {
     });
 })
 
+// Returns a list of active deals sorted into respective stage arrays.
+// TO-DO: Update so only active deals are retreived from database.
 router.get("/by-stage", (req, res) => {
+  // Creates an object where each property is an object for a particular deal stage of the form (e.g. {name: "Initiated", items: [Deals currently in initiated stage]})
   const resultsObj = dealStages.reduce((acc,stageName) => ({...acc,[stageName]:{name: stageName, items: []}}),{});
   const searchObject = {};
   const propertiesToReturn = 'amount name stage company';
@@ -48,7 +52,7 @@ router.get("/by-stage", (req, res) => {
     })
 })
 
-// TO-DO: Build in some way to make sure the company for new deal is valid. Also, add in an error message if the company is invalid.
+// TO-DO: Build in some way to make sure the company for new deal is valid. Also, add in an error message if the company is invalid. Check though if a bad company is provided will the save fail?
 router.post("/", (req, res) => {
   let newDeal = new Deal(req.body);
   newDeal.stage = req.body.stage || 'Initiated';
