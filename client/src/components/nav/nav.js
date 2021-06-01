@@ -7,7 +7,7 @@ function Nav() {
     
     <nav className="navbar navbar-expand-sm ">
       <img className="icon-logo" src={iconLogo}></img>
-    <Link className="nav-title navbar-brand" to="/companies"><h3 className="nav-title">Parsity-CRM </h3></Link> 
+    <Link className="nav-title navbar-brand" to="/companies"><h2 className="nav-title">Parsity-CRM </h2></Link> 
    
     <ul className="navbar-nav">
         <li className="nav-item">
@@ -15,8 +15,8 @@ function Nav() {
               <button className="dashboard-button">Dashboard</button>
             </a>
         </li>
-          <li className="login-signup nav-item"><h4 >Login</h4></li>
-          <li className="login-signup nav-item"><h4 >Sign Up</h4></li>
+          <li className="login-signup nav-item">Login</li>
+          <li className="login-signup nav-item">Sign Up</li>
     </ul>
 </nav>
 
