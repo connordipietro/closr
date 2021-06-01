@@ -14,25 +14,69 @@ const DashboardView1 = () => {
     dispatch(getDeals());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },  [getDeals]);
-
-  
-  function renderDashboardDisplay1() {
-    return (
-      
-      <div className="float-container col-md-8">
-        <div className = "float-child info">
-          <h2>Company Info </h2>
-        </div>
-      </div>
-    )}
    
     const options = {
-      title: {
-        text: 'My chart'
-      },
-      series: [{
-        data: [1, 2, 3]
-      }]
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Browser market shares in January, 2018'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'Chrome',
+            y: 61.41,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Internet Explorer',
+            y: 11.84
+        }, {
+            name: 'Firefox',
+            y: 10.85
+        }, {
+            name: 'Edge',
+            y: 4.67
+        }, {
+            name: 'Safari',
+            y: 4.18
+        }, {
+            name: 'Sogou Explorer',
+            y: 1.64
+        }, {
+            name: 'Opera',
+            y: 1.6
+        }, {
+            name: 'QQ',
+            y: 1.2
+        }, {
+            name: 'Other',
+            y: 2.61
+        }]
+    }]
     }
     
     const App = () => <div>
@@ -44,7 +88,6 @@ const DashboardView1 = () => {
     
   return (
     <div className="text">
-      {renderDashboardDisplay1()}
       <App />
     </div>
   );
