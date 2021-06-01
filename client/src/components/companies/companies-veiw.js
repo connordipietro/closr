@@ -11,6 +11,7 @@ const queryString = require('query-string');
 function CompaniesView() {
   const { companies } = useSelector(state => state.companyData);
   const { error } = useSelector(state => state.companyData);
+  
   const dispatch = useDispatch();
   const location = useLocation();
  /*  const [urlQuery, setUrlQuery] = useState(1); */
@@ -24,7 +25,9 @@ function CompaniesView() {
   
   function renderCompaniesDisplay () {
     if ((_.isEmpty(error) && (!_.isEmpty(companies)))) { // if companies returned from dispatch, render companies
+      
       const companyTableRows = companies.map(item => {
+        item.logo = item.logo ? item.logo : 'https://media.tarkett-image.com/large/TH_24567080_24594080_24596080_24601080_24563080_24565080_24588080_001.jpg';
       return (
         <tr key={item._id} className ="table-row">
           <td ><Link className="company-name" to={`companies/${item._id}`}><img src={item.logo} onerror="this.onerror=null; this.remove();" alt="" width="40 auto"/>   {item.name}</Link></td>
