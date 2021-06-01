@@ -1,4 +1,4 @@
-import { POST_COMPANY, RESET_NEW_COMPANY } from "../actions";
+import { POST_COMPANY, RESET_NEW_COMPANY } from "../actions/action-names";
 
 const DEFAULT_STATE = {
   isSuccessful: false,

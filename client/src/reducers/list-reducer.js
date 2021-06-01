@@ -1,4 +1,4 @@
-import { GET_COMPANIES_LIST } from "../actions";
+import { GET_COMPANIES_LIST } from "../actions/action-names";
 
 const DEFAULT_STATE = []
 
