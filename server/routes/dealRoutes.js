@@ -20,7 +20,7 @@ router.param("id", (req, res, next, id) => {
 // TO-DO: Update so request can specify archived deals for the search object.
 router.get("/", (req, res) => {
   const searchObject = {};
-  searchObject.stage = req.query.stage ? req.query.stage : null;
+  req.query.stage ? searchObject.stage = req.query.stage : null;
 
   Deal.find(searchObject)
     .populate("company")
@@ -60,8 +60,18 @@ router.post("/", (req, res) => {
   newDeal.stageLastUpdatedAt = new Date();
   newDeal.archived = false;
   newDeal.expectedCloseDate = req.body.expectedCloseDate || null;
-  
-  newDeal.save()
+
+  let firstEntry = new ChangeEntry({
+    user: '',
+    timeStamp: new Date(),
+    newValue: newDeal.stage,
+    deal: newDeal._id
+  })
+  firstEntry.save()
+    .then(savedEntry => {
+      newDeal.stageHistory.push(savedEntry)
+      return newDeal.save()
+    })
     .then(dealSaved => {
       return Company.findById(dealSaved.company).exec();
     })
