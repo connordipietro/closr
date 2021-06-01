@@ -6,9 +6,9 @@ const Company = require("../models/company");
 const companies = require("../dev-data/companies");
 const ChangeEntry = require("../models/changeEntry");
 const Deal = require("../models/deal");
-const deals = require("../dev-data/deals");
 const dealStages = require('../dev-data/dealStages')
 const faker = require("faker");
+const generateDeals = require("../dev-data/deals");
 
 router.use("/companies", companyRoutes);
 router.use("/deals", dealRoutes);
@@ -28,6 +28,9 @@ router.get("/generate-company-dev-data", (req, res)=> {
 router.get("/generate-deals-dev-data", (req, res) => {
   Deal.deleteMany({}).exec()
     .then(() => {
+      return generateDeals();
+    })
+    .then((deals) => {
       deals.forEach(deal => {
         let newDeal = new Deal(deal);
         Company.findById(newDeal.company._id).exec((err, companyForDeal) => {
@@ -38,8 +41,12 @@ router.get("/generate-deals-dev-data", (req, res) => {
           if (err) throw err;
         })
       })
+      res.send('saved the fake data');
     })
-  res.send('saved the fake data');
+    .catch((err) => {
+      console.error(err);
+      res.end();
+    })
 })
 
 //TO-DO: Push the deal id into the deals array for its company. In order for that to work need to revise the deals dummy data file to only grab the list of companies after the saveCompaniesPromises have resolved.
