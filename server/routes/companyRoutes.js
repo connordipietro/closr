@@ -56,6 +56,7 @@ router.post("/", (req, res) => {
   newCompany.normalizedName = req.body.name.toLowerCase();
   newCompany.deals = [];
   newCompany.createdAt = new Date();
+  newCompany.logo = newCompany.logo || '';
   newCompany.save()
     .then(savedCompany => {
       res.send(savedCompany);

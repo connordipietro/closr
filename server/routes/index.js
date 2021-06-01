@@ -9,9 +9,11 @@ const Deal = require("../models/deal");
 const dealStages = require('../dev-data/dealStages')
 const faker = require("faker");
 const generateDeals = require("../dev-data/deals");
+const dashboardRoutes = require("./dashboardRoutes");
 
 router.use("/companies", companyRoutes);
 router.use("/deals", dealRoutes);
+router.use("/dashboard", dashboardRoutes)
 
 router.get("/generate-company-dev-data", (req, res)=> {
   Company.deleteMany({}).exec().then(
