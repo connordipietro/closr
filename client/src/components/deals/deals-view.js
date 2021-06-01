@@ -19,7 +19,6 @@ function DealsView(props) {
   }, [deals])
 
   return (
-    <div className="deals-container">
     <div className="deals-view-outer">
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns, dispatch)}
@@ -62,7 +61,9 @@ function DealsView(props) {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     style={{
-                                      backgroundColor: "white",
+                                        backgroundColor: snapshot.isDragging
+                                          ? "lightgrey"
+                                          : "#f5f5f5",
                                       ...provided.draggableProps.style
                                     }}
                                     >
@@ -95,7 +96,7 @@ function DealsView(props) {
         })}
       </DragDropContext>
     </div>
-    </div>
+
   );
 }
 
