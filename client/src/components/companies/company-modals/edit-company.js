@@ -59,6 +59,7 @@ function EditCompany({ company, id }) {
               })} 
             </Modal.Body>
             <Modal.Footer>
+              <Button variant="secondary">Delete Company</Button>
               <Button type="submit" variant="primary">Submit</Button>
             </Modal.Footer>
           </form>
