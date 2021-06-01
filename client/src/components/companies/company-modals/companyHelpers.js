@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 export const companySchema = Yup.object().shape({
-  name: Yup.string(),
+  name: Yup.string().required(),
   owner: Yup.string(),
   phone: Yup.string(),
   city: Yup.string(),

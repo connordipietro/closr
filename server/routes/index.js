@@ -27,22 +27,11 @@ router.get("/generate-company-dev-data", (req, res)=> {
 
 router.get("/generate-deals-dev-data", (req, res) => {
   Deal.deleteMany({}).exec()
+    .then(() => ChangeEntry.deleteMany({}).exec())
     .then(() => {
-      return generateDeals();
+      return generateDeals(false);
     })
-    .then((deals) => {
-      deals.forEach(deal => {
-        let newDeal = new Deal(deal);
-        Company.findById(newDeal.company._id).exec((err, companyForDeal) => {
-          companyForDeal.deals.push(newDeal);
-          companyForDeal.save();
-        })
-        newDeal.save((err) => {
-          if (err) throw err;
-        })
-      })
-      res.send('saved the fake data');
-    })
+    .then(() => res.send('saved the fake data'))
     .catch((err) => {
       console.error(err);
       res.end();
@@ -77,19 +66,45 @@ router.get("/generate-dev-data", (req, res) => {
 })
 
 router.get("/generate-archives", (req, res) => {
-  deals.forEach(deal => {
-    let dealIndex = dealStages.findIndex(deal.stage);
-    for (let i = dealIndex; i >= 0; i--) {
-      let currentFakeDate = new Date();
-      let newChangeEntry = new ChangeEntry({
-        user: '',
-        timeStamp: faker.date.past(0.25, currentFakeDate),
-        newValue: dealStages[i],
-        deal: deal._id
-      });
-      currentFakeDate = newChangeEntry.timestamp;
-    }
-  })
+  generateDeals(true)
+    .then(dealsToArchive => {
+      dealsToArchive.forEach(deal => {
+        let dealIndex = dealStages.findIndex(stage => stage === deal.stage);
+        let currentFakeDate = new Date();
+        let closedLost = false;
+        if (dealIndex < 3) {
+          let lostEntry = new ChangeEntry({
+            user: '',
+            timeStamp: faker.date.past(0.25, currentFakeDate),
+            newValue: "Closed Lost",
+            deal: deal._id
+          })
+          currentFakeDate = lostEntry.timeStamp;
+          lostEntry.save();
+          deal.stage = "Closed Lost";
+          deal.stageHistory.unshift(lostEntry);
+        }
+        for (let i = dealIndex; i >= 0; i--) {
+          if ( dealIndex === 4 ){
+            closedLost = true;
+          }
+          if (closedLost === true && i === 3){
+            continue
+          }
+          let newChangeEntry = new ChangeEntry({
+            user: '',
+            timeStamp: faker.date.past(0.25, currentFakeDate),
+            newValue: dealStages[i],
+            deal: deal._id
+          });
+          currentFakeDate = newChangeEntry.timeStamp;
+          newChangeEntry.save();
+          deal.stageHistory.unshift(newChangeEntry);
+        }
+        deal.save();
+      })
+      res.send(dealsToArchive);
+    })
 })
 
 module.exports = router;
