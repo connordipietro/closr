@@ -27,7 +27,7 @@ function CompaniesView() {
       const companyTableRows = companies.map(item => {
       return (
         <tr key={item._id} className ="table-row">
-          <td><Link to={`companies/${item._id}`}><img src={item.logo} onerror="this.onerror=null; this.remove();" alt="" width="40 auto"/>   {item.name}</Link></td>
+          <td ><Link className="company-name" to={`companies/${item._id}`}><img src={item.logo} onerror="this.onerror=null; this.remove();" alt="" width="40 auto"/>   {item.name}</Link></td>
           <td>{item.owner}</td>
           <td>{item.phone}</td>
           <td>{item.city}, {item.state}</td>

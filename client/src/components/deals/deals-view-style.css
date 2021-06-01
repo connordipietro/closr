@@ -1,19 +1,19 @@
 .container{
   width: 100%;
-
 }
+
 .col{
   max-width: 250px
 }
+
 .btn.btn-primary.add-deals-button {
   background-color: #E46407; 
   border: solid 1px #E46407;
   color: white;
-  padding: 6px 16px;
+  padding: 6px 14px;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
-  font-size: 20px ;
+  font-size: 18px ;
   margin-top: 30px;
   margin-bottom: 0;
   box-shadow: 2px 4px 6px 
@@ -23,55 +23,74 @@
   background-color: white; 
   border: solid 1px #E46407;
   color: #E46407;
-  padding: 6px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 20px;
 }
-
-
 
 .deals-view-outer {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100%;
   margin-top: 15px;
+  width:100%;
+  overflow-x: auto !important;
+  word-break: break-word;
+  overflow: visible;
+  flex-grow: 1;
 }
+
+@media screen and (min-width: 1425px) {
+  .deals-view-outer { 
+  justify-content: center;
+  } 
+}
+
 .deal-area {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 375px;
+  outline: 1px solid;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
 }
+
 
 .deal-view {
   outline: 1px solid;
+  min-width:375px
 }
 
 .deals-column-header {
-  border-bottom-width: 1px;
-  border-bottom-color: black;
-  border-bottom-style: solid;
+  border-top: 1px black solid;
+  border-bottom: 1px black solid;
   display: flex;
   justify-content: space-between;
-  padding: 5px;
-  background-color: #cbd6e2;
+  padding: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #F5F5F5;
 }
 
 .deal-column-body {
   padding: 4px;
   width: 19vw;
   height: 56vh;
-  min-width: 150px;
+  min-width: 374.5px;
 }
 
 .deal-item {
   color: white;
   user-select: none;
   padding: 16px;
-  margin: 0px 0px 8px 0px;
+  margin: 12px 12px 20px 12px;
   min-height: 50px;
-  font-size: 14px;
+  box-shadow: 5px 5px 10px gray;
+  transition: all 0.5s ease 0s;
+}
+
+.deal-item:hover {
+  box-shadow: 5px 5px 10px gray;
+  color: #fff;
+  transform: translateY(-4px);
 }
 
 .deals-column-footer {
@@ -82,7 +101,34 @@
   justify-content: center;
   padding: 5px;
   background-color: white;
+  border-bottom: 1px black solid;
+  border-left: 1px black solid;
+  font-size: 18px
 }
+
+.edit-deal {
+  color: #0091AE;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.edit-deal:hover {
+  cursor: pointer;
+  text-decoration: underline
+}
+
+.deal-contents {
+  color: black;
+  font-size: 18px;
+  font-style: italic;
+}
+
+.deal-container {
+  width: 100%;
+  
+}
+
+
 
 
 

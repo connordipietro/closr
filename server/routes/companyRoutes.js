@@ -40,7 +40,7 @@ router.get("/", (req, res) => {
 
 // Provides list of all the company names in the user's list
 router.get("/list", (req, res) => {
-  Company.find( {}, "name" ).sort({name: 1}).exec((err, companiesList)=> {
+  Company.find( {}, "normalizedName name" ).sort({normalizedName: 1}).exec((err, companiesList)=> {
     res.send(companiesList);
   })
 })
@@ -52,6 +52,7 @@ router.post("/", (req, res) => {
     return res.status(400).send("Name field is required");
   }
   const newCompany = new Company(req.body);
+  newCompany.normalizedName = req.body.name.toLowerCase();
   newCompany.deals = [];
   newCompany.createdAt = new Date();
   newCompany.save()
@@ -75,6 +76,7 @@ router.put("/:id", (req, res) => {
   for (prop in req.body) {
     company[prop] = req.body[prop];
   }
+  company.normalizedName = company.name.toLowerCase();
   company.save()
     .then(updatedCompany => {
       res.send(updatedCompany);
