@@ -7,7 +7,7 @@ const ChangeEntry = require("../models/changeEntry");
 
 // For all routes that specify a deal Id, finds the deal and provides it to the route
 router.param("id", (req, res, next, id) => {
-  Deal.findById(id).populate({path: "company"}).populate("stageHistory").exec((err, deal) => {
+  Deal.findById(id).populate({path: "company"}).exec((err, deal) => {
     if(err) {
       return res.status(404).send("No Deal with that ID found");
     }
@@ -24,7 +24,6 @@ router.get("/", (req, res) => {
 
   Deal.find(searchObject)
     .populate("company")
-    .populate("stageHistory")
     .exec((err, dealResults) => {
       if (err) {
         console.error(err);
@@ -67,11 +66,8 @@ router.post("/", (req, res) => {
     newValue: newDeal.stage,
     deal: newDeal._id
   })
-  firstEntry.save()
-    .then(savedEntry => {
-      newDeal.stageHistory.push(savedEntry)
-      return newDeal.save()
-    })
+  newDeal.stageHistory.push(firstEntry);
+  newDeal.save()
     .then(dealSaved => {
       return Company.findById(dealSaved.company).exec();
     })
@@ -89,41 +85,6 @@ router.post("/", (req, res) => {
       }
       res.status(400).send("error, entry not saved");
     }) 
-})
-
-// Provides list of the revenue from the deals for each company (To-Do: Limit it to the last six months)
-router.get("/sales-by-company", (req, res) => {
-  Deal.find({stage: "Closed Won"}).populate({path: "company"}).exec()
-    .then(dealsWon => {
-      const salesRevenueByCompany = dealsWon.reduce((acc, deal) => {
-        acc[deal.company.name] = acc[deal.company.name] ? acc[deal.company.name] + deal.amount : deal.amount;
-        return acc;
-      }, {});
-      res.send(salesRevenueByCompany);
-    })
-    .catch(err => {
-      console.error(err);
-      res.end();
-    })
-})
-
-// Returns the likliehood for a deal at each staged to be won based on archived deals
-router.get("/conversion-rate", (req, res) => {
-
-  // const generateConversionRates = async () => {
-  //   const contractSentDeals = await Deal.find({archived: true, stageHistory})
-  //   // const populatedDeals = await Deal.find({archived: true}).populate("stageHistory").exec();
-  //   const contractSentDealIds = await ChangeEntry.find({newValue: "Contract Sent"}, "deal").exec()
-
-  //   const numberOfDealsWon = await Deal.find({archived: true, stage: "Closed Won"}).count().exec();
-  //   const numberOfInitiatedDeals = await Deal.find({archived: true}).count().exec();
-  //   const initiatedStageConversionRate = numberOfDealsWon / numberOfInitiatedDeals ;
-  //   const numberOfQualifiedDeals = 2 
-  //   const qualifiedStageConversionRate = numberOfDealsWon / numberOfQualifiedDeals ;
-  //   const numberOfContractSentDeals = 2 
-  //   const qualifiedStageConversionRate = numberOfDealsWon / numberOfContractSentDeals ;
-  // }
-
 })
 
 // Returns the specific deal matching the id provided
@@ -150,11 +111,8 @@ router.put("/:id", (req, res) => {
     deal: deal._id,
     newValue: deal.stage
   });
-  newChangeEntry.save()
-    .then(savedEntry=>{
-      deal.stageHistory.push(savedEntry._id);
-      return deal.save();
-    })
+  deal.stageHistory.push(newChangeEntry);
+  deal.save()
     .then(savedDeal=>{
       res.redirect(303, "/deals/by-stage");
     })

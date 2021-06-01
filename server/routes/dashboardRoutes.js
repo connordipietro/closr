@@ -23,6 +23,30 @@ router.get("/conversion-percentage-overall", (req, res) => {
     })
 })
 
+router.get("/conversion-percentage-by-stage", (req, res) => {
+  const initiatedDealsPromise = Deal.countDocuments({archived: true}).exec();
+  const qualifiedDealsPromise = Deal.find({archived: true, "stageHistory": {$elemMatch: {newValue: "Qualified"}}}).countDocuments().exec();
+  const contractSentDealsPromise = Deal.find({archived: true, "stageHistory": {$elemMatch: {newValue: "Contract Sent"}}}).countDocuments().exec();
+  const closedWonDealsPromise = Deal.countDocuments({archived: true, stage: "Closed Won"}).exec();
+
+  Promise.all([initiatedDealsPromise, qualifiedDealsPromise, contractSentDealsPromise, closedWonDealsPromise])
+    .then(results => {
+      let conversionPercentageByStage = [];
+      for (let i = 0; i < 3; i++) {
+        const stageObject = {
+          stage: dealStages[i],
+          conversionPercentage: results[3]/results[i]
+        }
+        conversionPercentageByStage.push(stageObject);
+      }
+      res.send(conversionPercentageByStage);
+    })
+    .catch(err => {
+      console.error(err);
+      res.end();
+    })
+})
+
 // Provides list of the revenue from the deals for each company (To-Do: Limit it to the last six months)
 router.get("/sales-by-company", (req, res) => {
   Deal.aggregate([
@@ -41,20 +65,7 @@ router.get("/sales-by-company", (req, res) => {
       console.error(err)
       res.end();
     })
-
-
-  // Deal.find({archived: true, stage: "Closed Won"}).populate({path: "company"}).exec()
-  //   .then(dealsWon => {
-  //     const salesRevenueByCompany = dealsWon.reduce((acc, deal) => {
-  //       acc[deal.company.name] = acc[deal.company.name] ? acc[deal.company.name] + deal.amount : deal.amount;
-  //       return acc;
-  //     }, {});
-  //     res.send(salesRevenueByCompany);
-  //   })
-  //   .catch(err => {
-  //     console.error(err);
-  //     res.end();
-  //   })
 })
+
 
 module.exports = router;

@@ -82,7 +82,6 @@ router.get("/generate-archives", (req, res) => {
             deal: deal._id
           })
           currentFakeDate = lostEntry.timeStamp;
-          lostEntry.save();
           deal.stage = "Closed Lost";
           deal.stageHistory.unshift(lostEntry);
         }
@@ -100,7 +99,6 @@ router.get("/generate-archives", (req, res) => {
             deal: deal._id
           });
           currentFakeDate = newChangeEntry.timeStamp;
-          newChangeEntry.save();
           deal.stageHistory.unshift(newChangeEntry);
         }
         deal.save();
