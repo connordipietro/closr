@@ -1,4 +1,4 @@
-import { GET_COMPANY, GET_COMPANY_ERROR } from "../actions";
+import { GET_COMPANY, GET_COMPANY_ERROR } from "../actions/action-names";
 
 const DEFAULT_STATE = {
   company: [],

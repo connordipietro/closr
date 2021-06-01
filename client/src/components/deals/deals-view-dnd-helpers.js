@@ -42,40 +42,23 @@ export const onDragEnd = (result, columns, setColumns, dispatch) => {
 };
 
 export const generateDealsStageColumns = (deals) => {
- 
+
   const calculateAmountTotal = (dealStage) => dealStage.map(deal => deal.amount).reduce((acc, dealAmount) => acc + dealAmount, 0).toFixed(2);
 
-  const dealStageColumns = {
-    [uuid()]: {
-      name: "Initiated",
-      items: deals['Initiated'].items,
-      quantity: deals['Initiated'].items.length,
-      amount: calculateAmountTotal(deals['Initiated'].items),
-    },
-    [uuid()]: {
-      name: "Qualified",
-      items: deals['Qualified'].items,
-      quantity: deals['Qualified'].items.length,
-      amount: calculateAmountTotal(deals['Qualified'].items)
-    },
-    [uuid()]: {
-      name: "Contract Sent",
-      items: deals['Contract Sent'].items,
-      quantity: deals['Contract Sent'].items.length,
-      amount: calculateAmountTotal(deals['Contract Sent'].items)
-    },
-    [uuid()]: {
-      name: "Closed Won",
-      items: deals['Closed Won'].items,
-      quantity: deals['Closed Won'].items.length,
-      amount: calculateAmountTotal(deals['Closed Won'].items)
-    },
-    [uuid()]: {
-      name: "Closed Lost",
-      items: deals['Closed Lost'].items,
-      quantity: deals['Closed Lost'].items.length,
-      amount: calculateAmountTotal(deals['Closed Lost'].items)
-    }
-  }
-  return dealStageColumns;
+  const dealStageColumnItems = Object.keys(deals).map(stageName => {
+    return (
+      {
+        name: deals[stageName].name,
+        items: deals[stageName].items,
+        quantity: deals[stageName].items.length,
+        amount: calculateAmountTotal(deals[stageName].items)
+      }
+    )
+  });
+  
+  let dealStageColumnsObj = {}
+
+  dealStageColumnItems.forEach((columnDeals) => dealStageColumnsObj[[uuid()]] = columnDeals)
+
+  return dealStageColumnsObj;
 };

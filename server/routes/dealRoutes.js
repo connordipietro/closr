@@ -20,7 +20,7 @@ router.param("id", (req, res, next, id) => {
 // TO-DO: Update so request can specify archived deals for the search object.
 router.get("/", (req, res) => {
   const searchObject = {};
-  searchObject.stage = req.query.stage ? req.query.stage : null;
+  req.query.stage ? searchObject.stage = req.query.stage : null;
 
   Deal.find(searchObject)
     .populate("company")
@@ -39,7 +39,7 @@ router.get("/", (req, res) => {
 router.get("/by-stage", (req, res) => {
   // Creates an object where each property is an object for a particular deal stage (e.g. {name: "Initiated", items: [Deals currently in initiated stage]})
   const resultsObj = dealStages.reduce((acc,stageName) => ({...acc,[stageName]:{name: stageName, items: []}}),{});
-  const searchObject = {};
+  const searchObject = {archived: false};
   const propertiesToReturn = 'amount name stage company expectedCloseDate';
   Deal.find(searchObject, propertiesToReturn).populate("company").exec()
     .then(dealResults => {
@@ -60,8 +60,18 @@ router.post("/", (req, res) => {
   newDeal.stageLastUpdatedAt = new Date();
   newDeal.archived = false;
   newDeal.expectedCloseDate = req.body.expectedCloseDate || null;
-  
-  newDeal.save()
+
+  let firstEntry = new ChangeEntry({
+    user: '',
+    timeStamp: new Date(),
+    newValue: newDeal.stage,
+    deal: newDeal._id
+  })
+  firstEntry.save()
+    .then(savedEntry => {
+      newDeal.stageHistory.push(savedEntry)
+      return newDeal.save()
+    })
     .then(dealSaved => {
       return Company.findById(dealSaved.company).exec();
     })
@@ -79,6 +89,22 @@ router.post("/", (req, res) => {
       }
       res.status(400).send("error, entry not saved");
     }) 
+})
+
+// Provides list of the revenue from the deals for each company (To-Do: Limit it to the last six months)
+router.get("/sales-by-company", (req, res) => {
+  Deal.find({stage: "Closed Won"}).populate({path: "company"}).exec()
+    .then(dealsWon => {
+      const salesRevenueByCompany = dealsWon.reduce((acc, deal) => {
+        acc[deal.company.name] = acc[deal.company.name] ? acc[deal.company.name] + deal.amount : deal.amount;
+        return acc;
+      }, {});
+      res.send(salesRevenueByCompany);
+    })
+    .catch(err => {
+      console.error(err);
+      res.end();
+    })
 })
 
 // Returns the likliehood for a deal at each staged to be won based on archived deals

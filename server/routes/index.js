@@ -4,8 +4,11 @@ const companyRoutes = require("./companyRoutes");
 const dealRoutes = require("./dealRoutes");
 const Company = require("../models/company");
 const companies = require("../dev-data/companies");
+const ChangeEntry = require("../models/changeEntry");
 const Deal = require("../models/deal");
-const deals = require("../dev-data/deals");
+const dealStages = require('../dev-data/dealStages')
+const faker = require("faker");
+const generateDeals = require("../dev-data/deals");
 
 router.use("/companies", companyRoutes);
 router.use("/deals", dealRoutes);
@@ -24,19 +27,15 @@ router.get("/generate-company-dev-data", (req, res)=> {
 
 router.get("/generate-deals-dev-data", (req, res) => {
   Deal.deleteMany({}).exec()
+    .then(() => ChangeEntry.deleteMany({}).exec())
     .then(() => {
-      deals.forEach(deal => {
-        let newDeal = new Deal(deal);
-        Company.findById(newDeal.company._id).exec((err, companyForDeal) => {
-          companyForDeal.deals.push(newDeal);
-          companyForDeal.save();
-        })
-        newDeal.save((err) => {
-          if (err) throw err;
-        })
-      })
+      return generateDeals(false);
     })
-  res.send('saved the fake data');
+    .then(() => res.send('saved the fake data'))
+    .catch((err) => {
+      console.error(err);
+      res.end();
+    })
 })
 
 //TO-DO: Push the deal id into the deals array for its company. In order for that to work need to revise the deals dummy data file to only grab the list of companies after the saveCompaniesPromises have resolved.
@@ -67,7 +66,45 @@ router.get("/generate-dev-data", (req, res) => {
 })
 
 router.get("/generate-archives", (req, res) => {
-  res.end();
+  generateDeals(true)
+    .then(dealsToArchive => {
+      dealsToArchive.forEach(deal => {
+        let dealIndex = dealStages.findIndex(stage => stage === deal.stage);
+        let currentFakeDate = new Date();
+        let closedLost = false;
+        if (dealIndex < 3) {
+          let lostEntry = new ChangeEntry({
+            user: '',
+            timeStamp: faker.date.past(0.25, currentFakeDate),
+            newValue: "Closed Lost",
+            deal: deal._id
+          })
+          currentFakeDate = lostEntry.timeStamp;
+          lostEntry.save();
+          deal.stage = "Closed Lost";
+          deal.stageHistory.unshift(lostEntry);
+        }
+        for (let i = dealIndex; i >= 0; i--) {
+          if ( dealIndex === 4 ){
+            closedLost = true;
+          }
+          if (closedLost === true && i === 3){
+            continue
+          }
+          let newChangeEntry = new ChangeEntry({
+            user: '',
+            timeStamp: faker.date.past(0.25, currentFakeDate),
+            newValue: dealStages[i],
+            deal: deal._id
+          });
+          currentFakeDate = newChangeEntry.timeStamp;
+          newChangeEntry.save();
+          deal.stageHistory.unshift(newChangeEntry);
+        }
+        deal.save();
+      })
+      res.send(dealsToArchive);
+    })
 })
 
 module.exports = router;
