@@ -101,6 +101,7 @@ router.get("/generate-archives", (req, res) => {
           currentFakeDate = newChangeEntry.timeStamp;
           deal.stageHistory.unshift(newChangeEntry);
         }
+        deal.stageLastUpdatedAt = deal.stageHistory[deal.stageHistory.length-1].timeStamp;
         deal.save();
       })
       res.send(dealsToArchive);

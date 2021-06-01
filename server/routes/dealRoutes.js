@@ -112,6 +112,7 @@ router.put("/:id", (req, res) => {
     newValue: deal.stage
   });
   deal.stageHistory.push(newChangeEntry);
+  deal.stageLastUpdatedAt = newChangeEntry.timeStamp;
   deal.save()
     .then(savedDeal=>{
       res.redirect(303, "/deals/by-stage");
