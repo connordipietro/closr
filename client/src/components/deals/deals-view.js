@@ -67,7 +67,7 @@ function DealsView(props) {
                                       ...provided.draggableProps.style
                                     }}
                                     >
-                                    <EditDeal id="edit-deal-link" deal={item}></EditDeal>
+                                    <EditDeal deal={item}></EditDeal>
                                     <div className="deal-contents">
                                       <div>{item.company['name']}</div>
                                       <div className="deal-amount">${item.amount}</div>
