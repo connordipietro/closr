@@ -30,6 +30,19 @@ function EditDeal(props) {
     dispatch(editDeal(deal._id, data));
   };
 
+  const handleArchiveDeal = () => {
+    setShow(false);
+    dispatch(editDeal(deal._id, {archived: true}));
+  }
+  const generateArchiveDealButton = (dealStage) => {
+    if (dealStage === "Closed Won" || dealStage === "Closed Lost") {
+      return (
+        <Button variant="secondary" onClick={handleArchiveDeal}>Archive</Button>
+      )
+    }
+    return;
+  }
+
   const onClose = () => {
     setShow(false);
     reset();
@@ -100,6 +113,7 @@ function EditDeal(props) {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={onClose}>Close</Button>
+            {generateArchiveDealButton(deal.stage)}
             <Button type="submit" variant="primary">Submit</Button>
           </Modal.Footer>
         </form>
