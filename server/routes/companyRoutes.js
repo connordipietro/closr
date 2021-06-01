@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const router = require("express").Router();
 const Company = require("../models/company");
+const Deal = require("../models/deal");
 
 // For all routes that specify a company Id, finds the company and provides it to the route
 router.param("id", (req, res, next, id) => {
