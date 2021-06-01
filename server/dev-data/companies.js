@@ -1,6 +1,7 @@
 const companies = [
   {
     name: "Google",
+    normalizedName: "google",
     owner: "Publicly Traded",
     phone: "123-456-7890",
     city: "Mountain View",
@@ -11,6 +12,7 @@ const companies = [
   },
   {
     name: "Home Depot",
+    normalizedName: "home depot",
     owner: "Bernard Marcus",
     phone: "432-555-6739",
     city: "Atlanta",
@@ -21,6 +23,7 @@ const companies = [
   },
   {
     name: "Sweetwater",
+    normalizedName: "sweetwater",
     owner: "Chuck Surack",
     phone: "800-222-4700",
     city: "Fort Wayne",
@@ -31,6 +34,7 @@ const companies = [
   },
   {
     name: "Harris Teeter",
+    normalizedName: "harris teeter",
     owner: "Publicly Traded",
     phone: "800-432-6111",
     city: "Matthews",
@@ -41,6 +45,7 @@ const companies = [
   },
   {
     name: "Luxottica",
+    normalizedName: "luxottica",
     owner: "Leonardo Del Vecchio",
     phone: "674-209-2034",
     city: "Milan",
@@ -51,6 +56,7 @@ const companies = [
   },
   {
     name: "Honda",
+    normalizedName: "honda",
     owner: "Publicly Traded",
     phone: "800-999-1009",
     city: "Hamamatsu",
@@ -61,6 +67,7 @@ const companies = [
   },
   {
     name: "Alpaca Chicken",
+    normalizedName: "alpaca chicken",
     owner: "Nora Palma",
     phone: "919-908-1597",
     city: "Durham",
@@ -71,6 +78,7 @@ const companies = [
   },
   {
     name: "British Petroleum",
+    normalizedName: "british petroleum",
     owner: "Publicly Traded",
     phone: "784-986-5912",
     city: "Houston",
@@ -81,6 +89,7 @@ const companies = [
   },
   {
     name: "Gibson Guitars",
+    normalizedName: "gibson guitars",
     owner: "James Curleigh",
     phone: "223-567-4039",
     city: "Nashville",
@@ -91,6 +100,7 @@ const companies = [
   },
   {
     name: "ScubaPro",
+    normalizedName: "scubapro",
     owner: "Gustav Dalla Valle",
     phone: "875-966-2103",
     city: "Racine",
