@@ -77,7 +77,7 @@ router.get("/generate-archives", (req, res) => {
         if (dealIndex < 3) {
           let lostEntry = new ChangeEntry({
             user: '',
-            timeStamp: faker.date.past(0.25, currentFakeDate),
+            timeStamp: faker.date.past(1, currentFakeDate),
             newValue: "Closed Lost",
             deal: deal._id
           })
@@ -94,7 +94,7 @@ router.get("/generate-archives", (req, res) => {
           }
           let newChangeEntry = new ChangeEntry({
             user: '',
-            timeStamp: faker.date.past(0.25, currentFakeDate),
+            timeStamp: faker.date.past(1, currentFakeDate),
             newValue: dealStages[i],
             deal: deal._id
           });

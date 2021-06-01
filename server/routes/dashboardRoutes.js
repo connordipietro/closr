@@ -70,15 +70,13 @@ router.get("/sales-by-company", (req, res) => {
 router.get("/sales-by-month", (req, res) => {
   Deal.aggregate([
     { $match: {archived: true, stage: "Closed Won"}},
-    { $project: {amount: 1, month: { $dateToString: { format: "%m", date: "$stageLastUpdatedAt" } }} },
+    { $project: {amount: 1, month: { $dateToString: { format: "%Y-%m", date: "$stageLastUpdatedAt" } }} },
     { $group: {_id: "$month", total: {$sum: "$amount"} }},
-    { $sort: {_id: 1}},
+    { $sort: {_id: -1}},
+    { $limit: 6},
     { $project: {_id: 0, total: 1, month: "$_id"}}
   ])
     .then(salesByMonth => {
-      console.log(salesByMonth)
-      salesByMonth.map((monthObject) => {
-      })
       res.send(salesByMonth);
     })
     .catch(err => {
