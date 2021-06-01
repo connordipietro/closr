@@ -81,6 +81,22 @@ router.post("/", (req, res) => {
     }) 
 })
 
+// Provides list of the revenue from the deals for each company (To-Do: Limit it to the last six months)
+router.get("/sales-by-company", (req, res) => {
+  Deal.find({stage: "Closed Won"}).populate({path: "company"}).exec()
+    .then(dealsWon => {
+      const salesRevenueByCompany = dealsWon.reduce((acc, deal) => {
+        acc[deal.company.name] = acc[deal.company.name] ? acc[deal.company.name] + deal.amount : deal.amount;
+        return acc;
+      }, {});
+      res.send(salesRevenueByCompany);
+    })
+    .catch(err => {
+      console.error(err);
+      res.end();
+    })
+})
+
 // Returns the likliehood for a deal at each staged to be won based on archived deals
 router.get("/conversion-rate", (req, res) => {
 
