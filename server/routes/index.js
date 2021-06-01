@@ -4,8 +4,11 @@ const companyRoutes = require("./companyRoutes");
 const dealRoutes = require("./dealRoutes");
 const Company = require("../models/company");
 const companies = require("../dev-data/companies");
+const ChangeEntry = require("../models/changeEntry");
 const Deal = require("../models/deal");
 const deals = require("../dev-data/deals");
+const dealStages = require('../dev-data/dealStages')
+const faker = require("faker");
 
 router.use("/companies", companyRoutes);
 router.use("/deals", dealRoutes);
@@ -67,7 +70,19 @@ router.get("/generate-dev-data", (req, res) => {
 })
 
 router.get("/generate-archives", (req, res) => {
-  res.end();
+  deals.forEach(deal => {
+    let dealIndex = dealStages.findIndex(deal.stage);
+    for (let i = dealIndex; i >= 0; i--) {
+      let currentFakeDate = new Date();
+      let newChangeEntry = new ChangeEntry({
+        user: '',
+        timeStamp: faker.date.past(0.25, currentFakeDate),
+        newValue: dealStages[i],
+        deal: deal._id
+      });
+      currentFakeDate = newChangeEntry.timestamp;
+    }
+  })
 })
 
 module.exports = router;
