@@ -28,15 +28,13 @@ app.use((req, res, next) => {
 
 app.use(allRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  // Express will serve up production assets
-  app.use(express.static(path.join(__dirname, '../client/build')));
+if (process.env.NODE_ENV === 'production') {
+  // Serve production assets
+  app.use(express.static('client/build'));
 
-  // Express will serve up the index.html file
-  // if it doesn't recognize the route
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  // Serve index.html from /build for base route (catch all)
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve('client', 'build', 'index.html'));
   });
 }
 
