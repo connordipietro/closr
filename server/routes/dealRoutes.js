@@ -155,5 +155,3 @@ router.delete("/:id", (req, res) => {
       res.end();
     }) 
 })
-
-module.exports = router;
