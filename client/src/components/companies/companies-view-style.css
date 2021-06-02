@@ -33,5 +33,7 @@
   text-decoration: underline;
 }
 
-
+td {
+  vertical-align: middle;
+}
 
