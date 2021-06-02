@@ -34,13 +34,26 @@ router.get("/", (req, res) => {
 })
 
 // Returns a list of active deals sorted into respective stage arrays.
-// TO-DO: Update so only non-archived deals are retreived from database.
 router.get("/by-stage", (req, res) => {
   // Creates an object where each property is an object for a particular deal stage (e.g. {name: "Initiated", items: [Deals currently in initiated stage]})
   const resultsObj = dealStages.reduce((acc,stageName) => ({...acc,[stageName]:{name: stageName, items: []}}),{});
   const searchObject = {archived: false};
-  const propertiesToReturn = 'amount name stage company expectedCloseDate';
-  Deal.find(searchObject, propertiesToReturn).populate("company").exec()
+  const propertiesToReturn = 'amount name stage company expectedCloseDate createdAt';
+  if (req.query.min) {
+    searchObject.amount = {$gte: Number(req.query.min)};
+  }
+  if (req.query.max) {
+    searchObject.amount = {...searchObject.amount, $lte: Number(req.query.max)};
+  }
+  if (req.query.recent) {
+    const currentDate = new Date();
+    const OneMonthAgo = currentDate.setMonth(currentDate.getMonth()-1);
+    searchObject.createdAt = {$gte: OneMonthAgo};
+  }
+  if (req.query.company) {
+    searchObject.company = {_id: req.query.company};
+  }
+  Deal.find(searchObject, propertiesToReturn).populate({path: "company", select: "name"}).exec()
     .then(dealResults => {
       const dealsSortedByStage = dealResults.reduce((acc, deal) => {
         deal.id = deal._id;
