@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const keys = require("./server/config/keys");
+const keys = require("./config/keys");
 const http = require("http");
-const allRoutes = require("./server/routes/index");
+const allRoutes = require("./routes/index");
 const { urlencoded } = require('express');
 
 mongoose.connect(keys.MONGODB_URI, {
