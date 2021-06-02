@@ -8,7 +8,7 @@ const CompanyViewCard = (props) => {
           <div class="card-body">
             <div className="space-between">
               <h3 class="card-title">{company.name}</h3>
-              <img src={company.logo ? company.logo : ""} />
+              <img src={company.logo ? company.logo : ""} width="40 auto"/>
               <EditCompany company={company} id={companyId}/>
             </div>
             <div className="card-subtitle text-muted">{company.city}, {company.state}</div>
