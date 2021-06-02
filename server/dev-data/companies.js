@@ -8,7 +8,8 @@ const companies = [
     state: "CA",
     deals: [],
     createdAt: new Date('December 17, 2005 03:24:00'),
-    industry: "Technology"
+    industry: "Technology",
+    logo: ""
   },
   {
     name: "Home Depot",
@@ -19,7 +20,8 @@ const companies = [
     state: "GA",
     deals: [],
     createdAt: new Date('January 27, 2001 05:55:00'),
-    industry: "Home Improvement"
+    industry: "Home Improvement",
+    logo: ""
   },
   {
     name: "Sweetwater",
@@ -30,7 +32,8 @@ const companies = [
     state: "IN",
     deals: [],
     createdAt: new Date('March 17, 2012 14:55:00'),
-    industry: "Music Supply"
+    industry: "Music Supply",
+    logo: ""
   },
   {
     name: "Harris Teeter",
@@ -41,7 +44,8 @@ const companies = [
     state: "NC",
     deals: [],
     createdAt: new Date('July 4, 2017 16:55:00'),
-    industry: "Grocery"
+    industry: "Grocery",
+    logo: ""
   },
   {
     name: "Luxottica",
@@ -52,7 +56,8 @@ const companies = [
     state: "Italy",
     deals: [],
     createdAt: new Date('June 21, 2006 18:00:00'),
-    industry: "Apparel"
+    industry: "Apparel",
+    logo: ""
   },
   {
     name: "Honda",
@@ -63,7 +68,8 @@ const companies = [
     state: "Japan",
     deals: [],
     createdAt: new Date('August 12, 2016 12:00:00'),
-    industry: "Automotive"
+    industry: "Automotive",
+    logo: ""
   },
   {
     name: "Alpaca Chicken",
@@ -74,7 +80,8 @@ const companies = [
     state: "NC",
     deals: [],
     createdAt: new Date('August 1, 2013 4:00:00'),
-    industry: "Restaraunts"
+    industry: "Restaraunts",
+    logo: ""
   },
   {
     name: "British Petroleum",
@@ -85,7 +92,8 @@ const companies = [
     state: "TX",
     deals: [],
     createdAt: new Date('November 8, 2017 14:00:00'),
-    industry: "Petrochemicals"
+    industry: "Petrochemicals",
+    logo: ""
   },
   {
     name: "Gibson Guitars",
@@ -96,7 +104,8 @@ const companies = [
     state: "TN",
     deals: [],
     createdAt: new Date('December 5, 2015 19:00:00'),
-    industry: "Music Supply"
+    industry: "Music Supply",
+    logo: ""
   },
   {
     name: "ScubaPro",
@@ -107,7 +116,8 @@ const companies = [
     state: "WI",
     deals: [],
     createdAt: new Date('April 3, 2013 22:00:00'),
-    industry: "Recreational Products"
+    industry: "Recreational Products",
+    logo: ""
   }
 ];
 
