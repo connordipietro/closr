@@ -115,3 +115,15 @@ export function editCompany(updatedInfo, id) {
     alert('Error');
   });
 };
+
+export function getCompaniesByRevenue() {
+  return axios.get(`/dashboard/sales-by-company`)
+  .then(response => {
+    return {
+      type: actionNames.GET_COMPANIES_BY_REVENUE,
+      payload: response
+    }; 
+  })
+  .catch(error => {alert('Error');
+});
+};

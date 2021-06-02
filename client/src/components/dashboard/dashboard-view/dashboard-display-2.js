@@ -1,18 +1,21 @@
-import React from 'react'
-import { render } from 'react-dom'
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
+import React from 'react';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
 import { useSelector, useDispatch } from "react-redux";
-import { getDeals } from '../../../actions';
+import { getCompaniesByRevenue } from '../../../actions';
 import { useEffect } from 'react';
 
 const DashboardView2 = () => {
+  const {companies} = useSelector(state => state.revenueData);
+  
+  companies.forEach(a => delete a._id);
+  const newCompanies = companies.map(a => ({ name: a.name, y: a.total}));
 
   const dispatch = useDispatch();
-  useEffect(() => { // loads all deals on initial render
-    dispatch(getDeals());
+  useEffect(() => { 
+    dispatch(getCompaniesByRevenue());
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },  [getDeals]);
+  },  [getCompaniesByRevenue]);
    
     const options = {
       chart: {
@@ -42,25 +45,10 @@ const DashboardView2 = () => {
         }
     },
     series: [{
-        name: 'Top 5 Customers',
-        colorByPoint: true,
-        data: [{
-          name: 'Harris Teeter',
-          y: 157.43
-      }, {
-          name: 'Home Depot',
-          y: 546.50
-      }, {
-          name: 'Google',
-          y: 200
-      }, {
-          name: 'Alpaca Chicken',
-          y: 350
-      }, {
-          name: 'Sweetwater',
-          y: 420
-      }],
-        innerSize: '50%',
+      name: 'Top 5 Customers',
+      colorByPoint: true,
+      data: newCompanies,
+      innerSize: "50%"
     }]
 }
     const App = () => <div>
