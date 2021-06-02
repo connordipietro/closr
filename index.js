@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const keys = require("./config/keys");
+const keys = require("./server/config/keys");
 const http = require("http");
-const allRoutes = require("./routes/index");
+const allRoutes = require("./server/routes/index");
 const { urlencoded } = require('express');
 
 mongoose.connect(keys.MONGODB_URI, {
@@ -30,11 +30,11 @@ app.use(allRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   // Serve production assets
-  app.use(express.static('../client/build'));
+  app.use(express.static('/client/build'));
 
   // Serve index.html from /build for base route (catch all)
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve('..', 'client', 'build', 'index.html'));
+    res.sendFile(path.resolve('client', 'build', 'index.html'));
   });
 }
 
