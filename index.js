@@ -30,7 +30,7 @@ app.use(allRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   // Serve production assets
-  app.use(express.static('/client/build'));
+  app.use(express.static('client/build'));
 
   // Serve index.html from /build for base route (catch all)
   app.get('*', (req, res) => {
