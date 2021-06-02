@@ -5,6 +5,7 @@ import { Button} from 'react-bootstrap';
 import _ from "lodash";
 import axios from "axios";
 import EditDeal from './edit-deal'
+import DealTimeline from './deal-timeline'
 
 const DealView = (props) => {
   const dealId = props.match.params._id;
@@ -39,7 +40,7 @@ const DealView = (props) => {
           </div>
           <div className = "float-child deals col-md-4 text-center">
             <h2 className="deals-title">Timeline</h2>
-             {/* loop through the array of deals and render each detail in its respective tag */}
+             <DealTimeline/>
           </div>
         </div>
     </>
