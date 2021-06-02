@@ -9,7 +9,7 @@ import './deals-view-style.css'
 function DealsView(props) {
   const dispatch = useDispatch();
   const { deals } = props;
-  
+ 
   const dealStageColumns = generateDealsStageColumns(deals);
   const [columns, setColumns] = useState({});
 
