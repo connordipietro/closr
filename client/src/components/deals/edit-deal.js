@@ -6,7 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import DatePicker from "react-datepicker";
 import { editDeal, getCompaniesList } from '../../actions'
-import { PencilSquare, X } from 'react-bootstrap-icons';
+import XCloseButton from '../buttons/xCloseButton'
+import EditButton from '../buttons/editButton'
 
 const dealSchema = Yup.object().shape({
   name: Yup.string().required("Please enter a name for the deal"),
@@ -58,13 +59,13 @@ function EditDeal(props) {
 
   return (
     <>
-    {/* <div className="edit-deal" onClick={() => setShow(true)}>{deal.name}</div> */}
-    <PencilSquare width={24} height={24} onClick={() => setShow(true)}/>
+    <EditButton onClick={() => setShow(true)}/>
+
 
     <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header>
           <Modal.Title>Edit deal</Modal.Title>
-          <X onClick={onClose} />
+          <XCloseButton onClose={onClose}/>
         </Modal.Header>
         <form onSubmit={handleSubmit(handleDealEdit)}>
           <Modal.Body>
@@ -120,7 +121,6 @@ function EditDeal(props) {
             </div> 
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={onClose}>Close</Button>
             {generateArchiveDealButton(deal.stage)}
             <Button type="submit" variant="primary">Submit</Button>
           </Modal.Footer>

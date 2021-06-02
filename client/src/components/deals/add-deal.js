@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import XCloseButton from '../buttons/xCloseButton'
 
 const dealSchema = Yup.object().shape({
   name: Yup.string().required("Please enter a name for the deal"),
@@ -60,6 +61,7 @@ function AddDeal() {
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header>
           <Modal.Title>Add a new Deal</Modal.Title>
+          <XCloseButton onClose={onClose}/>
         </Modal.Header>
         <form onSubmit={handleSubmit(handleDealAdd)}>
           <Modal.Body>
@@ -115,7 +117,6 @@ function AddDeal() {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={onClose}>Close</Button>
             <Button type="submit" variant="primary">Submit</Button>
           </Modal.Footer>
         </form>

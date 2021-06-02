@@ -7,12 +7,13 @@ import axios from "axios";
 import EditDeal from './edit-deal'
 import DealTimeline from './deal-timeline'
 import { Safe, SafeFill } from 'react-bootstrap-icons';
+import ArchiveButton from "../buttons/archiveButton";
+import Moment from 'react-moment';
 
 const DealView = (props) => {
   const dealId = props.match.params._id;
-  const dispatch = useDispatch();
   const [dealData, setDealData] = useState({})
-  const [archiveHover, setArchiveHover] = useState(false);
+
 
   useEffect(() => {
     axios.get(`/deals/${dealId}`).then(returnedDeal => setDealData(returnedDeal.data))
@@ -33,11 +34,11 @@ const DealView = (props) => {
             <h2>{dealData.name}</h2>
             <div className="box-flex">
               <img src={dealData.company.logo} onerror="this.onerror=null; this.remove();" alt='img' width="100"/>
-              <h4><EditDeal deal={dealData}/><span title="archive deal" onMouseEnter={()=>{setArchiveHover(true)}} onMouseLeave={()=>{setArchiveHover(false)}}>{archiveHover ? <SafeFill/> : <Safe/>}</span></h4>
+              <EditDeal deal={dealData}/><ArchiveButton/>
             </div>
-            <p>Created on:</p><h6>{dealData.createdAt}</h6>
-            <p>Amount: </p><h6>{dealData.amount}</h6>
-            <p>Expected Close Date </p><h6>{dealData.expectedCloseDate}</h6>
+            <p>Created on:</p><h6><Moment format="hh:mm:ss A MM/DD/YYYY">{dealData.createdAt}</Moment></h6>
+            <p>Amount: </p><h6>${dealData.amount}</h6>
+            <p>Expected Close Date </p><h6><Moment format ="MM/DD/YYYY">{dealData.expectedCloseDate}</Moment></h6>
             <p>Stage: </p><h6>{dealData.stage}</h6>
           </div>
           <div className = "float-child deals col-md-4 text-center">
