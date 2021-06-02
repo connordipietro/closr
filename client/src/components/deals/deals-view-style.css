@@ -77,7 +77,7 @@
 .edit-deal {
   color: #0091ae;
   font-weight: 550;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .edit-deal:hover {
@@ -102,4 +102,9 @@
 
 .deal-amount {
   text-align: end;
+}
+
+.justify-between {
+  display: flex;
+  justify-content: space-between;
 }
