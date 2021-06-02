@@ -1,6 +1,10 @@
 <p align="center">
 
   <h3 align="center">Parsity CRM Project</h3>
+  <p align="center">
+  <a href="https://parsity-crm.herokuapp.com">https://parsity-crm.herokuapp.com</a>
+  </p>
+  <br />
   <p align="center">This project has been created by the Spring 2021 full-time cohort at Parsity, an online software engineering course. The work in this repository is wholly of the students based on a project prompt given by Parsity instructors. The application is an online CRM (customer relationship management) tool that helps companies track customers, deals and revenue.</p>
     
   <p align="center">
@@ -45,21 +49,23 @@
    ```sh
    git clone https://github.com/connordipietro/parsity-crm.git
    ```
-2. Install NPM packages for Client
+2. Install NPM packages in root directory
    ```sh
-   cd client
    npm install
    cd -
    ```
-3. Install NPM packages for Server
+3. Install NPM packages in Client
    ```sh
    cd server
    npm install
    ```
-   
+4. Go to "URL" and generate your free API key
+5. Create an .env file in the Client folder and add the following text in it: REACT_APP_BIGPICTURE_API_KEY = "insert the API key you created"
+6. Add the .env file to your .gitignore
+
  ## Contributing
 
-Any contributions you make are ** appreciated**.
+Any contributions you make are appreciated.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b newFeature`)
