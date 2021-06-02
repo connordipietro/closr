@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Nav from './nav/nav.js';
 import DealsContainer from './deals/deals-container'
+import DealView from './deals/deal-view'
 import CompaniesContainer from './companies/companies-container'
 /* import {Tab, Tabs} from 'react-bootstrap'; */
 import { Redirect, Route, Switch } from 'react-router';
@@ -15,6 +16,7 @@ function App() {
       <Switch>
         <Route path="/companies/:_id" component={CompanyView}/>
         <Route path="/companies" component={CompaniesContainer}/>
+        <Route path="/deals/:_id" component={DealView}/>
         <Route path="/deals" component={DealsContainer}/>
         <Route path="/dashboard" component={DashboardView}/>
         <Redirect to="/companies" />

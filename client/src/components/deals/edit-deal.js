@@ -1,11 +1,12 @@
 import {Modal, Button} from 'react-bootstrap';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import DatePicker from "react-datepicker";
-import { editDeal } from '../../actions'
+import { editDeal, getCompaniesList } from '../../actions'
+import { PencilSquare, X } from 'react-bootstrap-icons';
 
 const dealSchema = Yup.object().shape({
   name: Yup.string().required("Please enter a name for the deal"),
@@ -24,6 +25,11 @@ function EditDeal(props) {
   const companiesList = useSelector(({companiesList}) => companiesList);
 
   const [show, setShow] = useState(false);
+
+  useEffect(() => { // loads all deals on initial render
+    dispatch(getCompaniesList());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },  [getCompaniesList]);
 
   const handleDealEdit = (data) => {
     setShow(false);
@@ -52,11 +58,13 @@ function EditDeal(props) {
 
   return (
     <>
-    <div className="edit-deal" onClick={() => setShow(true)}>{deal.name}</div>
+    {/* <div className="edit-deal" onClick={() => setShow(true)}>{deal.name}</div> */}
+    <PencilSquare width={24} height={24} onClick={() => setShow(true)}/>
 
     <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header>
           <Modal.Title>Edit deal</Modal.Title>
+          <X onClick={onClose} />
         </Modal.Header>
         <form onSubmit={handleSubmit(handleDealEdit)}>
           <Modal.Body>

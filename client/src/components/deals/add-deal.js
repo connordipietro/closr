@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import {Modal, Button} from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
-import { postNewDeal } from '../../actions'
+import { postNewDeal, getCompaniesList } from '../../actions'
 import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -24,6 +24,12 @@ function AddDeal() {
   const dispatch = useDispatch(); 
 
   const [show, setShow] = useState(false);
+
+  useEffect(() => { // loads all deals on initial render
+    dispatch(getCompaniesList());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },  [getCompaniesList]);
+
   const companiesList = useSelector(({companiesList}) => companiesList)
 
   //const [companiesList, setCompaniesList] = useState([]);
