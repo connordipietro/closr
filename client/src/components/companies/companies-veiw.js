@@ -30,7 +30,7 @@ function CompaniesView() {
         item.logo = item.logo ? item.logo : 'https://media.tarkett-image.com/large/TH_24567080_24594080_24596080_24601080_24563080_24565080_24588080_001.jpg';
       return (
         <tr key={item._id} className ="table-row">
-          <td ><Link className="company-name" to={`companies/${item._id}`}><img src={item.logo} onerror="this.onerror=null; this.remove();" alt="" width="40 auto"/>   {item.name}</Link></td>
+          <td ><Link className="company-name" to={`companies/${item._id}`}><img src={item.logo} alt="" width="40 auto"/>   {item.name}</Link></td>
           <td>{item.owner}</td>
           <td>{item.phone}</td>
           <td>{item.city}, {item.state}</td>
