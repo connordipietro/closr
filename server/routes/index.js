@@ -9,9 +9,11 @@ const Deal = require("../models/deal");
 const dealStages = require('../dev-data/dealStages')
 const faker = require("faker");
 const generateDeals = require("../dev-data/deals");
+const dashboardRoutes = require("./dashboardRoutes");
 
 router.use("/companies", companyRoutes);
 router.use("/deals", dealRoutes);
+router.use("/dashboard", dashboardRoutes)
 
 router.get("/generate-company-dev-data", (req, res)=> {
   Company.deleteMany({}).exec().then(
@@ -75,12 +77,11 @@ router.get("/generate-archives", (req, res) => {
         if (dealIndex < 3) {
           let lostEntry = new ChangeEntry({
             user: '',
-            timeStamp: faker.date.past(0.25, currentFakeDate),
+            timeStamp: faker.date.past(1, currentFakeDate),
             newValue: "Closed Lost",
             deal: deal._id
           })
           currentFakeDate = lostEntry.timeStamp;
-          lostEntry.save();
           deal.stage = "Closed Lost";
           deal.stageHistory.unshift(lostEntry);
         }
@@ -93,14 +94,14 @@ router.get("/generate-archives", (req, res) => {
           }
           let newChangeEntry = new ChangeEntry({
             user: '',
-            timeStamp: faker.date.past(0.25, currentFakeDate),
+            timeStamp: faker.date.past(1, currentFakeDate),
             newValue: dealStages[i],
             deal: deal._id
           });
           currentFakeDate = newChangeEntry.timeStamp;
-          newChangeEntry.save();
           deal.stageHistory.unshift(newChangeEntry);
         }
+        deal.stageLastUpdatedAt = deal.stageHistory[deal.stageHistory.length-1].timeStamp;
         deal.save();
       })
       res.send(dealsToArchive);
