@@ -6,9 +6,32 @@ import { getDeals } from '../../../actions';
 import { useEffect } from 'react';
 
 const DashboardView1 = () => {
+  const { deals }  = useSelector(state => state.dealsData);
+
+  const key1 = "Initiated";
+  const key2 = "Qualified";
+  const key3 = "Contract Sent";
+  const key4 = "Closed Lost";
+  const key5 = "Closed Won";
+
+  // will rewrite once i find a cleaner way
+  const { [key1] : _0, [key2] : _1, [key3] : _2, [key4] : _3, ...won} = deals;
+  const { [key1] : _4, [key2] : _5, [key3] : _6, [key5] : _7, ...lost} = deals;
+
+  const dealsView = [];
+
+  const wonDeals = Object.create(won);
+  wonDeals.name = 'Contracts Won';
+  wonDeals.y = won["Closed Won"]?.items?.length;
+  dealsView.push(wonDeals);
+
+  const lostDeals = Object.create(lost);
+  lostDeals.name = 'Contracts Won';
+  lostDeals.y = lost["Closed Lost"]?.items?.length;
+  dealsView.push(lostDeals);
 
   const dispatch = useDispatch();
-  useEffect(() => { // loads all deals on initial render
+  useEffect(() => { 
     dispatch(getDeals());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },  [getDeals]);
@@ -21,7 +44,7 @@ const DashboardView1 = () => {
         type: 'pie'
     },
     title: {
-        text: 'Browser market shares in January, 2018'
+        text: 'Contracts Won vs Lost'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -42,38 +65,10 @@ const DashboardView1 = () => {
         }
     },
     series: [{
-        name: 'Brands',
+        name: 'Contracts',
         colorByPoint: true,
-        data: [{
-            name: 'Chrome',
-            y: 61.41,
-            sliced: true,
-            selected: true
-        }, {
-            name: 'Internet Explorer',
-            y: 11.84
-        }, {
-            name: 'Firefox',
-            y: 10.85
-        }, {
-            name: 'Edge',
-            y: 4.67
-        }, {
-            name: 'Safari',
-            y: 4.18
-        }, {
-            name: 'Sogou Explorer',
-            y: 1.64
-        }, {
-            name: 'Opera',
-            y: 1.6
-        }, {
-            name: 'QQ',
-            y: 1.2
-        }, {
-            name: 'Other',
-            y: 2.61
-        }]
+        data: dealsView,
+        innerSize: "50%"
     }]
     }
     
