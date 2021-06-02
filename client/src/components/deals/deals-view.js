@@ -6,11 +6,12 @@ import { onDragEnd, generateDealsStageColumns } from "./deals-view-dnd-helpers";
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import EditDeal from './edit-deal'
 import './deals-view-style.css'
+import Moment from 'react-moment';
 
 function DealsView(props) {
   const dispatch = useDispatch();
   const { deals } = props;
-  
+ 
   const dealStageColumns = generateDealsStageColumns(deals);
   const [columns, setColumns] = useState({});
 
@@ -72,8 +73,16 @@ function DealsView(props) {
                                     <Link to={`/deals/${item._id}`}>{item.name}</Link>
                                     <div className="deal-contents">
                                       <div>{item.company['name']}</div>
-                                      <div className="deal-amount">${item.amount}</div>
-                                    </div>
+                                      <hr></hr>                                  
+                                      <div className="justify-between">
+                                        <div> Expected close: </div>
+                                        <Moment className="close-date" format="MM/DD/YY">{item.expectedCloseDate}</Moment>
+                                      </div>
+                                      <div className="justify-between">
+                                        <div> Amount: </div>
+                                        <div>${item.amount}</div>
+                                      </div>
+                                      </div>
                                   </div>
                                 );
                               }}
