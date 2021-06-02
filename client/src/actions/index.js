@@ -1,29 +1,18 @@
 import axios from "axios";
+import  * as actionNames   from  "./action-names.js";
 
-export const GET_COMPANIES = "GET_COMPANIES";
-export const GET_COMPANIES_ERROR = "GET_COMPANIES_ERROR";
-export const GET_COMPANY = "GET_COMPANY";
-export const GET_COMPANY_ERROR = "GET_COMPANY_ERROR";
-export const GET_DEALS = "GET_DEALS";
-export const GET_DEALS_ERROR = "GET_DEALS_ERROR";
-export const POST_COMPANY = "POST_COMPANY";
-export const PUT_DEAL = "PUT_DEAL";
-export const EDIT_COMPANY = "EDIT_COMPANY";
-export const POST_DEAL = "POST_DEAL";
-export const RESET_NEW_COMPANY = "RESET_NEW_COMPANY";
-export const GET_COMPANIES_LIST = "GET_COMPANIES_LIST";
 
 export function getCompanies(pageNumber) {
   return axios.get(`/companies?page=${pageNumber}`)
   .then(response => {
     return {
-      type: GET_COMPANIES,
+      type: actionNames.GET_COMPANIES,
       payload: response
     }; 
   })
   .catch(error => {
     return {
-      type: GET_COMPANIES_ERROR,
+      type: actionNames.GET_COMPANIES_ERROR,
       payload: error
     }
 });
@@ -32,7 +21,7 @@ export function getCompanies(pageNumber) {
 export function getCompaniesList() {
   const companyList = axios.get("/companies/list")
   return {
-    type: GET_COMPANIES_LIST,
+    type: actionNames.GET_COMPANIES_LIST,
     payload: companyList
   }
 }
@@ -41,13 +30,13 @@ export function getDeals() {
   return axios.get(`/deals/by-stage`)
   .then(response => {
     return {
-      type: GET_DEALS,
+      type: actionNames.GET_DEALS,
       payload: response
     }; 
   })
   .catch(error => {
     return {
-      type: GET_DEALS_ERROR,
+      type: actionNames.GET_DEALS_ERROR,
       payload: error
     }
 });
@@ -58,7 +47,7 @@ export function postNewCompany(newCompany) {
   return axios.post(`/companies`, newCompany)
   .then(response => {
     return {
-      type: POST_COMPANY,
+      type: actionNames.POST_COMPANY,
       payload: response
     }; 
   })
@@ -69,7 +58,7 @@ export function postNewCompany(newCompany) {
 
 export function resetNewCompany() {
   return {
-    type: RESET_NEW_COMPANY
+    type: actionNames.RESET_NEW_COMPANY
   }
 }
 
@@ -78,7 +67,7 @@ export function postNewDeal(newDeal) {
   return axios.post(`/deals`, newDeal)
   .then(response => {
     return {
-      type: POST_DEAL,
+      type: actionNames.POST_DEAL,
       payload: response
     }; 
   })
@@ -91,7 +80,7 @@ export function postNewDeal(newDeal) {
 export function putDeal(id, updatedStage) {
   const response = axios.put(`/deals/${id}`, {stage: updatedStage})
     return {
-      type: GET_DEALS,
+      type: actionNames.GET_DEALS,
       payload: response
     }
 }
@@ -106,13 +95,13 @@ export function getCompanyById(_id) {
   return axios.get(`/companies/${_id}`)
   .then(response => {
     return {
-      type: GET_COMPANY,
+      type: actionNames.GET_COMPANY,
       payload: response
     }; 
   })
   .catch(error => {
     return {
-      type: GET_COMPANY_ERROR,
+      type: actionNames.GET_COMPANY_ERROR,
       payload: error
     }
   });

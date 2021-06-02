@@ -1,0 +1,13 @@
+
+export const GET_COMPANIES = "GET_COMPANIES";
+export const GET_COMPANIES_ERROR = "GET_COMPANIES_ERROR";
+export const GET_COMPANY = "GET_COMPANY";
+export const GET_COMPANY_ERROR = "GET_COMPANY_ERROR";
+export const GET_DEALS = "GET_DEALS";
+export const GET_DEALS_ERROR = "GET_DEALS_ERROR";
+export const POST_COMPANY = "POST_COMPANY";
+export const PUT_DEAL = "PUT_DEAL";
+export const EDIT_COMPANY = "EDIT_COMPANY";
+export const POST_DEAL = "POST_DEAL";
+export const RESET_NEW_COMPANY = "RESET_NEW_COMPANY";
+export const GET_COMPANIES_LIST = "GET_COMPANIES_LIST";

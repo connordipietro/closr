@@ -1,4 +1,4 @@
-import { GET_DEALS, GET_DEALS_ERROR } from "../actions";
+import { GET_DEALS, GET_DEALS_ERROR } from "../actions/action-names";
 
 const DEFAULT_STATE = {
   deals: [],

@@ -12,7 +12,7 @@ const DealSchema = new Schema({
   createdAt: { type: Date, required: true, immutable: true},
   expectedCloseDate: Date,
   stageLastUpdatedAt: { type: Date, required: true },
-  stageHistory: [{ type: Schema.Types.ObjectId, ref: "ChangeEntry" }],
+  stageHistory: [{ type: ChangeEntry.schema }],
   archived: Boolean
 });
 

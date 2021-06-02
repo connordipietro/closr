@@ -1,4 +1,4 @@
-import { POST_DEAL } from "../actions";
+import { POST_DEAL } from "../actions/action-names";
 
 const DEFAULT_STATE = {
   newDeal: []

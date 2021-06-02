@@ -5,7 +5,7 @@ const Deal = require("../models/deal");
 
 // For all routes that specify a company Id, finds the company and provides it to the route
 router.param("id", (req, res, next, id) => {
-  Company.findById(id).populate({path: "deals"}).exec((err, company) => {
+  Company.findById(id).populate({path: "deals", match: {archived: false}}).exec((err, company) => {
     if(err) {
       return res.status(404).send("No Company with that ID found");
     }
@@ -56,6 +56,7 @@ router.post("/", (req, res) => {
   newCompany.normalizedName = req.body.name.toLowerCase();
   newCompany.deals = [];
   newCompany.createdAt = new Date();
+  newCompany.logo = newCompany.logo || '';
   newCompany.save()
     .then(savedCompany => {
       res.send(savedCompany);
