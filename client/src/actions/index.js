@@ -131,6 +131,7 @@ export function getCompaniesByRevenue() {
 export function getConversionPercentageOverall() {
   return axios.get(`/dashboard/conversion-percentage-overall`)
   .then(response => {
+    console.log(response)
     return {
       type: actionNames.GET_CONVERSION_PERCENTAGE_ALL,
       payload: response
@@ -143,6 +144,7 @@ export function getConversionPercentageOverall() {
 export function getConversionsByStage() {
   return axios.get(`/dashboard/conversion-percentage-by-stage`)
   .then(response => {
+    console.log(response)
     return {
       type: actionNames.GET_CONVERSIONS_BY_STAGE,
       payload: response
