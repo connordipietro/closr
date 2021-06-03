@@ -37,11 +37,10 @@ const  Paginate = () => {
     return (
       <ul class="pagination">
       <li class="page-item">
-        <div className="page-link pag-text-style">{pageNumber}</div>
+        <div className="page-link pag-text-style center-pag-element">Page {pageNumber} of {numOfPages}</div>
       </li>
       <li class="page-item">
         <div class="page-link pag-text-style" onClick={handleNextPage}>
-          <span class="sr-only">Next</span>
           <span aria-hidden="true"> &raquo; </span>
         </div>
       </li>
@@ -55,15 +54,13 @@ const  Paginate = () => {
         <li class="page-item">
           <div class="page-link pag-text-style" onClick={handlePrevPage}>
             <span aria-hidden="true">&laquo; </span>
-            <span class="sr-only">Prev</span>
           </div>
         </li>
         <li class="page-item">
-          <div className="page-link pag-text-style">{pageNumber}</div>
+          <div className="page-link pag-text-style center-pag-element">Page {pageNumber} of {numOfPages}</div>
         </li>
         <li class="page-item">
           <div class="page-link pag-text-style" onClick={handleNextPage}>
-            <span class="sr-only">Next</span>
             <span aria-hidden="true"> &raquo; </span>
           </div>
         </li>
@@ -76,11 +73,10 @@ const  Paginate = () => {
         <li class="page-item">
           <div class="page-link pag-text-style" onClick={handlePrevPage}>
             <span aria-hidden="true">&laquo; </span>
-            <span class="sr-only">Prev</span>
           </div>
         </li>
         <li class="page-item">
-          <div className="page-link pag-text-style">{pageNumber}</div>
+          <div className="page-link pag-text-style center-pag-element">Page {pageNumber} of {numOfPages}</div>
         </li>
       </ul>
       )
