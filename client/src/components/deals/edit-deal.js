@@ -37,12 +37,6 @@ function EditDeal(props) {
     dispatch(editDeal(deal._id, data));
   };
 
-  const handleArchiveDeal = () => {
-    setShow(false);
-    dispatch(editDeal(deal._id, {archived: true}));
-  }
-
-
   const onClose = () => {
     setShow(false);
     reset();

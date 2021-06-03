@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button} from 'react-bootstrap';
 import _ from "lodash";
 import axios from "axios";
@@ -10,11 +10,13 @@ import { Safe, SafeFill } from 'react-bootstrap-icons';
 import ArchiveButton from "../buttons/archiveButton";
 import Moment from 'react-moment';
 import { editDeal } from "../../actions";
+import DeleteButton from "../buttons/deleteButton";
 
 const DealView = (props) => {
   const dealId = props.match.params._id;
   const [dealData, setDealData] = useState({});
   const dispatch = useDispatch();
+  const history = useHistory();
 
 
   useEffect(() => {
@@ -22,6 +24,10 @@ const DealView = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleDeleteDeal = () => {
+    // To-Do: Put in some way to ask if they are sure they want to delete the deal
+    axios.delete(`/deals/${dealData._id}`).then(() => {history.push("/deals")})
+  }
   const handleArchiveDeal = () => {
     // dispatch(editDeal(dealData._id, {archived: true}));
     axios.put(`/deals/${dealData._id}/update`, {archived: true}).then(updatedDeal => setDealData(updatedDeal.data))
@@ -46,6 +52,7 @@ const DealView = (props) => {
             <div className="box-flex">
               <img src={dealData.company.logo} onerror="this.onerror=null; this.remove();" alt='img' width="100"/>
               <EditDeal deal={dealData}/>
+              <DeleteButton onClick={handleDeleteDeal}/>
               {dealData.archived ? <p>Deal Archived</p> : generateArchiveDealButton(dealData.stage)}
             </div>
             <p>Created on:</p><h6><Moment format="hh:mm:ss A MM/DD/YYYY">{dealData.createdAt}</Moment></h6>
