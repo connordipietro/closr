@@ -22,7 +22,8 @@ function AddCompany() {
   const [searchingByUrl, setSearchingByUrl] = useState(true);
   const [previewImageUrl, setPreviewImageUrl] = useState('');
   const [badSearch, setBadSearch] = useState(false);
-  const apiHeaders = {headers: {'Authorization': `${process.env.REACT_APP_BIGPICTURE_API_KEY}`}}
+  const apiKey = process.env.REACT_APP_BIGPICTURE_API_KEY;
+  const apiHeaders = {headers: {'Authorization': `${apiKey}`}}
 
   const failedSearch = () => {
     setShow(true);
