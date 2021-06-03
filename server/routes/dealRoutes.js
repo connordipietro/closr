@@ -164,7 +164,7 @@ router.put('/:id/update', (req, res) => {
   deal
     .save()
     .then((dealWithUpdates) => {
-      res.send(dealWithUpdates);
+      res.redirect(303, `/deals/${dealWithUpdates._id}`);
     })
     .catch((err) => {
       console.error(err);
