@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import {Modal, Button} from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
-import { postNewDeal } from '../../actions'
+import { postNewDeal, getCompaniesList } from '../../actions'
 import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import XCloseButton from '../buttons/xCloseButton'
 
 const dealSchema = Yup.object().shape({
   name: Yup.string().required("Please enter a name for the deal"),
@@ -24,6 +25,12 @@ function AddDeal() {
   const dispatch = useDispatch(); 
 
   const [show, setShow] = useState(false);
+
+  useEffect(() => { // loads all deals on initial render
+    dispatch(getCompaniesList());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },  [getCompaniesList]);
+
   const companiesList = useSelector(({companiesList}) => companiesList)
 
   //const [companiesList, setCompaniesList] = useState([]);
@@ -54,6 +61,7 @@ function AddDeal() {
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header>
           <Modal.Title>Add a new Deal</Modal.Title>
+          <XCloseButton onClose={onClose}/>
         </Modal.Header>
         <form onSubmit={handleSubmit(handleDealAdd)}>
           <Modal.Body>
@@ -109,7 +117,6 @@ function AddDeal() {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={onClose}>Close</Button>
             <Button type="submit" variant="primary">Submit</Button>
           </Modal.Footer>
         </form>

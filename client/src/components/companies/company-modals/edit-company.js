@@ -7,6 +7,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { PencilSquare } from 'react-bootstrap-icons';
 import { X } from 'react-bootstrap-icons';
 import { companySchema } from './companyHelpers';
+import XCloseButton from '../../buttons/xCloseButton';
+import EditButton from '../../buttons/editButton';
 
 function EditCompany({ company, id }) {
   const { reset, register, handleSubmit, formState: { errors }} = useForm({
@@ -31,12 +33,12 @@ function EditCompany({ company, id }) {
   const renderEditCompanyModal = () => {
     return (
       <>
-        <PencilSquare width={24} height={24} onClick={() => setShow(true)}/>
+        <EditButton onClick={() => setShow(true)}/>
 
         <Modal show={show} onHide={() => setShow(false)}>
           <Modal.Header>
             <Modal.Title>Edit Company</Modal.Title>
-            <X onClick={onClose} />
+            <XCloseButton onClose={onClose}/>
           </Modal.Header>
           <form onSubmit={handleSubmit(handleCompanyEdit)}>
             <Modal.Body>
