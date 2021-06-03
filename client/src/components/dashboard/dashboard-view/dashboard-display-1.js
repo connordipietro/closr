@@ -6,8 +6,6 @@ import { getConversionPercentageOverall } from '../../../actions';
 import { useEffect } from 'react';
 
 const DashboardView1 = () => {
-  Highcharts.setOptions({ credits: false})
-  
   const percentage= useSelector(state => state.percentageOverall)
 
   const dealsView = [];
