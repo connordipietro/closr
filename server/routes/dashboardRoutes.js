@@ -12,9 +12,17 @@ router.get("/conversion-percentage-overall", (req, res) => {
 
   Promise.all([allDealsCountPromise, dealsWonCountPromise])
     .then((results) => {
-      const percentDealsWon = {
-        conversionPercentageOverall: results[1]/results[0]
+
+      let percentage = results[1]/results [0]
+
+      if (!percentage) {
+        percentage = 0
       }
+
+      const percentDealsWon = {
+        conversionPercentageOverall: percentage
+      }
+   
       res.send(percentDealsWon);
     })
     .catch((err) => {
@@ -33,11 +41,20 @@ router.get("/conversion-percentage-by-stage", (req, res) => {
     .then(results => {
       let conversionPercentageByStage = [];
       for (let i = 0; i < 3; i++) {
+
+        let percentage = results[3]/results[i];
+
+        if (!percentage) {
+          percentage = 0
+        }
+
         const stageObject = {
           stage: dealStages[i],
-          conversionPercentage: results[3]/results[i]
+          conversionPercentage: percentage
         }
+
         conversionPercentageByStage.push(stageObject);
+      
       }
       res.send(conversionPercentageByStage);
     })
