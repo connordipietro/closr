@@ -18,10 +18,10 @@ const CompanyViewCard = (props) => {
       <div class="card-body">
         <div className="space-between">
           <h3 class="card-title">{company.name}</h3>
-          <img src={company.logo ? company.logo : ""} width="40 auto"/>
+          <img src={company.logo ? company.logo : ""} width="40" height="40"/>
           <div className="space-between">
-            <EditCompany company={company} id={companyId}/>
-            <DeleteButton deleteFunction={handleDeleteCompany} type="company" />
+            <div className="icon-spacing"><EditCompany company={company} id={companyId}/></div>
+            <div className="icon-spacing"><DeleteButton deleteFunction={handleDeleteCompany} type="company" /></div>
           </div>
         </div>
         <div className="card-subtitle text-muted">{company.city}, {company.state}</div>
