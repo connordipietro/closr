@@ -34,15 +34,24 @@ const  Paginate = () => {
 
  
   return (
-    <div className="row container-for-a-tags">
-      <div className="col-md-8 a-tag-children">  
-          <button onClick={handlePrevPage}  className="previous arrow">&#8249;</button>
-              <div className="" display="inline-block">
-                {pageNumber}
-              </div>
-          <button onClick={handleNextPage}  className="previous arrow">&#8250;</button>        
-      </div>
-    </div>
+      <ul class="pagination">
+        <li class="page-item">
+          <div class="page-link pag-text-style" onClick={handlePrevPage}>
+            <span aria-hidden="true">&laquo; </span>
+            <span class="sr-only">Prev</span>
+          </div>
+        </li>
+        <li class="page-item">
+          <div className="page-link pag-text-style">{pageNumber}</div>
+        </li>
+        <li class="page-item">
+          <div class="page-link pag-text-style" onClick={handleNextPage}>
+            <span class="sr-only">Next</span>
+            <span aria-hidden="true"> &raquo; </span>
+          </div>
+        </li>
+      </ul>
+
   )   
 }
 
