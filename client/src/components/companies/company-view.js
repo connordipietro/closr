@@ -31,7 +31,7 @@ const CompanyView = (props) => {
           <div className="col-md-4 p-2">
             <div className="card" width="18rem">
               <div class="card-body">
-                <h2 className="deals-title">Associated Deals</h2>
+                <h2 className="deals-title">Active Deals</h2>
                 {/* loop through the array of deals and render each detail in its respective tag */}
                 {deals.map((deal, id) => (
                   <div key={id} >
@@ -56,8 +56,8 @@ const CompanyView = (props) => {
           <div className="col-md-4 p-2">
             <div className="card" width="18rem">
               <div class="card-body">
-                <h2 className="deals-title">Associated Deals</h2>
-                <h6 className="center">There are no deals associated with this company</h6>
+                <h2 className="deals-title">Active Deals</h2>
+                <h6 className="center">There are no active deals associated with this company</h6>
               </div>
             </div>
           </div>
