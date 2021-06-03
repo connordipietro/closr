@@ -70,7 +70,7 @@ function DealsView(props) {
                                     }}
                                     >
                                     {/* <EditDeal deal={item}></EditDeal> */}
-                                    <Link to={`/deals/${item._id}`} className="edit-deal">{item.name}</Link>
+                                    <Link to={`/deals/${item._id}`}>{item.name}</Link>
                                     <div className="deal-contents">
                                       <div>{item.company['name']}</div>
                                       <hr></hr>                                  
