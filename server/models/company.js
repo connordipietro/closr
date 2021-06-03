@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
+const { Schema } = mongoose;
 
 const CompanySchema = new Schema({
   name: { type: String, required: true },
@@ -10,10 +10,10 @@ const CompanySchema = new Schema({
   phone: String,
   city: String,
   state: String,
-  deals: [{ type: Schema.Types.ObjectId, ref: "Deal" }],
+  deals: [{ type: Schema.Types.ObjectId, ref: 'Deal' }],
   createdAt: { type: Date, required: true, immutable: true },
   industry: String,
-  logo: String
+  logo: String,
 });
 
-module.exports = mongoose.model("Company", CompanySchema);
+module.exports = mongoose.model('Company', CompanySchema);
