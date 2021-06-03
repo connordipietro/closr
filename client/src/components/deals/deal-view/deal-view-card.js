@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router';
 
 const DealViewCard = (props) => {
-  const { deal, handleArchiveDeal, handleDeleteDeal } = props;
+  const { deal, handleArchiveDeal, handleDeleteDeal, handleEditDeal } = props;
   const history = useHistory();
   const generateArchiveDealButton = (dealStage) => {
     // Only want the option to archive deal if it is closed won or closed lost
@@ -20,7 +20,7 @@ const DealViewCard = (props) => {
               <img src={deal.company.logo ? deal.company.logo : ""} width="40" height="40"/>
               <div className="space-between">
                 <div className="icon-spacing">
-                  <EditDeal deal={deal} />
+                  <EditDeal deal={deal} handleEditDeal={handleEditDeal} />
                 </div>
                 <div className="icon-spacing">
                 <DeleteButton deleteFunction={handleDeleteDeal} type="deal" />
