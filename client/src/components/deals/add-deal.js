@@ -36,7 +36,6 @@ function AddDeal() {
   //const [companiesList, setCompaniesList] = useState([]);
 
   const handleDealAdd = (data) => {
-    debugger;
     dispatch(postNewDeal(data))
     reset()
     setShow(false);

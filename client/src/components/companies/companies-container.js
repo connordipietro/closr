@@ -12,9 +12,14 @@ function CompaniesContainer() {
     <React.Fragment>
       <AddCompany/>
       <Nav variant="tabs" defaultActiveKey="/companies">
+      <LinkContainer to="/dashboard">
+          <Nav.Item>
+            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+          </Nav.Item>
+        </LinkContainer>
         <LinkContainer to="/companies">
           <Nav.Item>
-            <Nav.Link href="/companies" disabled>Companies</Nav.Link>
+            <Nav.Link href="/companies">Companies</Nav.Link>
           </Nav.Item>
         </LinkContainer>
         <LinkContainer to="/deals">
