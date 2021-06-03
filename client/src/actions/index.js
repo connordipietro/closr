@@ -139,3 +139,27 @@ export function getConversionPercentageOverall() {
   .catch(error => {alert('Error');
 });
 };
+
+export function getConversionsByStage() {
+  return axios.get(`/dashboard/conversion-percentage-by-stage`)
+  .then(response => {
+    return {
+      type: actionNames.GET_CONVERSIONS_BY_STAGE,
+      payload: response
+    };
+  })
+  .catch(error => {alert('Error');
+  });
+};
+
+export function getRevenueByMonth() {
+  return axios.get(`/dashboard/sales-by-month`)
+  .then(response => {
+    return {
+      type: actionNames.GET_REVENUE_BY_MONTH,
+      payload: response
+    };
+  })
+  .catch(error => {alert('Error');
+  });
+};

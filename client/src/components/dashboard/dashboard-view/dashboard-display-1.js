@@ -33,7 +33,7 @@ const DashboardView1 = () => {
         type: 'pie'
     },
     title: {
-        text: 'Contracts Won vs Lost'
+        text: 'Conversion Percentage Overall'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
