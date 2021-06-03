@@ -4,6 +4,7 @@ import HighchartsReact from 'highcharts-react-official';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react';
 import { getRevenueByMonth } from "../../../actions"; 
+import NoDataToDisplay from "highcharts/modules/no-data-to-display";
 
 const DashboardView4 = () => {
   const {revenueByMonth} = useSelector(state => state.monthlyRevenue);
@@ -27,12 +28,19 @@ const DashboardView4 = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },  [getRevenueByMonth]);
    
+  NoDataToDisplay(Highcharts);
+  Highcharts.setOptions({
+    lang: {
+      noData: 'Data is not available'
+    }
+  });
+
     const options = {
       chart: {
         type: 'column'
     },
     title: {
-        text: 'Revenue By Month (US$)'
+        text: 'Sales By Month (US$)'
     },
     xAxis: {
       categories: months,
@@ -43,7 +51,7 @@ const DashboardView4 = () => {
     yAxis: {
         min: 0,
         title: {
-            text: 'Total Revenue'
+            text: 'Total Sales'
         }
     },
     plotOptions: {
@@ -59,7 +67,7 @@ const DashboardView4 = () => {
       },
   },
     series: [{
-        name: 'Revenue',
+        name: 'Sales',
         colorByPoint: true,
         data: lastSixMonths,
         showInLegend: false,
