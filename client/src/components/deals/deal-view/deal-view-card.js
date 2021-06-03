@@ -17,11 +17,17 @@ const DealViewCard = (props) => {
           <div class="card-body">
             <div className="space-between">
               <h3 class="card-title">{deal.name}</h3>
-              <img src={deal.company.logo ? deal.company.logo : ""} width="40 auto"/>
+              <img src={deal.company.logo ? deal.company.logo : ""} width="40" height="40"/>
               <div className="space-between">
-                <EditDeal deal={deal} />
+                <div className="icon-spacing">
+                  <EditDeal deal={deal} />
+                </div>
+                <div className="icon-spacing">
                 <DeleteButton deleteFunction={handleDeleteDeal} type="deal" />
-                {deal.archived ? <p>Deal Archived</p> : generateArchiveDealButton(deal.stage)}
+                </div>
+                <div className="icon-spacing">
+                  {deal.archived ? <p>Deal Archived</p> : generateArchiveDealButton(deal.stage)}
+                </div>
               </div>
             </div>
             <div className="card-subtitle text-muted">{deal.company.name}</div>
