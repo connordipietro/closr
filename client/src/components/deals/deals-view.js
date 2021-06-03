@@ -56,6 +56,7 @@ function DealsView(props) {
                               index={index}
                             >
                               {(provided, snapshot) => {
+                                console.log(item)
                                 return (
                                   <div
                                     className="deal-item"
