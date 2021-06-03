@@ -37,7 +37,7 @@ const  Paginate = () => {
     <div className="row container-for-a-tags">
       <div className="col-md-8 a-tag-children">  
           <button onClick={handlePrevPage}  className="previous arrow">&#8249;</button>
-              <div className="boxed">
+              <div className="" display="inline-block">
                 {pageNumber}
               </div>
           <button onClick={handleNextPage}  className="previous arrow">&#8250;</button>        
