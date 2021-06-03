@@ -9,6 +9,7 @@ import { X } from 'react-bootstrap-icons';
 import '../companies-view-style.css'
 import axios from "axios";
 import { companySchema } from './companyHelpers';
+import XCloseButton from '../../buttons/xCloseButton'
 
 function AddCompany() {
   const { reset, register, handleSubmit, formState: { errors }} = useForm({
@@ -114,7 +115,7 @@ function AddCompany() {
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header>
           <Modal.Title>Add a new Company</Modal.Title>
-          <X onClick={onClose} />
+          <XCloseButton onClose={onClose}/>
         </Modal.Header>
         <form onSubmit={handleSubmit(handleCompanyAdd)}>
           <Modal.Body>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { onDragEnd, generateDealsStageColumns } from "./deals-view-dnd-helpers";
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import EditDeal from './edit-deal'
@@ -68,7 +69,8 @@ function DealsView(props) {
                                       ...provided.draggableProps.style
                                     }}
                                     >
-                                    <EditDeal deal={item}></EditDeal>
+                                    {/* <EditDeal deal={item}></EditDeal> */}
+                                    <Link to={`/deals/${item._id}`}>{item.name}</Link>
                                     <div className="deal-contents">
                                       <div>{item.company['name']}</div>
                                       <hr></hr>                                  

@@ -12,7 +12,6 @@ function DealsViewHandler() {
 
   useEffect(() => { // loads all deals on initial render
     dispatch(getDeals());
-    dispatch(getCompaniesList());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },  [getDeals]);
 
