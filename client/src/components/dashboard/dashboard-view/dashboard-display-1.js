@@ -4,6 +4,7 @@ import HighchartsReact from 'highcharts-react-official';
 import { useSelector, useDispatch } from "react-redux";
 import { getConversionPercentageOverall } from '../../../actions';
 import { useEffect } from 'react';
+import NoDataToDisplay from "highcharts/modules/no-data-to-display";
 
 const DashboardView1 = () => {
   const percentage= useSelector(state => state.percentageOverall)
@@ -25,6 +26,13 @@ const DashboardView1 = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },  [getConversionPercentageOverall]);
    
+  NoDataToDisplay(Highcharts);
+  Highcharts.setOptions({
+    lang: {
+      noData: 'Data is not available'
+    }
+  });
+  
     const options = {
       chart: {
         plotBackgroundColor: null,

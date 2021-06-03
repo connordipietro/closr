@@ -4,6 +4,7 @@ import HighchartsReact from 'highcharts-react-official';
 import { useSelector, useDispatch } from "react-redux";
 import { getCompaniesByRevenue } from '../../../actions';
 import { useEffect } from 'react';
+import NoDataToDisplay from "highcharts/modules/no-data-to-display";
 
 const DashboardView2 = () => {
   const {companies} = useSelector(state => state.revenueData);
@@ -17,12 +18,19 @@ const DashboardView2 = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },  [getCompaniesByRevenue]);
    
+  NoDataToDisplay(Highcharts);
+  Highcharts.setOptions({
+    lang: {
+      noData: 'Data is not available'
+    }
+  });
+
     const options = {
       chart: {
         type: 'pie'
     },
     title: {
-        text: 'Top 5 Companies by Revenue'
+        text: 'Sales by Company'
     },
     yAxis: {
         title: {
@@ -45,7 +53,7 @@ const DashboardView2 = () => {
         }
     },
     series: [{
-      name: 'Top 5 Customers',
+      name: 'Sales by Company',
       colorByPoint: true,
       data: newCompanies,
       innerSize: "50%"
