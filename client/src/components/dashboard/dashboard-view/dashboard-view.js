@@ -9,12 +9,20 @@ function DashboardView() {
   return (
     <React.Fragment>
       <div className="box-flex">
-      <DashboardView1 className="display"/>
-      <DashboardView2 className="display"/>
+        <div className="display">
+          <DashboardView1/>
+        </div>
+        <div className="display">
+          <DashboardView2/>
+        </div>
       </div>
       <div className="box-flex">
-      <DashboardView3 className="display"/>
-      <DashboardView4 className="display"/>
+      <div className="display">
+          <DashboardView3/>
+        </div>
+        <div className="display">
+          <DashboardView4/>
+        </div>
       </div>
     </React.Fragment>
   );

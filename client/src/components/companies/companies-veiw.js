@@ -6,6 +6,7 @@ import _ from 'lodash'
 import Paginate from '../pagination/pagination'
 import '../App.css'
 import { Link, useLocation } from 'react-router-dom';
+import Moment from 'react-moment';
 const queryString = require('query-string');
 
 function CompaniesView() {
@@ -35,7 +36,7 @@ function CompaniesView() {
           <td>{item.phone}</td>
           <td>{item.city}, {item.state}</td>
           <td>{item.industry}</td>
-          <td>{item.createdAt}</td>
+          <td><Moment format="MMMM Do, YYYY">{item.createdAt}</Moment></td>
         </tr>
         );
       }

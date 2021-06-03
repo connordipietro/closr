@@ -1,36 +1,49 @@
-import React from 'react'
-import { render } from 'react-dom'
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
+import React from 'react';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
 import { useSelector, useDispatch } from "react-redux";
-import { getDeals } from '../../../actions';
 import { useEffect } from 'react';
+import { getRevenueByMonth } from "../../../actions"; 
 
 const DashboardView4 = () => {
+  const {revenueByMonth} = useSelector(state => state.monthlyRevenue);
+  
+  // renamed the revenue key, sorted the array by month/year, reversed the array and sliced it to only show the last 6 months of data
+  const totalRevenue = revenueByMonth.map(a => ({ month: a.month, y: a.total}));
+  totalRevenue.reverse().sort((a, b) => {
+    return a.month - b.month;
+  });
 
+  let lastSixMonths = totalRevenue.slice(totalRevenue.length-6,totalRevenue.length);
+
+  // created an array for the months, which is rendered on the X-axis in the graph
+  const months = lastSixMonths.map((value) => {
+    return value.month;
+  });
+  
   const dispatch = useDispatch();
-  useEffect(() => { // loads all deals on initial render
-    dispatch(getDeals());
+  useEffect(() => {
+    dispatch(getRevenueByMonth());
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },  [getDeals]);
+  },  [getRevenueByMonth]);
    
     const options = {
       chart: {
         type: 'column'
     },
     title: {
-        text: 'Revenue By Month'
+        text: 'Revenue By Month (US$)'
     },
     xAxis: {
-      categories: ['December', 'January', 'February', 'March', 'April', 'May'],
+      categories: months,
       title: {
-          text: null
-      }
+          text: "Months"
+      },
     },
     yAxis: {
         min: 0,
         title: {
-            text: 'Deals Won'
+            text: 'Total Revenue'
         }
     },
     plotOptions: {
@@ -43,15 +56,16 @@ const DashboardView4 = () => {
     tooltip: {
       formatter: function() {
           return '<b>$'+ this.y.toFixed(2) +'</b>';
-      }
+      },
   },
     series: [{
-        name: '',
+        name: 'Revenue',
         colorByPoint: true,
-        data: [10000,12000,18000,12400,8000,6500],
+        data: lastSixMonths,
         showInLegend: false,
     }]
 }
+
     const App = () => <div>
       <HighchartsReact
         highcharts={Highcharts}
