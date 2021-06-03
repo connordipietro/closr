@@ -11,6 +11,7 @@ const DashboardView3 = () => {
   const {deals} = useSelector(state => state.conversionData);
 
   const dispatch = useDispatch();
+  
   const dealConversion = deals.map(a => ({ stage: a.stage, y: a.conversionPercentage.toFixed(2)*100}));
   
   useEffect(() => { // loads all deals on initial render
