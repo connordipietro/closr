@@ -1,8 +1,12 @@
 import EditCompany from './company-modals/edit-company'
 import Moment from 'react-moment'
+import DeleteButton from '../buttons/deleteButton'
 
 const CompanyViewCard = (props) => {
-  const { company, companyId } = props
+  const { company, companyId } = props;
+  const handleDeleteCompany = () => {
+
+  }
       return (
         <div class="card" width="18rem">
           <div class="card-body">
@@ -10,6 +14,7 @@ const CompanyViewCard = (props) => {
               <h3 class="card-title">{company.name}</h3>
               <img src={company.logo ? company.logo : ""} width="40 auto"/>
               <EditCompany company={company} id={companyId}/>
+              <DeleteButton onClick={handleDeleteCompany} />
             </div>
             <div className="card-subtitle text-muted">{company.city}, {company.state}</div>
             <ul class="list-group list-group-flush mt-3">
