@@ -13,7 +13,7 @@ router.get("/conversion-percentage-overall", (req, res) => {
   Promise.all([allDealsCountPromise, dealsWonCountPromise])
     .then((results) => {
 
-      let percentage = results[1] / results [0]
+      let percentage = results[1]/results [0]
 
       if (!percentage) {
         percentage = 0
