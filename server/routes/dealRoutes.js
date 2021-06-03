@@ -49,7 +49,7 @@ router.get('/by-stage', (req, res) => {
   );
   const searchObject = { archived: false };
   const propertiesToReturn =
-    'amount name stage company expectedCloseDate createdAt';
+    'amount name stage company expectedCloseDate createdAt stageLastUpdatedAt';
   if (req.query.min) {
     searchObject.amount = { $gte: Number(req.query.min) };
   }
@@ -69,6 +69,7 @@ router.get('/by-stage', (req, res) => {
   }
   Deal.find(searchObject, propertiesToReturn)
     .populate({ path: 'company', select: 'name' })
+    .sort({stageLastUpdatedAt: -1})
     .exec()
     .then((dealResults) => {
       const dealsSortedByStage = dealResults.reduce((acc, deal) => {
