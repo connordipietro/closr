@@ -4,14 +4,13 @@ import { Link, useHistory } from "react-router-dom";
 import { Button} from 'react-bootstrap';
 import _ from "lodash";
 import axios from "axios";
-import EditDeal from './edit-deal'
+import EditDeal from '../edit-deal'
 import DealTimeline from './deal-timeline'
-import { Safe, SafeFill } from 'react-bootstrap-icons';
-import ArchiveButton from "../buttons/archiveButton";
 import Moment from 'react-moment';
-import { editDeal } from "../../actions";
-import DeleteButton from "../buttons/deleteButton";
+import { editDeal } from "../../../actions";
+import DeleteButton from "../../buttons/deleteButton";
 import DealViewCard from "./deal-view-card";
+//import '../../companies/company-style.css';
 
 const DealView = (props) => {
   const dealId = props.match.params._id;
@@ -51,7 +50,7 @@ const DealView = (props) => {
             <div className="card" width="18rem">
               <div class="card-body">
                 <h2 className="deals-title">Timeline</h2>
-                <DealTimeline stageHistory={dealData.stageHistory}/>
+                {dealData.stageHistory.length !== 0 ? <DealTimeline stageHistory={dealData.stageHistory}/> : <h6 className="center">No updates available</h6>}
               </div>
             </div>
           </div>

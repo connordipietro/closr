@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Nav from './nav/nav.js';
 import DealsContainer from './deals/deals-container'
-import DealView from './deals/deal-view'
+import DealView from './deals/deal-view/deal-view'
 import CompaniesContainer from './companies/companies-container'
 /* import {Tab, Tabs} from 'react-bootstrap'; */
 import { Redirect, Route, Switch } from 'react-router';

@@ -98,9 +98,11 @@ router.put("/:id", (req, res) => {
 // Deletes the company matching the id provided
 // TO-DO: We may not want a delete company route, more like archive company
 router.delete("/:id", (req, res) => {
-  Company.deleteOne(req.company)
+  Company.deleteOne({_id: req.company._id})
+    .then((deletedCompany) => {
+      return Deal.deleteMany({company: req.company._id})})
     .then(() => {
-      res.send("Company successfully deleted");
+      res.send("Company and deals successfully deleted");
     })
     .catch(err => {
       console.error(err);
