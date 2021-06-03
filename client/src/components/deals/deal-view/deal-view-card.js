@@ -4,6 +4,7 @@ import DeleteButton from '../../buttons/deleteButton';
 import ArchiveButton from '../../buttons/archiveButton';
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const DealViewCard = (props) => {
   const { deal, handleArchiveDeal, handleDeleteDeal, handleEditDeal } = props;
@@ -30,7 +31,7 @@ const DealViewCard = (props) => {
                 </div>
               </div>
             </div>
-            <div className="card-subtitle text-muted">{deal.company.name}</div>
+            <div className="card-subtitle text-muted"><Link to={`/companies/${deal.company._id}`}>{deal.company.name}</Link></div>
             <ul className="list-group list-group-flush mt-3">
               <li className="list-group-item">
                 <div className="space-between">

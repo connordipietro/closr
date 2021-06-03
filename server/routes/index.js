@@ -6,7 +6,7 @@ const Company = require('../models/company');
 const companies = require('../dev-data/companies');
 const ChangeEntry = require('../models/changeEntry');
 const Deal = require('../models/deal');
-const dealStages = require('../dev-data/dealStages').default;
+const dealStages = require('../dev-data/dealStages');
 const generateDeals = require('../dev-data/deals');
 const dashboardRoutes = require('./dashboardRoutes');
 

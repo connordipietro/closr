@@ -36,7 +36,7 @@ const CompanyView = (props) => {
                 {deals.map((deal, id) => (
                   <div key={id} >
                     <hr></hr>
-                    <p>{deal.name}</p>
+                    <Link to={`/deals/${deal._id}`}><p>{deal.name}</p></Link>
                     <h6>Amount: ${deal.amount}</h6>
                     <h6>Stage: {deal.stage}</h6>
                   </div>
