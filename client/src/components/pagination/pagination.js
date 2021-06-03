@@ -32,8 +32,25 @@ const  Paginate = () => {
     pageNumber === 1 ? setPageNumber(1) : setPageNumber(page => page - 1)
  }
 
- 
-  return (
+ const handlePaginationDisplay = () => {
+   if (pageNumber === 1 ) {
+    return (
+      <ul class="pagination">
+      <li class="page-item">
+        <div className="page-link pag-text-style">{pageNumber}</div>
+      </li>
+      <li class="page-item">
+        <div class="page-link pag-text-style" onClick={handleNextPage}>
+          <span class="sr-only">Next</span>
+          <span aria-hidden="true"> &raquo; </span>
+        </div>
+      </li>
+    </ul>
+    )
+   }
+
+   if (pageNumber > 1 && pageNumber < numOfPages) {
+    return (
       <ul class="pagination">
         <li class="page-item">
           <div class="page-link pag-text-style" onClick={handlePrevPage}>
@@ -51,8 +68,30 @@ const  Paginate = () => {
           </div>
         </li>
       </ul>
-
-  )   
+    )
+   }
+    if (pageNumber == numOfPages) {
+      return (
+        <ul class="pagination">
+        <li class="page-item">
+          <div class="page-link pag-text-style" onClick={handlePrevPage}>
+            <span aria-hidden="true">&laquo; </span>
+            <span class="sr-only">Prev</span>
+          </div>
+        </li>
+        <li class="page-item">
+          <div className="page-link pag-text-style">{pageNumber}</div>
+        </li>
+      </ul>
+      )
+    }
+ }
+ 
+  return (
+    <>
+    {handlePaginationDisplay()}
+    </>
+  )
 }
 
 // this will export and gets rendered in company views
