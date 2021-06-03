@@ -7,7 +7,7 @@ import CompaniesContainer from './companies/companies-container'
 /* import {Tab, Tabs} from 'react-bootstrap'; */
 import { Redirect, Route, Switch } from 'react-router';
 import CompanyView from './companies/company-view';
-import DashboardView from './dashboard/dashboard-view/dashboard-view';
+import DashboardContainer from './dashboard/dashboard-container';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Route path="/companies" component={CompaniesContainer}/>
         <Route path="/deals/:_id" component={DealView}/>
         <Route path="/deals" component={DealsContainer}/>
-        <Route path="/dashboard" component={DashboardView}/>
+        <Route path="/dashboard" component={DashboardContainer}/>
         <Redirect to="/companies" />
       </Switch>
     </React.Fragment>

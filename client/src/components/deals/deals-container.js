@@ -10,6 +10,11 @@ function DealsContainer() {
     <React.Fragment>
       <AddDeal />
       <Nav variant="tabs" defaultActiveKey="/deals">
+      <LinkContainer to="/dashboard">
+          <Nav.Item>
+            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+          </Nav.Item>
+        </LinkContainer>
         <LinkContainer to="/companies">
           <Nav.Item>
             <Nav.Link href="/companies">Companies</Nav.Link>
