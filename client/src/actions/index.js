@@ -127,3 +127,15 @@ export function getCompaniesByRevenue() {
   .catch(error => {alert('Error');
 });
 };
+
+export function getConversionPercentageOverall() {
+  return axios.get(`/dashboard/conversion-percentage-overall`)
+  .then(response => {
+    return {
+      type: actionNames.GET_CONVERSION_PERCENTAGE_ALL,
+      payload: response
+    }; 
+  })
+  .catch(error => {alert('Error');
+});
+};

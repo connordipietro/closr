@@ -5,7 +5,8 @@ import NewCompanyReducer from "./new-company-reducer";
 import CompanyReducer from "./company-reducer";
 import NewDealReducer from "./new-deal-reducer"
 import ListReducer from "./list-reducer";
-import DashboardReducer2 from "./dashboard-reducer-2"
+import DashboardReducer2 from "./dashboard-reducer-2";
+import DashboardReducer1 from "./dashboard-reducer-1";
 
 const rootReducer = combineReducers({
   companyData: CompaniesReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   companyView: CompanyReducer,
   newDeal: NewDealReducer,
   companiesList: ListReducer,
-  revenueData: DashboardReducer2
+  revenueData: DashboardReducer2,
+  percentageOverall: DashboardReducer1
 });
 
 export default rootReducer;

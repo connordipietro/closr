@@ -2,39 +2,28 @@ import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useSelector, useDispatch } from "react-redux";
-import { getDeals } from '../../../actions';
+import { getConversionPercentageOverall } from '../../../actions';
 import { useEffect } from 'react';
 
 const DashboardView1 = () => {
-  const { deals }  = useSelector(state => state.dealsData);
-
-  const key1 = "Initiated";
-  const key2 = "Qualified";
-  const key3 = "Contract Sent";
-  const key4 = "Closed Lost";
-  const key5 = "Closed Won";
-
-  // will rewrite once i find a cleaner way
-  const { [key1] : _0, [key2] : _1, [key3] : _2, [key4] : _3, ...won} = deals;
-  const { [key1] : _4, [key2] : _5, [key3] : _6, [key5] : _7, ...lost} = deals;
+  const percentage= useSelector(state => state.percentageOverall)
 
   const dealsView = [];
-
-  const wonDeals = Object.create(won);
+  const wonDeals = Object.create(percentage);
   wonDeals.name = 'Contracts Won';
-  wonDeals.y = won["Closed Won"]?.items?.length;
+  wonDeals.y = percentage.conversion.conversionPercentageOverall;
   dealsView.push(wonDeals);
 
-  const lostDeals = Object.create(lost);
-  lostDeals.name = 'Contracts Won';
-  lostDeals.y = lost["Closed Lost"]?.items?.length;
+  const lostDeals = Object.create(percentage);
+  lostDeals.name = 'Contracts Lost';
+  lostDeals.y = 1 - percentage.conversion.conversionPercentageOverall;
   dealsView.push(lostDeals);
 
   const dispatch = useDispatch();
   useEffect(() => { 
-    dispatch(getDeals());
+    dispatch(getConversionPercentageOverall());
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },  [getDeals]);
+  },  [getConversionPercentageOverall]);
    
     const options = {
       chart: {
