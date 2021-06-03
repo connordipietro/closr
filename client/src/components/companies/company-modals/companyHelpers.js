@@ -8,7 +8,16 @@ export const companySchema = Yup.object().shape({
   state: Yup.string(),
   industry: Yup.string(),
   logo: Yup.string().url(),
-  url: Yup.string().required()
-})
+  url: Yup.string().required(),
+});
 
-export const defaultFormFields = ['Name', 'Owner', 'Phone', 'City', 'State', 'Industry', 'Logo', 'url'];
+export const defaultFormFields = [
+  'Name',
+  'Owner',
+  'Phone',
+  'City',
+  'State',
+  'Industry',
+  'Logo',
+  'url',
+];
