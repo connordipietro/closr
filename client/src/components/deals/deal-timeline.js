@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { Timeline, TimelineEvent } from "react-event-timeline";
 import { ArrowLeftCircleFill, ArrowRightCircleFill, XCircleFill, CheckCircleFill, EggFill } from 'react-bootstrap-icons';
 import _ from 'lodash';
+import moment from 'moment';
 
 
 const DealTimeline = ( {stageHistory} ) => {
@@ -47,11 +48,11 @@ const DealTimeline = ( {stageHistory} ) => {
           return (
             <TimelineEvent
             title={changeEntry.newValue}
-            createdAt={changeEntry.timeStamp}
+            createdAt={moment(changeEntry.timeStamp).format('MMMM Do YYYY, h:mm:ss a')}
             icon={changeEntry.movedBackward ? <h1><ArrowLeftCircleFill/></h1>: <h1>{renderIcon(changeEntry.newValue)}</h1>}
             bubbleStyle={{"borderColor": "#fff", "backgroundColor": "#fff"}}
             >
-            {`${changeEntry.user} updated deal to status to ${changeEntry.newValue}`}
+            {`${changeEntry.user} updated deal status to ${changeEntry.newValue}`}
             </TimelineEvent>
           )
       })}

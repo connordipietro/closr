@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button} from 'react-bootstrap';
 import _ from "lodash";
 import axios from "axios";
@@ -9,16 +9,29 @@ import DealTimeline from './deal-timeline'
 import { Safe, SafeFill } from 'react-bootstrap-icons';
 import ArchiveButton from "../buttons/archiveButton";
 import Moment from 'react-moment';
+import { editDeal } from "../../actions";
+import DeleteButton from "../buttons/deleteButton";
+import DealViewCard from "./deal-view-card";
 
 const DealView = (props) => {
   const dealId = props.match.params._id;
-  const [dealData, setDealData] = useState({})
-
+  const [dealData, setDealData] = useState({});
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     axios.get(`/deals/${dealId}`).then(returnedDeal => setDealData(returnedDeal.data))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleDeleteDeal = () => {
+    // To-Do: Put in some way to ask if they are sure they want to delete the deal
+    axios.delete(`/deals/${dealData._id}`).then(() => {history.push("/deals")})
+  }
+  const handleArchiveDeal = () => {
+    // dispatch(editDeal(dealData._id, {archived: true}));
+    axios.put(`/deals/${dealData._id}/update`, {archived: true}).then(updatedDeal => setDealData(updatedDeal.data))
+  }
 
   if (_.isEmpty(dealData)){
     return (
@@ -28,24 +41,22 @@ const DealView = (props) => {
 
   return (
     <>
-    <h1 onClick={()=> console.log(dealData)}>log deal data</h1>
-      <div className="float-container col-md-8">
-          <div className = "float-child info col-md-4">
-            <h2>{dealData.name}</h2>
-            <div className="box-flex">
-              <img src={dealData.company.logo} onerror="this.onerror=null; this.remove();" alt='img' width="100"/>
-              <EditDeal deal={dealData}/><ArchiveButton/>
-            </div>
-            <p>Created on:</p><h6><Moment format="hh:mm:ss A MM/DD/YYYY">{dealData.createdAt}</Moment></h6>
-            <p>Amount: </p><h6>${dealData.amount}</h6>
-            <p>Expected Close Date </p><h6><Moment format ="MM/DD/YYYY">{dealData.expectedCloseDate}</Moment></h6>
-            <p>Stage: </p><h6>{dealData.stage}</h6>
+      <div className="text">
+        <Link to="/deals" variant="primary"><Button className="btn-return">Return to all deals</Button></Link>
+        <div className="center">
+          <div className="col-md-4 p-2">
+            <DealViewCard deal={dealData} handleArchiveDeal={handleArchiveDeal} handleDeleteDeal={handleDeleteDeal}></DealViewCard>
           </div>
-          <div className = "float-child deals col-md-4 text-center">
-            <h2 className="deals-title">Timeline</h2>
-             <DealTimeline stageHistory={dealData.stageHistory}/>
+          <div className="col-md-4 p-2">
+            <div className="card" width="18rem">
+              <div class="card-body">
+                <h2 className="deals-title">Timeline</h2>
+                <DealTimeline stageHistory={dealData.stageHistory}/>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
     </>
   );
 };

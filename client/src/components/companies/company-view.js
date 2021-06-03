@@ -75,7 +75,7 @@ const CompanyView = (props) => {
 
   return (
     <div className="text">
-      <Link to="/" variant="primary"><Button className="btn-return">Return to full list</Button></Link>
+      <Link to="/companies" variant="primary"><Button className="btn-return">Return to full list</Button></Link>
       {renderCompany()}
       {/* <EditCompany company={company} id={companyId}/> */}
     </div>
