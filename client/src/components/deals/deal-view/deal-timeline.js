@@ -46,7 +46,7 @@ const DealTimeline = ( {stageHistory} ) => {
             iconStyle={{"cursor": "auto"}}
             bubbleStyle={{"borderColor": "#fff", "backgroundColor": "#fff"}}
             >
-            {`${changeEntry.user} updated deal status to ${changeEntry.newValue}`}
+            {changeEntry.user ? `${changeEntry.user} updated deal status to ${changeEntry.newValue}` : `Deal status updated to ${changeEntry.newValue}`}
             </TimelineEvent>
           )
       })}

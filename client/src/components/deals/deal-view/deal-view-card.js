@@ -13,10 +13,10 @@ const DealViewCard = (props) => {
     return dealStage === "Closed Won" || dealStage === "Closed Lost" ? <ArchiveButton onClick={handleArchiveDeal}/> : null;
   }
       return (
-        <div class="card" width="18rem">
-          <div class="card-body">
+        <div className="card" width="18rem">
+          <div className="card-body">
             <div className="space-between">
-              <h3 class="card-title">{deal.name}</h3>
+              <h3 className="card-title">{deal.name}</h3>
               <img src={deal.company.logo ? deal.company.logo : ""} width="40 auto"/>
               <div className="space-between">
                 <EditDeal deal={deal} />
@@ -25,26 +25,26 @@ const DealViewCard = (props) => {
               </div>
             </div>
             <div className="card-subtitle text-muted">{deal.company.name}</div>
-            <ul class="list-group list-group-flush mt-3">
-              <li class="list-group-item">
+            <ul className="list-group list-group-flush mt-3">
+              <li className="list-group-item">
                 <div className="space-between">
                   <div>Amount:</div>
                   <div>${deal.amount}</div>
                 </div>
               </li>
-              <li class="list-group-item">
+              <li className="list-group-item">
                 <div className="space-between">
                   <div>Stage:</div>
                   <div>{deal.stage}</div>
                 </div>
               </li>
-              <li class="list-group-item">
+              <li className="list-group-item">
                 <div className="space-between">
                   <div>Expected Close Date:</div>
                   <Moment format="MM/DD/YY">{deal.expectedCloseDate}</Moment>
                 </div>
               </li>
-              <li class="list-group-item">
+              <li className="list-group-item">
                 <div className="space-between">
                   <div>Created on:</div>
                     <Moment format="MM/DD/YY">{deal.createdAt}</Moment>
