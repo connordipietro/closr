@@ -1,7 +1,7 @@
-import EditDeal from './edit-deal';
+import EditDeal from '../edit-deal';
 import Moment from 'react-moment'
-import DeleteButton from '../buttons/deleteButton';
-import ArchiveButton from '../buttons/archiveButton';
+import DeleteButton from '../../buttons/deleteButton';
+import ArchiveButton from '../../buttons/archiveButton';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 
@@ -18,9 +18,11 @@ const DealViewCard = (props) => {
             <div className="space-between">
               <h3 class="card-title">{deal.name}</h3>
               <img src={deal.company.logo ? deal.company.logo : ""} width="40 auto"/>
-              <EditDeal deal={deal} />
-              <DeleteButton onClick={handleDeleteDeal} />
-              {deal.archived ? <p>Deal Archived</p> : generateArchiveDealButton(deal.stage)}
+              <div className="space-between">
+                <EditDeal deal={deal} />
+                <DeleteButton deleteFunction={handleDeleteDeal} type="deal" />
+                {deal.archived ? <p>Deal Archived</p> : generateArchiveDealButton(deal.stage)}
+              </div>
             </div>
             <div className="card-subtitle text-muted">{deal.company.name}</div>
             <ul class="list-group list-group-flush mt-3">

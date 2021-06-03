@@ -34,13 +34,6 @@ const DealTimeline = ( {stageHistory} ) => {
         return <ArrowRightCircleFill/>
     }
   }
-
-  if (_.isEmpty(stageHistory)){
-      return (
-          <h1>No history to display</h1>
-      )
-  }
-
     
   return (
     <Timeline>
@@ -50,6 +43,7 @@ const DealTimeline = ( {stageHistory} ) => {
             title={changeEntry.newValue}
             createdAt={moment(changeEntry.timeStamp).format('MMMM Do YYYY, h:mm:ss a')}
             icon={changeEntry.movedBackward ? <h1><ArrowLeftCircleFill/></h1>: <h1>{renderIcon(changeEntry.newValue)}</h1>}
+            iconStyle={{"cursor": "auto"}}
             bubbleStyle={{"borderColor": "#fff", "backgroundColor": "#fff"}}
             >
             {`${changeEntry.user} updated deal status to ${changeEntry.newValue}`}

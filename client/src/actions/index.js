@@ -108,12 +108,19 @@ export function getCompanyById(_id) {
 };
 
 export function editCompany(updatedInfo, id) {
-  debugger;
   return axios.put(`/companies/${id}`, updatedInfo)
   .then(()=>getCompanyById(id))
   .catch(error => {
     alert('Error');
   });
+};
+
+export function deleteCompany(id) {
+  return axios.delete(`/companies/${id}`)
+    .then(() => getCompanies())
+    .catch(error => {
+      alert('Error');
+    });
 };
 
 export function getCompaniesByRevenue() {
