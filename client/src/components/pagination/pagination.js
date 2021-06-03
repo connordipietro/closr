@@ -2,8 +2,9 @@ import { getCompanies } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect} from 'react';
 import './pagination.css'
+import { PrevPagElement, CenterPagElement, NextPagElement } from './pag-elements';
 
-const  Paginate = () => {
+const Paginate = () => {
   const dispatch = useDispatch();
 
   // gets the total items so we can calculate how many pages we need
@@ -32,52 +33,42 @@ const  Paginate = () => {
     pageNumber === 1 ? setPageNumber(1) : setPageNumber(page => page - 1)
  }
 
+
+
  const handlePaginationDisplay = () => {
+
+  if (pageNumber === 1 && numOfPages === 1 ) {
+    return (
+      <ul class="pagination">
+        <CenterPagElement pageNumber={pageNumber} numOfPages={numOfPages} />
+      </ul>
+    )
+   }
+
+
    if (pageNumber === 1 ) {
     return (
       <ul class="pagination">
-      <li class="page-item">
-        <div className="page-link pag-text-style center-pag-element">Page {pageNumber} of {numOfPages}</div>
-      </li>
-      <li class="page-item">
-        <div class="page-link pag-text-style" onClick={handleNextPage}>
-          <span aria-hidden="true"> &raquo; </span>
-        </div>
-      </li>
-    </ul>
+        <CenterPagElement pageNumber={pageNumber} numOfPages={numOfPages} />
+        <NextPagElement pageNumber={pageNumber} numOfPages={numOfPages} handleNextPage={handleNextPage} />
+      </ul>
     )
    }
 
    if (pageNumber > 1 && pageNumber < numOfPages) {
     return (
       <ul class="pagination">
-        <li class="page-item">
-          <div class="page-link pag-text-style" onClick={handlePrevPage}>
-            <span aria-hidden="true">&laquo; </span>
-          </div>
-        </li>
-        <li class="page-item">
-          <div className="page-link pag-text-style center-pag-element">Page {pageNumber} of {numOfPages}</div>
-        </li>
-        <li class="page-item">
-          <div class="page-link pag-text-style" onClick={handleNextPage}>
-            <span aria-hidden="true"> &raquo; </span>
-          </div>
-        </li>
+        <PrevPagElement pageNumber={pageNumber} numOfPages={numOfPages} handlePrevPage={handlePrevPage} />
+        <CenterPagElement pageNumber={pageNumber} numOfPages={numOfPages} />
+        <NextPagElement pageNumber={pageNumber} numOfPages={numOfPages} handleNextPage={handleNextPage} />
       </ul>
     )
    }
     if (pageNumber == numOfPages) {
       return (
         <ul class="pagination">
-        <li class="page-item">
-          <div class="page-link pag-text-style" onClick={handlePrevPage}>
-            <span aria-hidden="true">&laquo; </span>
-          </div>
-        </li>
-        <li class="page-item">
-          <div className="page-link pag-text-style center-pag-element">Page {pageNumber} of {numOfPages}</div>
-        </li>
+          <PrevPagElement pageNumber={pageNumber} numOfPages={numOfPages} handlePrevPage={handlePrevPage} />
+          <CenterPagElement pageNumber={pageNumber} numOfPages={numOfPages} />
       </ul>
       )
     }
