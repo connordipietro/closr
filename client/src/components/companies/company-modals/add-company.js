@@ -36,7 +36,6 @@ function AddCompany() {
     if (searchingByUrl){
       axios.get(`https://company.bigpicture.io/v1/companies/find?domain=${data.url}`, apiHeaders).then(formPreFill => {  
         if ( formPreFill.status === 202){
-          console.log('test')
           failedSearch()
           return
         }  
