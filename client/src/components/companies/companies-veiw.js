@@ -73,7 +73,7 @@ return (
   <div >
     {renderCompaniesDisplay()}
     {/* renders our pagination component */}
-    <Paginate page={queryString.page}/>
+    <div id="pagination"><Paginate page={queryString.page}/></div>
   </div>
   );
 };
