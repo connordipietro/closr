@@ -1,7 +1,7 @@
 const faker = require('faker');
 const Company = require('../models/company');
 const Deal = require('../models/deal');
-const stageOptions = require('./dealStages').default;
+const stageOptions = require('./dealStages');
 
 const generateDeals = async (archived) => {
   const companyOptions = await Company.find({}).exec();

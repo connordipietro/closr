@@ -16,7 +16,7 @@ const dealSchema = Yup.object().shape({
 });
 
 function EditDeal(props) {
-  const { deal } = props;
+  const { deal, handleEditDeal } = props;
   const dispatch = useDispatch();
   const {
     reset,
@@ -38,9 +38,9 @@ function EditDeal(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getCompaniesList]);
 
-  const handleDealEdit = (data) => {
+  const submitDealEdit = (data) => {
     setShow(false);
-    dispatch(editDeal(deal._id, data));
+    handleEditDeal(deal._id, data);
   };
 
   const onClose = () => {
@@ -59,7 +59,7 @@ function EditDeal(props) {
           <Modal.Title>Edit deal</Modal.Title>
           <XCloseButton onClose={onClose} />
         </Modal.Header>
-        <form onSubmit={handleSubmit(handleDealEdit)}>
+        <form onSubmit={handleSubmit(submitDealEdit)}>
           <Modal.Body>
             {formFields.map((field) => (
               <div key={field}>
