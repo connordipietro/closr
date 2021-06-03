@@ -20,17 +20,19 @@ const DealView = (props) => {
   }, []);
 
   const handleDeleteDeal = () => {
-    // To-Do: Put in some way to ask if they are sure they want to delete the deal
     axios.delete(`/deals/${dealData._id}`).then(() => {
       history.push('/deals');
     });
   };
   const handleArchiveDeal = () => {
-    // dispatch(editDeal(dealData._id, {archived: true}));
     axios
       .put(`/deals/${dealData._id}/update`, { archived: true })
       .then((updatedDeal) => setDealData(updatedDeal.data));
   };
+
+  const handleEditDeal = (id, updatedDealInfo) => {
+    axios.put(`/deals/${id}/update`, updatedDealInfo).then(updatedDeal => setDealData(updatedDeal.data))
+  }
 
   if (_.isEmpty(dealData)) {
     return <h1>Loading...</h1>;
@@ -48,6 +50,7 @@ const DealView = (props) => {
               deal={dealData}
               handleArchiveDeal={handleArchiveDeal}
               handleDeleteDeal={handleDeleteDeal}
+              handleEditDeal={handleEditDeal}
             />
           </div>
           <div className="col-md-4 p-2">
