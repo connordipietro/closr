@@ -33,9 +33,9 @@ function AddCompany() {
 
 
   const handleCompanyAdd = async (data) => {
-    console.log(apiHeaders)
+
     if (searchingByUrl){
-      axios.get(`https://company.bigpicture.io/v1/companies/find?domain=${data.url}` ,apiHeaders).then(formPreFill => {  
+      axios.get(`https://company.bigpicture.io/v1/companies/find?domain=${data.url}`,apiHeaders).then(formPreFill => {  
         if ( formPreFill.status === 202){
           failedSearch()
           return
