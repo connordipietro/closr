@@ -28,7 +28,6 @@ export function getDeals(company = '', range = '') {
   url = range[0] ? url + `min=${range[0]}&` : url;
   url = range[1] ? url +`max=${range[1]}&` : url;
 
-  debugger;
   return axios
     .get(url)
     .then((response) => ({
