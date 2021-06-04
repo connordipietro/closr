@@ -18,7 +18,7 @@ function App() {
         <Route path="/deals/:_id" component={DealView} />
         <Route path="/deals" component={DealsContainer} />
         <Route path="/dashboard" component={DashboardContainer} />
-        <Redirect to="/dashboard" /> {{/* Default landing page */}}
+        <Redirect to="/dashboard" /> {/* Default landing page */}
       </Switch>
     </>
   );
