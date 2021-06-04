@@ -9,7 +9,7 @@ function Nav() {
   return (
     <nav className="navbar navbar-expand-sm ">
       <img className="icon-logo" src={iconLogo}></img>
-    <Link className="nav-title navbar-brand" to="/companies"><h2 className="nav-title">Parsity-CRM </h2></Link> 
+    <Link className="nav-title navbar-brand" to="/companies"><img className="icon-logo" src="closr-logo 3.png"></img></Link> 
     <ul className="navbar-nav">
       <li className="login-signup nav-item">Login</li>
       <li className="login-signup nav-item">Sign Up</li>
