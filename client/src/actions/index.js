@@ -128,7 +128,7 @@ export function getCompaniesByRevenue() {
       payload: response,
     }))
     .catch((error) => {
-      alert('Error');
+      console.log('Server Error 500, please try again later');
     });
 }
 
@@ -140,7 +140,7 @@ export function getConversionPercentageOverall() {
       payload: response,
     }))
     .catch((error) => {
-      alert('Error');
+      console.log('Server Error 500, please try again later');
     });
 }
 
@@ -152,7 +152,7 @@ export function getConversionsByStage() {
       payload: response,
     }))
     .catch((error) => {
-      alert('Error');
+      console.log('Server Error 500, please try again later');
     });
 }
 
@@ -164,6 +164,6 @@ export function getRevenueByMonth() {
       payload: response,
     }))
     .catch((error) => {
-      alert('Error');
+      console.log('Server Error 500, please try again later');
     });
 }

@@ -9,10 +9,6 @@ function Nav() {
       <Link className="nav-title navbar-brand" to="/companies">
         <img className="icon-logo" src="closr-logo-3.png" alt="" />
       </Link>
-      <ul className="navbar-nav">
-        <li className="login-signup nav-item">Login</li>
-        <li className="login-signup nav-item">Sign Up</li>
-      </ul>
     </nav>
   );
 }
