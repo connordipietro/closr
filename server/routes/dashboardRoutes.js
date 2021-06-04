@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Deal = require('../models/deal');
 const dealStages = require('../dev-data/dealStages');
 
+// From all archived deals, calculates the percentage of deals that end up as closed won.
 router.get('/conversion-percentage-overall', (_req, res) => {
   const allDealsCountPromise = Deal.countDocuments({
     archived: true,
@@ -32,6 +33,7 @@ router.get('/conversion-percentage-overall', (_req, res) => {
     });
 });
 
+// From all archived deals, calculates the percentage likeliehood of a deal reaching closed won at each stage
 router.get('/conversion-percentage-by-stage', (_req, res) => {
   const initiatedDealsPromise = Deal.countDocuments({
     archived: true,
@@ -86,7 +88,7 @@ router.get('/conversion-percentage-by-stage', (_req, res) => {
     });
 });
 
-// Provides list of the revenue from the deals for each company (To-Do: Limit it to the last six months)
+// Provides list of the sales by company for the top 5 companies
 router.get('/sales-by-company', (_req, res) => {
   Deal.aggregate([
     { $match: { archived: true, stage: 'Closed Won' } },
@@ -113,6 +115,7 @@ router.get('/sales-by-company', (_req, res) => {
     });
 });
 
+// Calculates the total sales by month for the last six months based on archived deals
 router.get('/sales-by-month', (_req, res) => {
   Deal.aggregate([
     { $match: { archived: true, stage: 'Closed Won' } },

@@ -26,7 +26,7 @@ function EditDeal(props) {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(dealSchema),
-    defaultValues: { expectedCloseDate: new Date(deal.expectedCloseDate) },
+    defaultValues: { expectedCloseDate: new Date(deal.expectedCloseDate), company: deal.company._id },
   });
   const companiesList = useSelector(({ companiesList }) => companiesList);
 
@@ -88,7 +88,6 @@ function EditDeal(props) {
                     <option
                       key={company._id}
                       value={company._id}
-                      defaultValue={company._id === deal.company._id}
                     >
                       {company.name}
                     </option>

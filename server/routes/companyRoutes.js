@@ -16,12 +16,10 @@ router.param('id', (req, res, next, id) => {
 });
 
 // Provides a paginated list of companies
-// TO-DO: Allow a search by name, sort alphabetically
 router.get('/', (req, res) => {
   const perPage = 5;
   const page = req.query.page || 1;
   const query = {};
-  // newUser.find({ name: { $regex: "s", $options: "i" } }
   if (req.query.name) {
     query.normalizedName = {
       $regex: req.query.name.toLowerCase(),
