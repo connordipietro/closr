@@ -1,4 +1,4 @@
-import { GET_COMPANIES, GET_COMPANIES_ERROR } from "../actions/action-names";
+import { GET_COMPANIES, GET_COMPANIES_ERROR } from '../actions/action-names';
 
 const DEFAULT_STATE = {
   companies: [],
@@ -6,23 +6,23 @@ const DEFAULT_STATE = {
   error: '',
 };
 
-const CompaniesReducer = function(state = DEFAULT_STATE, action) {
+const CompaniesReducer = function (state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_COMPANIES:
       return {
         companies: action.payload.data.companies,
         count: action.payload.data.totalResultsCount,
-        error: ''
-        }
+        error: '',
+      };
     case GET_COMPANIES_ERROR:
       return {
         companies: [],
         count: null,
-        error: action.payload.message
-        }
+        error: action.payload.message,
+      };
     default:
       return state;
-  };
+  }
 };
 
 export default CompaniesReducer;

@@ -5,9 +5,13 @@ import DashboardView from './dashboard-view/dashboard-view';
 
 function DealsContainer() {
   return (
-    <React.Fragment>
-      <Nav variant="tabs" defaultActiveKey="/dashboard" style={{marginTop: "71px"}}>
-      <LinkContainer to="/dashboard">
+    <>
+      <Nav
+        variant="tabs"
+        defaultActiveKey="/dashboard"
+        style={{ marginTop: '71px' }}
+      >
+        <LinkContainer to="/dashboard">
           <Nav.Item>
             <Nav.Link href="/dashboard">Dashboard</Nav.Link>
           </Nav.Item>
@@ -24,8 +28,8 @@ function DealsContainer() {
         </LinkContainer>
       </Nav>
       <DashboardView />
-    </React.Fragment>
+    </>
   );
-};
+}
 
 export default DealsContainer;
