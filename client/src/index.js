@@ -12,6 +12,7 @@ import App from './components/App';
 
 import reducers from './reducers';
 
+// Registers midddleware
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
