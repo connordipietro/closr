@@ -37,3 +37,10 @@ td {
   vertical-align: middle;
 }
 
+.secondary-column {
+  width: 16.4%
+}
+
+.main-column {
+  width: 18%
+}

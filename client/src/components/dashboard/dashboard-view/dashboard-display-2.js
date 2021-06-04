@@ -42,7 +42,7 @@ const DashboardView2 = () => {
         cursor: 'pointer',
         dataLabels: {
           enabled: true,
-          format: '<b>{point.name}</b>: ${y:.2f}',
+          format: '<b>{point.name}</b>: ${y:,.0f}',
         },
       },
     },
