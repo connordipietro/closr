@@ -116,6 +116,17 @@ router.post('/', (req, res) => {
     });
 });
 
+router.get('/max-active-deal', (req, res) => {
+  Deal.find({archived: false}, 'amount').sort({amount: -1}).limit(1).exec()
+    .then((maxDeal) => {
+      res.send(maxDeal[0]);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.end();
+    })
+})
+
 // Returns the specific deal matching the id provided
 router.get('/:id', (req, res) => {
   res.send(req.deal);
