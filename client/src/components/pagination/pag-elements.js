@@ -12,7 +12,7 @@ export const CenterPagElement = (props) => {
 export const PrevPagElement = (props) => {
   const { handlePrevPage } = props;
   return (
-    <li className="page-item">
+    <li className="page-item page-pointer">
       <div className="page-link pag-text-style" onClick={handlePrevPage}>
         <span aria-hidden="true">&laquo; </span>
       </div>
@@ -23,7 +23,7 @@ export const PrevPagElement = (props) => {
 export const NextPagElement = (props) => {
   const { handleNextPage } = props;
   return (
-    <li className="page-item">
+    <li className="page-item page-pointer">
       <div className="page-link pag-text-style" onClick={handleNextPage}>
         <span aria-hidden="true"> &raquo;</span>
       </div>
