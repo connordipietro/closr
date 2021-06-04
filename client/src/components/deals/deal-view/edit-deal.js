@@ -5,9 +5,9 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
-import { editDeal, getCompaniesList } from '../../actions';
-import XCloseButton from '../buttons/xCloseButton';
-import EditButton from '../buttons/editButton';
+import { editDeal, getCompaniesList } from '../../../actions';
+import XCloseButton from '../../buttons/xCloseButton';
+import EditButton from '../../buttons/editButton';
 
 const dealSchema = Yup.object().shape({
   name: Yup.string().required('Please enter a name for the deal'),
