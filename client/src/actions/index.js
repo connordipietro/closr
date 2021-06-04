@@ -22,9 +22,15 @@ export function getCompaniesList() {
   };
 }
 
-export function getDeals() {
+export function getDeals(company = '', range = '') {
+  let url = '/deals/by-stage?'
+  url = company ? url + `company=${company}&` : url;
+  url = range[0] ? url + `min=${range[0]}&` : url;
+  url = range[1] ? url +`max=${range[1]}&` : url;
+
+  debugger;
   return axios
-    .get(`/deals/by-stage`)
+    .get(url)
     .then((response) => ({
       type: actionNames.GET_DEALS,
       payload: response,
