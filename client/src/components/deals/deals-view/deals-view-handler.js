@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import _ from 'lodash';
-import { getDeals } from '../../actions';
+import { getDeals } from '../../../actions';
 import DealsView from './deals-view';
 
 function DealsViewHandler() {
