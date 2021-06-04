@@ -76,26 +76,6 @@ function EditDeal(props) {
                 <br />
               </div>
             ))}
-            <div key="company">
-              <div className="form-group">
-                <label>Company</label>
-                <select
-                  className="form-select"
-                  name="company"
-                  {...register('company')}
-                >
-                  {companiesList.map((company) => (
-                    <option
-                      key={company._id}
-                      value={company._id}
-                    >
-                      {company.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <br />
-            </div>
             <div className="form-section">
               <label htmlFor="expectedCloseDate" className="form-label">
                 Expected Close Date
