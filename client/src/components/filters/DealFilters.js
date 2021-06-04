@@ -23,15 +23,23 @@ const DealFilters = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getCompaniesList]);
 
-  const handleFilter = () =>{
-    dispatch(getDeals(company, range))
+  const handleFilter = (companyId, rangeBounds) =>{
+    dispatch(getDeals(companyId, rangeBounds))
+  }
+  const onSelection = (event) => {
+    setCompany(event.target.value);
+    handleFilter(event.target.value, range);
+  }
+  const onSliderChange = (rangeValue) => {
+    setRange(rangeValue);
+    handleFilter(company, rangeValue);
   }
 
   return (
     <>
-    <div className='row'>
+    <div className='row' >
       <div className='col'>
-          <select onChange={event=> setCompany(event.target.value)} value={company}>
+          <select onChange={onSelection} value={company}>
               <option value=''>All Companies</option>
               {companiesList.map((company) => (
               <option key={company._id} value={company._id}>
@@ -49,7 +57,7 @@ const DealFilters = () => {
               max={1500}
               marks={{0: 0, 1500: 1500}}
               draggableTrack={true}
-              onAfterChange={value => setRange(value)}
+              onAfterChange={onSliderChange}
             />
       </div>
         <div className='col'>

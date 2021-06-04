@@ -6,7 +6,7 @@ import { Scrollbars } from 'react-custom-scrollbars-2';
 import Moment from 'react-moment';
 import { onDragEnd, generateDealsStageColumns } from './deals-view-dnd-helpers';
 import './deals-view-style.css';
-import DealFilters from '../filters/DealFilters'
+import DealFilters from '../../filters/DealFilters'
 
 
 function DealsView(props) {
