@@ -35,7 +35,6 @@ export function getDeals() {
     }));
 }
 
-// will need to pass in current page number, and then apply it the .then(() => getCompanies). Currently if on page 2, and no param passed to getCompanies after adding a new company, first 5 companies will be displayed and current page will not be maintained. May want to default to last page so the newly added company is displayed.
 export function postNewCompany(newCompany) {
   return axios
     .post(`/companies`, newCompany)
@@ -61,7 +60,7 @@ export function postNewDeal(newDeal) {
       type: actionNames.POST_DEAL,
       payload: response,
     }))
-    .then(() => getDeals())
+    .then(() => getDeals()) // Dispatches getDeals to reflect added deal
     .catch((error) => {
       alert('Error');
     });
@@ -100,7 +99,7 @@ export function getCompanyById(_id) {
 export function editCompany(updatedInfo, id) {
   return axios
     .put(`/companies/${id}`, updatedInfo)
-    .then(() => getCompanyById(id))
+    .then(() => getCompanyById(id)) //Enables re render of comapny view to reflect update
     .catch((error) => {
       alert('Error');
     });
@@ -109,7 +108,7 @@ export function editCompany(updatedInfo, id) {
 export function deleteCompany(id) {
   return axios
     .delete(`/companies/${id}`)
-    .then(() => getCompanies())
+    .then(() => getCompanies()) //Get companies after delete to reflect deletion on frontend
     .catch((error) => {
       alert('Error');
     });
