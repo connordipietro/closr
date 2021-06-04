@@ -1,31 +1,31 @@
 import React from 'react';
-import DashboardView1 from "./dashboard-display-1";
-import DashboardView2 from "./dashboard-display-2";
-import DashboardView3 from "./dashboard-display-3";
-import DashboardView4 from "./dashboard-display-4";
-import "./style.css";
+import DashboardView1 from './dashboard-display-1';
+import DashboardView2 from './dashboard-display-2';
+import DashboardView3 from './dashboard-display-3';
+import DashboardView4 from './dashboard-display-4';
+import './style.css';
 
 function DashboardView() {
   return (
-    <React.Fragment>
+    <>
       <div className="box-flex">
         <div className="display">
-          <DashboardView1/>
+          <DashboardView1 />
         </div>
         <div className="display">
-          <DashboardView2/>
+          <DashboardView2 />
         </div>
       </div>
       <div className="box-flex">
-      <div className="display">
-          <DashboardView3/>
+        <div className="display">
+          <DashboardView3 />
         </div>
         <div className="display">
-          <DashboardView4/>
+          <DashboardView4 />
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
-};
+}
 
 export default DashboardView;

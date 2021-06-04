@@ -1,97 +1,106 @@
-import {Modal, Button} from 'react-bootstrap';
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useForm, Controller } from "react-hook-form";
+import { Modal, Button } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import DatePicker from "react-datepicker";
-import { editDeal, getCompaniesList } from '../../actions'
-import XCloseButton from '../buttons/xCloseButton'
-import EditButton from '../buttons/editButton'
+import DatePicker from 'react-datepicker';
+import { editDeal, getCompaniesList } from '../../actions';
+import XCloseButton from '../buttons/xCloseButton';
+import EditButton from '../buttons/editButton';
 
 const dealSchema = Yup.object().shape({
-  name: Yup.string().required("Please enter a name for the deal"),
-  amount: Yup.number().typeError("Please enter a deal amount"),
-  company: Yup.string()
-})
+  name: Yup.string().required('Please enter a name for the deal'),
+  amount: Yup.number().typeError('Please enter a deal amount'),
+  company: Yup.string(),
+});
 
 function EditDeal(props) {
-  const { deal } = props;
+  const { deal, handleEditDeal } = props;
   const dispatch = useDispatch();
-  const defaultValues = {...deal};
-  const { reset, register, handleSubmit, control, formState: { errors }} = useForm({
+  const {
+    reset,
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(dealSchema),
-    defaultValues: {expectedCloseDate: new Date(deal.expectedCloseDate)}
+    defaultValues: { expectedCloseDate: new Date(deal.expectedCloseDate) },
   });
-  const companiesList = useSelector(({companiesList}) => companiesList);
+  const companiesList = useSelector(({ companiesList }) => companiesList);
 
   const [show, setShow] = useState(false);
 
-  useEffect(() => { // loads all deals on initial render
+  useEffect(() => {
+    // loads all deals on initial render
     dispatch(getCompaniesList());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },  [getCompaniesList]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getCompaniesList]);
 
-  const handleDealEdit = (data) => {
+  const submitDealEdit = (data) => {
     setShow(false);
-    dispatch(editDeal(deal._id, data));
+    handleEditDeal(deal._id, data);
   };
 
   const onClose = () => {
     setShow(false);
     reset();
-  }
+  };
 
   const formFields = ['Name', 'Amount'];
 
   return (
     <>
-    <EditButton onClick={() => setShow(true)}/>
+      <EditButton onClick={() => setShow(true)} />
 
-
-    <Modal show={show} onHide={() => setShow(false)}>
+      <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header>
           <Modal.Title>Edit deal</Modal.Title>
-          <XCloseButton onClose={onClose}/>
+          <XCloseButton onClose={onClose} />
         </Modal.Header>
-        <form onSubmit={handleSubmit(handleDealEdit)}>
+        <form onSubmit={handleSubmit(submitDealEdit)}>
           <Modal.Body>
-            {formFields.map(field => {
-              return (
-                <div key ={field}>
-                  <div className="form-group" >
-                    <label>{field}</label>
-                    <input
-                      className="form-control"
-                      defaultValue={deal[field.toLowerCase()]}
-                      name={field.toLowerCase()}
-                      {...register(field.toLowerCase())}
-                    ></input>
-                    {errors[field.toLowerCase()]?.message}
-                  </div>
-                  <br />
+            {formFields.map((field) => (
+              <div key={field}>
+                <div className="form-group">
+                  <label>{field}</label>
+                  <input
+                    className="form-control"
+                    defaultValue={deal[field.toLowerCase()]}
+                    name={field.toLowerCase()}
+                    {...register(field.toLowerCase())}
+                  />
+                  {errors[field.toLowerCase()]?.message}
                 </div>
-              )
-            })}
-            <div key ="company">
-              <div className="form-group" >
+                <br />
+              </div>
+            ))}
+            <div key="company">
+              <div className="form-group">
                 <label>Company</label>
-                <select 
+                <select
                   className="form-select"
                   name="company"
-                  {...register("company")}
-                  >
-                  {companiesList.map(company => {
-                    return (
-                      <option key={company._id} value={company._id} selected={company._id === deal.company._id ? true: false}>{company.name}</option>
-                    );
-                  })}
+                  {...register('company')}
+                >
+                  {companiesList.map((company) => (
+                    <option
+                      key={company._id}
+                      value={company._id}
+                      defaultValue={company._id === deal.company._id}
+                    >
+                      {company.name}
+                    </option>
+                  ))}
                 </select>
               </div>
               <br />
             </div>
             <div className="form-section">
-              <label htmlFor="expectedCloseDate" className="form-label">Expected Close Date</label>
+              <label htmlFor="expectedCloseDate" className="form-label">
+                Expected Close Date
+              </label>
               <br />
               <Controller
                 control={control}
@@ -105,17 +114,17 @@ function EditDeal(props) {
                   />
                 )}
               />
-            </div> 
+            </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button type="submit" variant="primary">Submit</Button>
+            <Button type="submit" variant="primary">
+              Submit
+            </Button>
           </Modal.Footer>
         </form>
       </Modal>
-
     </>
-
   );
-};
+}
 
 export default EditDeal;
