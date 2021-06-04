@@ -33,8 +33,9 @@ const DashboardView4 = () => {
   NoDataToDisplay(Highcharts);
   Highcharts.setOptions({
     lang: {
+      thousandsSep: ',',
       noData: 'Data is not available',
-    },
+    }
   });
 
   const options = {
