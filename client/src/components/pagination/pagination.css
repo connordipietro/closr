@@ -65,3 +65,7 @@ a {
   padding-top: 5vh;
   width: 100%;
 }
+
+.page-pointer {
+  cursor: pointer;
+}
